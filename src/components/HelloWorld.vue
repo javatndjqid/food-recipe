@@ -6,7 +6,7 @@
           :src="require('../assets/main.png')"
           class="my-3"
           contain
-          height="200"
+          height="500"
         />
       </v-col>
        </v-row>
