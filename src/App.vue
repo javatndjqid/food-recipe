@@ -1,6 +1,7 @@
 <template>
   <v-app>
     <v-app-bar
+
       app
       color="red"
       dark
@@ -73,7 +74,7 @@ export default {
       selectedItem: 0,
       items: [
         /* https://cdn.materialdesignicons.com/5.4.55/ */
-        { text: 'Home',  path: '/Home' },
+        { text: 'Home',  path: '/' },
         { text: 'SEARCH',  path: '/Search' },
         { text: 'SHOPPING', path: '/Shopping' },
         { text: 'CLASS',  path: '/Class' },
