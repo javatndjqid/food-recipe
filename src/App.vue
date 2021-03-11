@@ -6,17 +6,7 @@
       color="red"
       dark
     >
-      <div class="d-flex align-center">
-        <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
-          src="./assets/jjub.png"
-          transition="scale-transition"
-          width="90"
-        />
-
-        <v-img
+              <v-img
           alt="Vuetify Name"
           class="shrink mt-1 hidden-sm-and-down"
           contain
@@ -24,8 +14,6 @@
           src="./assets/jjub2.png"
           width="100"
         />
-      </div>
-      
         <v-tabs 
           v-model="selectedItem"
           fixed-tabs
@@ -38,14 +26,31 @@
 
       <v-spacer></v-spacer>
 
-      <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
+      <!-- <v-btn
+        href=""
         target="_blank"
-        text
+        text="Login"
       >
         <span class="mr-2">LOGIN</span>
-        <v-icon>mdi-open-in-new</v-icon>
-      </v-btn>
+        <v-icon></v-icon>
+      </v-btn> -->
+
+      <div class="d-flex align-center">
+        <v-img
+          alt="Vuetify Logo"
+          class="shrink mr-2"
+          contain
+          src="./assets/jjub.png"
+          transition="scale-transition"
+          width="90"
+          @click="helloWorld()"
+          style="cursor: pointer"
+        />
+
+
+      </div>
+
+
     </v-app-bar>
 
     <v-main>
@@ -84,6 +89,9 @@ export default {
 
 
   methods: {
+      helloWorld(){
+        console.log('Hello World!');
+      },
       navigateTo(item) {
         /* https://router.vuejs.org/kr/guide/essentials/navigation.html */
         // 현재 경로와 다르면
