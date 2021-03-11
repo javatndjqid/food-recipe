@@ -24,15 +24,13 @@
           width="100"
         />
       </div>
-          
-        <v-tabs
+      
+        <v-tabs 
           v-model="selectedItem"
           fixed-tabs
-          slider-color="white"
+          slider-color="white" 
         >
-          <v-tab
-            v-for="(item, i) in items" :key="i" @click="navigateTo(item)"
-          >
+          <v-tab v-for="(item, i) in items" :key="i" @click="navigateTo(item)">
             {{  item.text }}
           </v-tab>
         </v-tabs>
@@ -50,37 +48,41 @@
     </v-app-bar>
 
     <v-main>
-      <HelloWorld/>
+        
+
+    <!-- Provides the application the proper gutter -->
+    <v-container fluid>
+      <!-- If using vue-router -->
+      <router-view></router-view>
+    </v-container>
     </v-main>
   </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld';
 
 
 
 export default {
   name: 'App',
-   data: () => ({
+  // components: {
+  //   HelloWorld,
+  // },
+  data: () => ({
       drawer: false, // drawer의 기본 값
       selectedItem: 0,
       items: [
         /* https://cdn.materialdesignicons.com/5.4.55/ */
         { text: 'Home',  path: '/Home' },
-        { text: 'SEARCH',  path: '/' },
-        { text: 'SHOPPING', path: '/' },
-        { text: 'CLASS',  path: '/' },
+        { text: 'SEARCH',  path: '/Search' },
+        { text: 'SHOPPING', path: '/Shopping' },
+        { text: 'CLASS',  path: '/Class' },
         { text: 'MYPAGE',  path: '/Mypage' },
       ],      
-    }),
-  components: {
-    HelloWorld,
-  },
+  }),
 
 
-
-    methods: {
+  methods: {
       navigateTo(item) {
         /* https://router.vuejs.org/kr/guide/essentials/navigation.html */
         // 현재 경로와 다르면
@@ -88,6 +90,7 @@ export default {
           // 라우터에 경로 추가
           this.$router.push(item.path);
         }
-      },
-  }}
+      }
+    },
+  }
 </script>
