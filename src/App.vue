@@ -11,7 +11,7 @@
           class="shrink mt-1 hidden-sm-and-down"
           contain
           min-width="120"
-          src="./assets/jjub2.png"
+          src="./assets/yum.png"
           width="100"
         />
         <v-tabs 
