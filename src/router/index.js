@@ -13,17 +13,17 @@ const routes = [
   {
     path: '/Class',
     name: 'Class',
-    component: () => import('../views/Class.vue')
+    component: () => import('../class/Class.vue')
   },
   {
     path: '/Search',
     name: 'Search',
-    component: () => import('../views/Search.vue')
+    component: () => import('../search/Search.vue')
   },
   {
     path: '/Shopping',
     name: 'Shopping',
-    component: () => import('../views/Shopping.vue')
+    component: () => import('../shopping/Shopping.vue')
   },
   {
     path: '/Mypage',

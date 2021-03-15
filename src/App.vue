@@ -10,9 +10,9 @@
           alt="Vuetify Name"
           class="shrink mt-1 hidden-sm-and-down"
           contain
-          min-width="100"
-          src="./assets/jjub2.png"
-          width="150"
+          min-width="120"
+          src="./assets/yum.png"
+          width="100"
         />
         <v-tabs 
           v-model="selectedItem"
