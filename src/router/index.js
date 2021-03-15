@@ -11,11 +11,6 @@ const routes = [
   //  component: () => import('../views/Home.vue')
   },
   {
-    path: '/Mypage',
-    name: 'Mypage',
-    component: () => import('../views/Mypage.vue')
-  },
-  {
     path: '/Class',
     name: 'Class',
     component: () => import('../views/Class.vue')
@@ -29,6 +24,26 @@ const routes = [
     path: '/Shopping',
     name: 'Shopping',
     component: () => import('../views/Shopping.vue')
+  },
+  {
+    path: '/Mypage',
+    name: 'Mypage',
+    component: () => import('../Mypage/Mypage.vue')
+  },
+  {
+    path: '/MypageRecipy',
+    name: 'MypageRecipy',
+    component: () => import('../Mypage/MypageRecipy.vue')
+  },
+  {
+    path: '/MypageClass',
+    name: 'MypageClass',
+    component: () => import('../Mypage/MypageClass.vue')
+  },
+  {
+    path: '/MypageMarket',
+    name: 'MypageMarket',
+    component: () => import('../Mypage/MypageMarket.vue')
   },
 ]
 
