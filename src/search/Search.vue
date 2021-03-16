@@ -97,7 +97,15 @@
         </v-container>
       </v-main>
     </v-app>
+    <div class="text-center">
+    <v-pagination
+      v-model="page"
+      :length="10"
+      :total-visible="9"
+    ></v-pagination>
   </div>
+  </div>
+  
   
 </template>
 <script>
@@ -180,6 +188,7 @@ export default {
         // chip2: true,
         // chip3: true,
         // chip4: true,
+        page: 1,
   }),
   watch: {
       search (val) {
