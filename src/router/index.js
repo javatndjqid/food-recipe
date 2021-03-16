@@ -35,16 +35,7 @@ const routes = [
     name: 'MypageRecipy',
     component: () => import('../Mypage/MypageRecipy.vue')
   },
-  {
-    path: '/MypageClass',
-    name: 'MypageClass',
-    component: () => import('../Mypage/MypageClass.vue')
-  },
-  {
-    path: '/MypageMarket',
-    name: 'MypageMarket',
-    component: () => import('../Mypage/MypageMarket.vue')
-  },
+
 ]
 
 const router = new VueRouter({
