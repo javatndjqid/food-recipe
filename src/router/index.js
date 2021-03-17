@@ -35,6 +35,11 @@ const routes = [
     name: 'MypageRecipy',
     component: () => import('../Mypage/MypageRecipy.vue')
   },
+  {
+    path: '/SearchDetail',
+    name: 'SearchDetail',
+    component: () => import('../search/SearchDetail.vue')
+  },
 
 ]
 
