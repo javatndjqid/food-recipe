@@ -75,13 +75,14 @@
         <v-container>
           <v-row>
             <v-col
-              v-for="n in 24"
+              v-for="(item,n) in 24"
               :key="n"
               cols="3"
             >
               <v-card 
                 class="mx-auto"
                 max-width="344"
+                @click="navigateTo(item)"
               >
                 <v-img
                   src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
@@ -189,6 +190,9 @@ export default {
         // chip3: true,
         // chip4: true,
         page: 1,
+        move:[
+          {text:"SearchDetail",path: '/SearchDetail'}
+        ]
   }),
   watch: {
       search (val) {
@@ -205,6 +209,11 @@ export default {
           })
           this.loading = false
         }, 500)
+      },
+      navigateTo(item){
+        console.log(item)
+        this.$router.push('/SearchDetail');
+        
       },
     },
 
