@@ -1,11 +1,11 @@
 <template>
-  <v-container>
+  <v-container color="primary">
     <v-row>
       <v-col cols="10"  md="8"
             lg="5">
         <template>
           <v-card style="height: 700px" class="overflow-y-auto">
-                <v-data-table :headers="recipyHeaders" :items="list" :items-per-page="12">
+                <v-data-table :headers="recipyHeaders" :items="userRecipeList" :items-per-page="12">
                   <template v-slot:item.recipyImage="{ item }">
                     <div>
                       <v-img :src="item.recipyImage" :alt="item.name" height="40px" width="50px"></v-img>
@@ -14,8 +14,18 @@
                 </v-data-table>
           </v-card>   
             <v-row cols="12" justify="end">
+                  <v-btn @click="navigate()"
+                    class="mx-2"
+                    fab
+                    dark
+                    color="cyan"
+                  >
+                    <v-icon>
+                      mdi-pencil
+                    </v-icon>
+                  <!-- </v-btn>
               <v-btn color="secondary" @click="navigate()" >
-                   <v-icon left> mdi-pencil</v-icon>레시피 추가
+                   <v-icon left> mdi-pencil</v-icon>레시피 추가 -->
               </v-btn>  
             </v-row>     
         </template>
@@ -27,8 +37,8 @@
 
       <v-col cols="10"  md="8" lg="5">
         <template>
-          <v-card style="max-height: 350px" class="overflow-y-auto">         
-                <v-data-table :headers="MarketHeaders" :items="list" :items-per-page="5">
+          <v-card  class="overflow-y-auto">         
+                <v-data-table :headers="MarketHeaders" :items="list" :items-per-page="5" style="height: 350px">
                   <template v-slot:item.recipyImage="{ item }">
                     <div class="p-2">
                       <v-img :src="item.recipyImage" :alt="item.name" height="40px" width="50px"></v-img>
@@ -38,8 +48,8 @@
           </v-card>      
         </template>
         <template>
-          <v-card style="max-height: 350px" class="overflow-y-auto">
-                <v-data-table :headers="ClassHeaders" :items="list" :items-per-page="5">
+          <v-card  class="overflow-y-auto">
+                <v-data-table :headers="ClassHeaders" :items="list" :items-per-page="5" style="height: 350px">
                   <template v-slot:item.recipyImage="{ item }">
                     <div class="p-2">
                       <v-img :src="item.recipyImage" :alt="item.name" height="40px" width="50px"></v-img>
@@ -117,7 +127,7 @@
           { text: '강의사진', value: 'recipyImage', sortable: false, },
           { text: '구독내역', value: 'recipyName', sortable: false, }, 
         ],
-      list: [
+      userRecipeList: [
         {no:1,recipyName:'어쩌구 볶음', recipyImage: require('./recipy1.jpg') },
         {no:2,recipyName:'저쩌구 볶음', recipyImage: require('./recipy2.jpg') },
         {no:3,recipyName:'어쩌구 볶음', recipyImage: require('./recipy3.jpg') },
@@ -139,12 +149,14 @@
         {no:19,recipyName:'어쩌구 볶음', recipyImage: require('./recipy1.jpg') },
         {no:20,recipyName:'저쩌구 볶음', recipyImage: require('./recipy2.jpg') },
         {no:21,recipyName:'어쩌구 볶음', recipyImage: require('./recipy3.jpg') },
+      ],  
+      userLectureList:[
 
+      ],
+      userPerchaseList:[
 
-
-      ],   
-      my:[
-      ] 
+      ],
+     
     }),
     computed: {
       items () {
