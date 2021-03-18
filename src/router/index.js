@@ -40,6 +40,7 @@ const routes = [
     name: 'SearchDetail',
     component: () => import('../search/SearchDetail.vue')
   },
+  
 
 ]
 
