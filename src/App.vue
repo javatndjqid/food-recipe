@@ -81,8 +81,8 @@ export default {
         /* https://cdn.materialdesignicons.com/5.4.55/ */
         { text: 'Home',  path: '/' },
         { text: 'SEARCH',  path: '/Search' },
-        { text: 'SHOPPING', path: '/Shopping' },
-        { text: 'CLASS',  path: '/Class' },
+        { text: '쇼핑', path: '/Shopping' },
+        { text: '강의',  path: '/Class' },
         { text: 'MYPAGE',  path: '/Mypage' },
       ],      
   }),

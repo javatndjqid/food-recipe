@@ -188,12 +188,12 @@
 
         ],
         category1: [
-          { name: '밑반찬', abbr: 'FL', id: 1 },
-          { name: '메인반찬', abbr: 'GA', id: 2 },
-          { name: '국/탕', abbr: 'NE', id: 3 },
-          { name: '찌개', abbr: 'CA', id: 4 },
-          { name: '디저트', abbr: 'NY', id: 5 },
-          { name: '기타', abbr: 'NY', id: 6 },
+          { name: '끓이기', id: 1 },
+          { name: '찌기', id: 2 },
+          { name: '튀기기', id: 3 },
+          { name: '굽기', id: 4 },
+          { name: '기타', id: 5 },
+        
         ],
         
         

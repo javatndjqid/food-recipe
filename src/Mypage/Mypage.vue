@@ -80,7 +80,7 @@
                           유저ID
                       </th>
                       <th class="text-center">
-                        chul2153
+                        쩝쩝박사
                       </th>
                     </tr>
                     <tr>
@@ -88,7 +88,7 @@
                           이름
                       </th>
                       <th class="text-center">
-                          김철수
+                          오지해 찌끄래기
                       </th>
                     </tr>
                     <tr>
@@ -96,7 +96,7 @@
                           E-mail
                       </th>
                       <th class="text-center">
-                        chul2153@gmail.com
+                        쩝쩝박사@gmail.com
                       </th>
                     </tr>
                   </tbody>
