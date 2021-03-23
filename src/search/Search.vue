@@ -1,9 +1,10 @@
 <template>
   <div>
     <v-app>
+      
       <v-toolbar
         dark
-        color="teal"
+        color="teal"                
       >
         <!-- <v-toolbar-title>State selection</v-toolbar-title> -->
         <v-autocomplete
@@ -75,7 +76,7 @@
         <v-container>
           <v-row>
             <v-col
-              v-for="(item,n) in 24"
+              v-for="(item,n) in recipe"
               :key="n"
               cols="3"
             >
@@ -85,12 +86,12 @@
                 @click="navigateTo(item)"
               >
                 <v-img
-                  src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
+                  :src="item.image"
                   height="200px"
                 ></v-img>
 
                 <v-card-title>
-                  Top western road trips
+                  {{item.name}}
                 </v-card-title>
               </v-card>
             </v-col>
@@ -110,6 +111,7 @@
   
 </template>
 <script>
+import api from '@/api/Search'
 export default {
   data: ()=>({
     loading: false,
@@ -192,30 +194,41 @@ export default {
         page: 1,
         move:[
           {text:"SearchDetail",path: '/SearchDetail'}
-        ]
+        ],
+        recipe:[],
   }),
   watch: {
       search (val) {
         val && val !== this.select && this.querySelections(val)
       },
+  },
+  mounted(){
+    this.getItem();
+  },
+  methods: {
+    querySelections (v) {
+      this.loading = true
+      // Simulated ajax query
+      setTimeout(() => {
+        this.items = this.states.filter(e => {
+        return (e || '').toLowerCase().indexOf((v || '').toLowerCase()) > -1
+      })
+      this.loading = false
+      }, 500)
     },
-    methods: {
-      querySelections (v) {
-        this.loading = true
-        // Simulated ajax query
-        setTimeout(() => {
-          this.items = this.states.filter(e => {
-            return (e || '').toLowerCase().indexOf((v || '').toLowerCase()) > -1
-          })
-          this.loading = false
-        }, 500)
-      },
-      navigateTo(item){
-        console.log(item)
-        this.$router.push('/SearchDetail');
-        
-      },
+    navigateTo(item){
+      console.log(item)
+      this.$router.push('/SearchDetail');        
     },
+    async getItem(){
+      const results = await api.list();
+      if(results.status == 200){
+        this.recipe=results.data
+        console.log(this.recipe)
+      }
+    }
+  },
+    
 
 }
 </script>
