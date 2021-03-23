@@ -6,9 +6,9 @@
         <template>
           <v-card style="height: 700px" class="overflow-y-auto">
                 <v-data-table :headers="recipyHeaders" :items="userRecipeList" :items-per-page="12">
-                  <template v-slot:item.recipyImage="{ item }">
+                  <template v-slot:item.imageSmall="{ item }">
                     <div>
-                      <v-img :src="item.recipyImage" :alt="item.name" height="40px" width="50px"></v-img>
+                      <v-img :src="item.imageSmall" :alt="item.recipeName" height="40px" width="50px"></v-img>
                     </div>
                   </template>
                 </v-data-table>
@@ -41,7 +41,7 @@
                 <v-data-table :headers="MarketHeaders" :items="list" :items-per-page="5" style="height: 350px">
                   <template v-slot:item.recipyImage="{ item }">
                     <div class="p-2">
-                      <v-img :src="item.recipyImage" :alt="item.name" height="40px" width="50px"></v-img>
+                      <v-img :src="item.recipyImage" :alt="item.recipeName" height="40px" width="50px"></v-img>
                     </div>
                   </template>
                 </v-data-table>
@@ -110,12 +110,13 @@
 </template>
 
 <script>
+import api from '@/api/Mypage'
   export default {
     data: () => ({
       recipyHeaders: [
-          {text: 'no', align: 'start',value: 'no'},
-          { text: '레시피사진', value: 'recipyImage', sortable: false, },
-          { text: '레시피목록', value: 'recipyName', sortable: false, }, 
+          {text: '레시피넘버', align: 'start', value: 'recipeId'},
+          { text: '레시피사진', value: 'imageSmall', sortable: false, },
+          { text: '레시피이름', value: 'recipeName', sortable: false, }, 
         ],
        ClassHeaders: [
           {text: 'no', align: 'start',value: 'no'},
@@ -128,27 +129,7 @@
           { text: '구독내역', value: 'recipyName', sortable: false, }, 
         ],
       userRecipeList: [
-        {no:1,recipyName:'어쩌구 볶음', recipyImage: require('./recipy1.jpg') },
-        {no:2,recipyName:'저쩌구 볶음', recipyImage: require('./recipy2.jpg') },
-        {no:3,recipyName:'어쩌구 볶음', recipyImage: require('./recipy3.jpg') },
-        {no:4,recipyName:'어쩌구 볶음', recipyImage: require('./recipy1.jpg') },
-        {no:5,recipyName:'저쩌구 볶음', recipyImage: require('./recipy2.jpg') },
-        {no:6,recipyName:'어쩌구 볶음', recipyImage: require('./recipy3.jpg') },
-        {no:7,recipyName:'어쩌구 볶음', recipyImage: require('./recipy1.jpg') },
-        {no:8,recipyName:'저쩌구 볶음', recipyImage: require('./recipy2.jpg') },
-        {no:9,recipyName:'어쩌구 볶음', recipyImage: require('./recipy3.jpg') },
-        {no:10,recipyName:'어쩌구 볶음', recipyImage: require('./recipy1.jpg') },
-        {no:11,recipyName:'저쩌구 볶음', recipyImage: require('./recipy2.jpg') },
-        {no:12,recipyName:'어쩌구 볶음', recipyImage: require('./recipy3.jpg') },
-        {no:13,recipyName:'어쩌구 볶음', recipyImage: require('./recipy1.jpg') },
-        {no:14,recipyName:'저쩌구 볶음', recipyImage: require('./recipy2.jpg') },
-        {no:15,recipyName:'어쩌구 볶음', recipyImage: require('./recipy3.jpg') },
-        {no:16,recipyName:'어쩌구 볶음', recipyImage: require('./recipy1.jpg') },
-        {no:17,recipyName:'저쩌구 볶음', recipyImage: require('./recipy2.jpg') },
-        {no:18,recipyName:'어쩌구 볶음', recipyImage: require('./recipy3.jpg') },
-        {no:19,recipyName:'어쩌구 볶음', recipyImage: require('./recipy1.jpg') },
-        {no:20,recipyName:'저쩌구 볶음', recipyImage: require('./recipy2.jpg') },
-        {no:21,recipyName:'어쩌구 볶음', recipyImage: require('./recipy3.jpg') },
+  
       ],  
       userLectureList:[
 
@@ -167,18 +148,24 @@
       },
     },
     methods: {
-      navigateTo(item) {
-        /* https://router.vuejs.org/kr/guide/essentials/navigation.html */
-        // 현재 경로와 다르면
-        if(this.$route.path != item.path){
-          // 라우터에 경로 추가
-          this.$router.push(item.path);
-        }
-      },
+       async navigateTo(){
+      const result = await api.list();
+         this.userRecipeList = result.data;
+         console.log(result.data);
+      }
+    },
+      // navigateTo(item) {
+      //   /* https://router.vuejs.org/kr/guide/essentials/navigation.html */
+      //   // 현재 경로와 다르면
+      //   if(this.$route.path != item.path){
+      //     // 라우터에 경로 추가
+      //     this.$router.push(item.path);
+      //   }
+      // },
        navigate() {
           this.$router.push('/MypageRecipy');
 
       },
 
-  }}
+  }
 </script>
