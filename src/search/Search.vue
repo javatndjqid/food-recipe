@@ -108,6 +108,7 @@ export default {
       { name: "찌개", status: false },
       { name: "구이", status: false },
       { name: "볶음", status: false },
+      { name: "볶음", status: false },
     ],
     chips: [],
     // chip2: true,
