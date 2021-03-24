@@ -29,6 +29,7 @@
                 </v-col>
                 <v-col cols="12" md="10">
                   <v-textarea
+                    v-model="recipe.explanation"
                     no-resize
                     rows="5"
                     solo
@@ -51,31 +52,39 @@
                 <v-col cols="12" md="4">
                   <v-autocomplete
                     style="float:left;"
-                    v-model="recipe.category.type"
+                    v-model="recipe.category"
                     solo
-                    :items="category1"
+                    :items="categorylist"
                     :filter="customFilter"
                     color="white"
-                    item-text="name"
+                    item-text="type"
                     label="카테고리"
                   ></v-autocomplete>
                 </v-col>
 
                 <v-col cols="12">
-                  <div v-for="(input, i) in recipe.stuffRecipe" :key="i">
+                  <div v-for="(item, i) in recipe.stuffRecipe" :key="i">
                     <v-col cols="8" md="5" style="float:left;">
-                      <v-text-field
+                      <v-autocomplete
                         solo
                         label="재료"
-                        v-model="recipe.stuffRecipe.stuffName"
+                        v-model="item.stuffName"
+                        :items="stuffs"
+                        item-text="name"
                         clearable
+                        chips
+                        full-width
+                        hide-details
+                        hide-no-data
+                        hide-selected
+                        single-line
                       />
                     </v-col>
                     <v-col cols="4" md="5" style="float:left;">
                       <v-text-field
                         solo
                         label="양"
-                        v-model="recipe.stuffRecipe.quantity"
+                        v-model="item.quantity"
                         clearable
                       />
                     </v-col>
@@ -88,11 +97,12 @@
                   >재료<v-icon right>mdi-minus</v-icon></v-btn
                 >
 
-                <v-col cols="12">
+                <v-col cols="12" >
+                  
                   <div v-for="(item, i) in recipe.recipeProcedure" :key="i">
                     <v-col cols="12" md="10" style="float:left;">
                       <v-text-field
-                        v-model="recipe.recipeProcedure.recipeProcedure"
+                        v-model="item.recipeProcedure"
                         solo
                         color="purple"
                         label="조리순서"
@@ -102,7 +112,7 @@
                     <v-col cols="12" md="2" style="float:left;">
                       <template>
                         <v-text-field
-                          v-model="recipe.recipeProcedure.recipeProcedureImage"
+                          v-model="item.recipeProcedureImage"
                           prepend-icon="mdi-camera"
                           label="사진첨부URL"
                         ></v-text-field>
@@ -125,6 +135,7 @@
                 >
                 <v-col cols="12">
                   <v-textarea
+                    v-model="recipe.tip"
                     no-resize
                     rows="5"
                     solo
@@ -165,22 +176,20 @@ export default {
     isEditing: null,
     model: null,
     recipe: {
+      tip:"",
+      explanation:"",
       recipeName: "",
       imageSmall: "",
       userId: 1,
       stuffRecipe: [{ quantity: "", stuffName: "" }],
       recipeProcedure: [
-        { recipeOrder: "", recipeProcedure: "", recipeProcedureImage: "" }
+        { recipeProcedure: "", recipeProcedureImage: "" }
       ],
-      category: [{ type: "" }]
+      category: ""
     },
-    category1: [
-      { name: "끓이기", id: 1 },
-      { name: "찌기", id: 2 },
-      { name: "튀기기", id: 3 },
-      { name: "굽기", id: 4 },
-      { name: "기타", id: 5 }
+    categorylist: [
     ],
+    stuffs: [],
 
     drawer: false, // drawer의 기본 값
     selectedItem: 0,
@@ -193,6 +202,11 @@ export default {
       }
     ]
   }),
+  mounted() {
+
+    this.getRecipeData();
+    this.getCategoryData();
+  },
   methods: {
     navigateTo(item) {
       /* https://router.vuejs.org/kr/guide/essentials/navigation.html */
@@ -217,13 +231,26 @@ export default {
         1
       );
     },
+
     async addData() {
-      const recipedata = this.recipe;
+      const recipedata = this.recipe
+      
+     console.log(recipedata);
       const result = await api.postrecipelist(recipedata);
       if (result.status == 200) {
-        this.recipe.unshift(result.data);
+        
+        this.$router.push("/Mypage");
       }
-      this.$router.push("/Mypage");
+    
+    },
+
+    async getRecipeData() {
+      const result = await api.stufflist();
+      this.stuffs = result.data;
+    },
+    async getCategoryData() {
+      const result = await api.categorylist();
+      this.categorylist = result.data;
     }
   }
 };
