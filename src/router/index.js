@@ -11,11 +11,6 @@ const routes = [
   //  component: () => import('../views/Home.vue')
   },
   {
-    path: '/Lecture',
-    name: 'Lecture',
-    component: () => import('../lecture/Lecture.vue')
-  },
-  {
     path: '/Search',
     name: 'Search',
     component: () => import('../search/Search.vue')
@@ -40,7 +35,22 @@ const routes = [
     name: 'SearchDetail',
     component: () => import('../search/SearchDetail.vue')
   },
-  
+
+  {
+    path: '/Lecture',
+    name: 'Lecture',
+    component: () => import('../lecture/Lecture.vue')
+  },
+  {
+    path: '/LectureDetail',
+    name: 'LectureDetail',
+    component: () => import('../lecture/LectureDetail.vue')
+  },
+  {
+    path: '/LecturePlay',
+    name: 'LecturePlay',
+    component: () => import('../lecture/LecturePlay.vue')
+  }
 
 ]
 
