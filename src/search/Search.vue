@@ -16,8 +16,9 @@
             hide-details
             label="What state are you from?"
             solo-inverted
+            @keyup.enter="addChip()"
           ></v-autocomplete>
-          <v-btn icon>
+          <v-btn icon @click="addChip()">
             <v-icon size="40" :style="{ marginRight: '10px' }"
               >mdi-card-search</v-icon
             >
@@ -25,8 +26,14 @@
         </v-toolbar>
       </v-container>
       <div class="text-center">
-        <v-chip v-if="chip1" class="ma-2" close @click:close="chip1 = false">
-          Closable
+        <v-chip
+          v-for="(chip, i) in chips"
+          :key="i"
+          class="ma-2"
+          close
+          @click:close="chip.view = false"
+        >
+          {{ chip.text }}
         </v-chip>
       </div>
       <v-container>
@@ -93,67 +100,7 @@ export default {
     items: [],
     search: null,
     select: null,
-    states: [
-      "Alabama",
-      "Alaska",
-      "American Samoa",
-      "Arizona",
-      "Arkansas",
-      "California",
-      "Colorado",
-      "Connecticut",
-      "Delaware",
-      "District of Columbia",
-      "Federated States of Micronesia",
-      "Florida",
-      "Georgia",
-      "Guam",
-      "Hawaii",
-      "Idaho",
-      "Illinois",
-      "Indiana",
-      "Iowa",
-      "Kansas",
-      "Kentucky",
-      "Louisiana",
-      "Maine",
-      "Marshall Islands",
-      "Maryland",
-      "Massachusetts",
-      "Michigan",
-      "Minnesota",
-      "Mississippi",
-      "Missouri",
-      "Montana",
-      "Nebraska",
-      "Nevada",
-      "New Hampshire",
-      "New Jersey",
-      "New Mexico",
-      "New York",
-      "North Carolina",
-      "North Dakota",
-      "Northern Mariana Islands",
-      "Ohio",
-      "Oklahoma",
-      "Oregon",
-      "Palau",
-      "Pennsylvania",
-      "Puerto Rico",
-      "Rhode Island",
-      "South Carolina",
-      "South Dakota",
-      "Tennessee",
-      "Texas",
-      "Utah",
-      "Vermont",
-      "Virgin Island",
-      "Virginia",
-      "Washington",
-      "West Virginia",
-      "Wisconsin",
-      "Wyoming",
-    ],
+    states: [],
     // recipeImage:
     category: [
       { name: "국", status: false },
@@ -162,7 +109,7 @@ export default {
       { name: "구이", status: false },
       { name: "볶음", status: false },
     ],
-    chip1: true,
+    chips: [],
     // chip2: true,
     // chip3: true,
     // chip4: true,
@@ -177,6 +124,7 @@ export default {
   },
   mounted() {
     this.getItem();
+    this.getState();
   },
   methods: {
     querySelections(v) {
@@ -189,6 +137,14 @@ export default {
         this.loading = false;
       }, 500);
     },
+    addChip() {
+      this.chips.push({ text: this.select, view: true });
+
+      console.log(this.chips);
+    },
+    delChip() {
+      this.chips.pop();
+    },
     navigateTo(item) {
       console.log(item);
       this.$router.push("/SearchDetail");
@@ -198,6 +154,13 @@ export default {
       if (results.status == 200) {
         this.recipe = results.data;
         console.log(this.recipe);
+      }
+    },
+    async getState() {
+      const results = await api.stuff();
+      if (results.status == 200) {
+        this.states = results.data;
+        console.log(this.states);
       }
     },
   },
