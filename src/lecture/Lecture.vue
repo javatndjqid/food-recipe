@@ -42,18 +42,18 @@ export default {
     page: 1,
     lecture: [],
   }),
-  created: function() {
-    axios
-      .get("LectureItem.json")
-      .then(
-        function(response) {
-          this.lecture = response.data;
-        }.bind(this)
-      )
-      .catch(function(e) {
-        console.error(e);
-      });
-  },
+  // created: function() {
+  //   axios
+  //     .get("LectureItem.json")
+  //     .then(
+  //       function(response) {
+  //         this.lecture = response.data;
+  //       }.bind(this)
+  //     )
+  //     .catch(function(e) {
+  //       console.error(e);
+  //     });
+  // },
   computed: {},
   methods: {
     async navigate() {},
