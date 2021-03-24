@@ -82,7 +82,7 @@ export default {
         { text: 'Home',  path: '/' },
         { text: 'SEARCH',  path: '/Search' },
         { text: '쇼핑', path: '/Shopping' },
-        { text: '강의',  path: '/Class' },
+        { text: '강의',  path: '/Lecture' },
         { text: 'MYPAGE',  path: '/Mypage' },
       ],      
   }),

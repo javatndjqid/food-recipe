@@ -11,9 +11,9 @@ const routes = [
   //  component: () => import('../views/Home.vue')
   },
   {
-    path: '/Class',
-    name: 'Class',
-    component: () => import('../class/Class.vue')
+    path: '/Lecture',
+    name: 'Lecture',
+    component: () => import('../lecture/Lecture.vue')
   },
   {
     path: '/Search',
