@@ -1,3 +1,5 @@
+
+
 <template>
   <div>
     <!-- 반응형 grid Layout 컨테이너 -->
@@ -18,37 +20,44 @@
               height="200"
               src="https://cdn.vuetifyjs.com/images/cards/cooking.png"
             ></v-img>
-            <v-card-title>강의명</v-card-title>
+            <v-card-title>{{ lecture.title }}</v-card-title>
             <v-card-text>
-              <div>카테고리</div>
-              <div>강의 설명</div>
+              <div>{{ lecture.category }}</div>
+              <div>{{ lecture.summary }}</div>
             </v-card-text>
           </v-card>
         </v-col>
 
         <!-- 이하 테스트 위한 공간. 실제 데이터는 목록에서 받아다 반복문 형태로 출력 -->
-
       </v-row>
     </v-container>
+    <v-pagination v-model="page" :length="5" :total-visible="5"></v-pagination>
   </div>
 </template>
 
 <script>
 // import { api } from '@/api/Lecture'
 export default {
-  data: () => ({    
-  
+  data: () => ({
+    page: 1,
+    lecture: [],
   }),
-  computed: {
-
+  created: function() {
+    axios
+      .get("LectureItem.json")
+      .then(
+        function(response) {
+          this.lecture = response.data;
+        }.bind(this)
+      )
+      .catch(function(e) {
+        console.error(e);
+      });
   },
+  computed: {},
   methods: {
-    async navigate(){
-      
-    }
+    async navigate() {},
   },
-  navigate() {
-
-  }
-}
+  navigate() {},
+};
 </script>
