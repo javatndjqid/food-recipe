@@ -6,24 +6,18 @@
     <v-container>
       <v-row>
         <v-col cols="12" md="3">
-          <v-card :loading="loading" max-width="374">
+          <v-card max-width="374">
             <!-- https://vuetifyjs.com/en/components/cards/#card-reveal -->
-            <template slot="progress">
-              <v-progress-linear
-                color="red"
-                height="10"
-                indeterminate
-              ></v-progress-linear>
-            </template>
 
             <v-img
               height="200"
               src="https://cdn.vuetifyjs.com/images/cards/cooking.png"
+              @click="navigateTo()"
             ></v-img>
-            <v-card-title>{{ lecture.title }}</v-card-title>
+            <v-card-title v-model="lectureList">타이틀</v-card-title>
             <v-card-text>
-              <div>{{ lecture.category }}</div>
-              <div>{{ lecture.summary }}</div>
+              <div>카테고리</div>
+              <div>요약정보</div>
             </v-card-text>
           </v-card>
         </v-col>
@@ -36,28 +30,33 @@
 </template>
 
 <script>
-// import { api } from '@/api/Lecture'
+// import api from '@/api/Lecture'
 export default {
   data: () => ({
     page: 1,
     lecture: [],
+    lectureList:[],
   }),
-  // created: function() {
-  //   axios
-  //     .get("LectureItem.json")
-  //     .then(
-  //       function(response) {
-  //         this.lecture = response.data;
-  //       }.bind(this)
-  //     )
-  //     .catch(function(e) {
-  //       console.error(e);
-  //     });
+  // mounted(){
+  //   this.getLectureList();
   // },
-  computed: {},
-  methods: {
-    async navigate() {},
+  computed: {
+    items() {
+      return Array.from({ length: this.length }, (k, v) => v + 1);
+    },
+    length(){
+      return 5
+    }
   },
-  navigate() {},
+  methods: {
+    // async getLectureList() {
+    //   const result = await api.lectureListAll();
+    //   this.lectureList = result.data;
+    //   console.log(result.data);
+    // },
+    navigateTo() {
+      this.$router.push("/LectureDetail");
+    }
+  }
 };
 </script>
