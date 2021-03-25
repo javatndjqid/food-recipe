@@ -8,7 +8,7 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home
-  //  component: () => import('../views/Home.vue')
+    //  component: () => import('../views/Home.vue')
   },
   {
     path: '/Search',
@@ -33,7 +33,8 @@ const routes = [
   {
     path: '/SearchDetail',
     name: 'SearchDetail',
-    component: () => import('../search/SearchDetail.vue')
+    component: () => import('../search/SearchDetail.vue'),
+    props: true
   },
 
   {
@@ -55,7 +56,7 @@ const routes = [
 ]
 
 const router = new VueRouter({
- // mode: 'history',
+  // mode: 'history',
   base: process.env.BASE_URL,
   routes
 })

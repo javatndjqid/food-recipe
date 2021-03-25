@@ -146,8 +146,7 @@ export default {
       console.log(this.chips);
     },
     navigateTo(item) {
-      console.log(item);
-      this.$router.push("/SearchDetail");
+      this.$router.push({ name: "SearchDetail", params: { id: item.id } });
     },
     selectRadio(category) {
       this.radio = category;

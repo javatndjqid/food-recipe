@@ -1,10 +1,8 @@
 <template>
-  <v-cols>
-    <v-col cols="6" style="margin-left: auto; margin-right: auto">
+  <v-row>
+    <v-col cols="8" style="margin-left: auto; margin-right: auto">
       <v-card class="mx-auto" style="padding: 20px">
-        <v-img
-          src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
-        ></v-img>
+        <v-img max-height="500px" :src="recipe.image"></v-img>
 
         <div style="margintop: 5px; display: flex; float: right">
           <v-avatar style="flex: 1"
@@ -13,7 +11,7 @@
           <v-card-text style="flex: 20">유저 아이디</v-card-text>
         </div>
         <v-card-title>
-          Top western road trips Top western road trips
+          {{ recipe.name }}
         </v-card-title>
 
         <v-card-subtitle> 1,000 miles of wonder </v-card-subtitle>
@@ -38,9 +36,9 @@
         <v-divider></v-divider>
 
         <v-list-item>
-          <v-list-item-title v-for="(item, i) in stuffs" :key="i"
-            >{{ item.stuff }} {{ item.quentity }}</v-list-item-title
-          >
+          <v-list-item-title v-for="(item, i) in recipe.stuff" :key="i">{{
+            item
+          }}</v-list-item-title>
         </v-list-item>
       </v-card>
 
@@ -78,34 +76,14 @@
         </v-list-item>
       </v-card>
     </v-col>
-  </v-cols>
+  </v-row>
 </template>
 <script>
+import api from "@/api/Search";
 export default {
   data: () => ({
     show: false,
-    stuffs: [
-      { stuff: "잡곡밥", quentity: "140g" },
-      { stuff: "곰취", quentity: "30g" },
-      { stuff: "소금", quentity: "약간" },
-      { stuff: "조갯살", quentity: "10g" },
-      { stuff: "새우살", quentity: "10g" },
-      { stuff: "잡곡밥", quentity: "140g" },
-      { stuff: "곰취", quentity: "30g" },
-      { stuff: "소금", quentity: "약간" },
-      { stuff: "조갯살", quentity: "10g" },
-      { stuff: "새우살", quentity: "10g" },
-      { stuff: "잡곡밥", quentity: "140g" },
-      { stuff: "곰취", quentity: "30g" },
-      { stuff: "소금", quentity: "약간" },
-      { stuff: "조갯살", quentity: "10g" },
-      { stuff: "새우살", quentity: "10g" },
-      { stuff: "잡곡밥", quentity: "140g" },
-      { stuff: "곰취", quentity: "30g" },
-      { stuff: "소금", quentity: "약간" },
-      { stuff: "조갯살", quentity: "10g" },
-      { stuff: "새우살", quentity: "10g" },
-    ],
+    recipe: [],
     recipes: [
       {
         text:
@@ -168,5 +146,19 @@ export default {
       },
     ],
   }),
+  mounted() {
+    this.getRecipeData();
+  },
+  methods: {
+    async getRecipeData() {
+      console.log(this.$route.params.id);
+      const id = this.$route.params.id;
+      const result = await api.recipe(id);
+      if (result.status == 200) {
+        this.recipe = result.data;
+        console.log(this.recipe);
+      }
+    },
+  },
 };
 </script>
