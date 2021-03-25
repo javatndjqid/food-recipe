@@ -33,7 +33,7 @@
           close
           @click:close="delChip(i)"
         >
-          {{ chip.text }}
+          {{ chip }}
         </v-chip>
       </div>
       <v-container>
@@ -104,13 +104,9 @@ export default {
     search: null,
     select: null,
     states: [],
-    // recipeImage:
     category: [{ id: 0, name: "전체" }],
     radio: { id: 0, name: "전체" },
     chips: [],
-    // chip2: true,
-    // chip3: true,
-    // chip4: true,
     page: 1,
     move: [{ text: "SearchDetail", path: "/SearchDetail" }],
     recipe: [],
@@ -137,9 +133,10 @@ export default {
       }, 500);
     },
     addChip() {
-      if (this.select == null || this.chips.c) return;
-      this.chips.push({ text: this.select });
+      if (this.select == null /*|| this.chips.c*/) return;
+      this.chips.push(this.select);
       console.log(this.chips);
+      // this.getSearchStuff(this.select, this.recipe);
     },
     delChip(i) {
       this.chips.splice(i, 1);
@@ -150,9 +147,7 @@ export default {
     },
     selectRadio(category) {
       this.radio = category;
-      this.radio.id == 0
-        ? this.getItem()
-        : this.getCategoryRecipe(this.radio.id);
+      this.radio.id == 0 ? this.recipe : this.getCategoryRecipe(this.radio.id);
     },
     async getItem() {
       const results = await api.list();
@@ -178,6 +173,14 @@ export default {
         this.recipe = results.data;
       }
     },
+    // async getSearchStuff(stuff, recipe) {
+    //   // const recipe = JSON.stringify(recipeData);
+    //   const results = await api.searchRecipe(stuff, recipe);
+    //   if (results.status == 200) {
+    //     this.recipe = results.data;
+    //     console.log(results.data);
+    //   }
+    // },
   },
 };
 </script>
