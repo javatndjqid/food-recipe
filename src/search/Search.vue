@@ -31,7 +31,7 @@
           :key="i"
           class="ma-2"
           close
-          @click:close="chip.view = false"
+          @click:close="delChip(i)"
         >
           {{ chip.text }}
         </v-chip>
@@ -50,13 +50,16 @@
                   </v-col>
                 </v-row>
               </v-expansion-panel-header>
-              <v-expansion-panel-content>
+              <v-expansion-panel-content style="display: flex">
                 <v-card-actions>
                   <v-btn
                     text
-                    color="secondary"
+                    :color="item.id == radio.id ? 'blue accent-4' : 'secondary'"
                     v-for="(item, i) in category"
                     :key="i"
+                    style="flex: 1"
+                    v-model="radio"
+                    @click="selectRadio(item)"
                   >
                     {{ item.name }}
                   </v-btn>
@@ -102,14 +105,8 @@ export default {
     select: null,
     states: [],
     // recipeImage:
-    category: [
-      { name: "국", status: false },
-      { name: "탕", status: false },
-      { name: "찌개", status: false },
-      { name: "구이", status: false },
-      { name: "볶음", status: false },
-      { name: "볶음", status: false },
-    ],
+    category: [{ id: 0, name: "전체" }],
+    radio: { id: 0, name: "전체" },
     chips: [],
     // chip2: true,
     // chip3: true,
@@ -126,6 +123,7 @@ export default {
   mounted() {
     this.getItem();
     this.getState();
+    this.getCategories();
   },
   methods: {
     querySelections(v) {
@@ -139,29 +137,46 @@ export default {
       }, 500);
     },
     addChip() {
-      this.chips.push({ text: this.select, view: true });
-
+      if (this.select == null || this.chips.c) return;
+      this.chips.push({ text: this.select });
       console.log(this.chips);
     },
-    delChip() {
-      this.chips.pop();
+    delChip(i) {
+      this.chips.splice(i, 1);
+      console.log(this.chips);
     },
     navigateTo(item) {
       console.log(item);
       this.$router.push("/SearchDetail");
     },
+    selectRadio(category) {
+      this.radio = category;
+      this.radio.id == 0
+        ? this.getItem()
+        : this.getCategoryRecipe(this.radio.id);
+    },
     async getItem() {
       const results = await api.list();
       if (results.status == 200) {
         this.recipe = results.data;
-        console.log(this.recipe);
       }
     },
     async getState() {
-      const results = await api.stuff();
-      if (results.status == 200) {
-        this.states = results.data;
-        console.log(this.states);
+      const satateResults = await api.stuff();
+      if (satateResults.status == 200) {
+        this.states = satateResults.data;
+      }
+    },
+    async getCategories() {
+      const categoriesResults = await api.categories();
+      if (categoriesResults.status === 200) {
+        this.category.push(...categoriesResults.data);
+      }
+    },
+    async getCategoryRecipe(i) {
+      const results = await api.category(i);
+      if (results.status === 200) {
+        this.recipe = results.data;
       }
     },
   },
