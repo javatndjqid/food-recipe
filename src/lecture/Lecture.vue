@@ -4,7 +4,7 @@
   <div>
     <!-- 반응형 grid Layout 컨테이너 -->
     <v-container>
-      <v-row>
+      <v-row justify="center">
         <v-col cols="12" md="3">
           <v-card max-width="374">
             <!-- https://vuetifyjs.com/en/components/cards/#card-reveal -->
@@ -13,6 +13,7 @@
               height="200"
               src="https://cdn.vuetifyjs.com/images/cards/cooking.png"
               @click="navigateTo()"
+              style="cursor: pointer"
             ></v-img>
             <v-card-title v-model="lectureList">타이틀</v-card-title>
             <v-card-text>

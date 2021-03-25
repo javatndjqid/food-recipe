@@ -1,30 +1,31 @@
 <template>
   <div>
     <v-container>
-      <v-row>
+      <v-row justify="center">
+
         <!-- UI -->
         <!-- 뒤로가기/구독취소/이미지/강의시청/연관카테고리(재료) 강의 위젯 -->
         <v-col cols="12" md="6">
-          <v-card color="blue" class="mx-auto" max-width="800px">
+          <v-card color="blue" class="mx-auto" width="800px">
           <!-- Vuetify 카드 컴포넌트 설명 페이지 https://vuetifyjs.com/en/components/cards/ -->
           <!-- Vuetify 색상 설명 페이지 https://vuetifyjs.com/en/styles/colors/#material-colors -->
             <v-card-actions>
               <v-btn depressed color="grey" @click="navigateToBack()">뒤로 가기</v-btn>
               <!-- Vuetify 버튼 컴포넌트 설명 페이지 https://vuetifyjs.com/en/components/buttons/#caveats -->
+
               <v-spacer />
-
-
 
               <v-btn depressed color="red" v-if="isSubscribed" @click="isSubscribed = !isSubscribed">구독 취소</v-btn>
               <!-- 조건부 렌더링 설명 https://kr.vuejs.org/v2/guide/conditional.html -->
               
               <!-- 구독 취소 버튼 클릭시 팝업 추가 -->
+              <!-- https://vuetifyjs.com/en/components/dialogs -->
             </v-card-actions>
 
             <v-card-actions>
               <v-img
                 src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
-                max-width="100%"
+                width="100%"
                 height="300px"
               />
             </v-card-actions>
@@ -34,19 +35,22 @@
             </v-card-actions>
           </v-card>
 
-          <v-card flat class="mx-auto" max-width="800px" height="30px">
+          <v-card flat class="mx-auto" width="800px" height="30px">
           </v-card>
 
-          <v-card class="mx-auto" max-width="800px" color="blue">
-            <!-- 연관강의 slot 1 -->
+          <!-- 연관강의 창 -->
+          <v-card class="mx-auto" width="800px" color="blue">
             <v-card-actions>
               <v-container>
                 <v-row>
+
+                  <!-- 연관강의 slot 1 -->
                   <v-col cols="12" md="6">
-                    <v-card class="mx-auto" max-width="385px">
+                    <v-card class="mx-auto" width="385px">
                       <v-card-actions>
                         <v-img
                           src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
+                          style="cursor: pointer"
                         />
                       </v-card-actions>
                       <v-card-title class="justify-center">
@@ -61,10 +65,11 @@
 
                   <!-- 연관강의 slot 2 -->
                   <v-col cols="12" md="6">
-                    <v-card class="mx-auto" max-width="385px">
+                    <v-card class="mx-auto" width="385px">
                       <v-card-actions>
                         <v-img
                           src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
+                          style="cursor: pointer"
                         />
                       </v-card-actions>
                       <v-card-title class="justify-center">
@@ -86,8 +91,8 @@
         <v-col cols="12" md="6">
           <v-card
             class="mx-auto"
-            max-width="800px"
-            min-height="400px"
+            width="800px"
+            min-height="800px"
             color="blue"
           >
             <v-card-title>
