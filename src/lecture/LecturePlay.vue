@@ -1,26 +1,38 @@
 <template>
   <div>
     <v-container>
+      <!-- 버튼 공간 -->
+      <v-card flat height="50px">
+        <v-card-actions>
+          <v-btn depressed color="grey" @click="navigateToBack()">시청 종료</v-btn>
+        </v-card-actions>
+      </v-card>
       <v-row>
-        <!-- 동영상 플레이어 -->
         <v-col cols="12" md="9">
-          <v-card color="blue" class="mx-auto">
-            <div width="100%" height="90%">
-            </div>
-            <v-card-actions>
-              <v-btn depressed color="grey" @click="navigateToBack()">뒤로 가기</v-btn>
-            </v-card-actions>
+          <!-- 동영상 플레이어 공간 -->
+          <v-card
+            color="blue"
+            height="800px"
+            class="d-flex align-center justify-center"
+          >
+            <!-- justify center https://vuetifyjs.com/en/styles/flex/#flex-justify -->
+            <iframe
+              v-html="html"
+              height="98%"
+              width="99%"
+              src="https://www.youtube.com/embed/AlK2Gl6kHZI"
+              title="YouTube video player"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            />
           </v-card>
-
         </v-col>
 
-        <!-- 강의정보 Card -->
+        <!-- 강의정보 공간 -->
         <v-col cols="12" md="3">
-          <v-card
-            class="mx-auto"
-            min-height="400px"
-            color="blue"
-            >
+          <!-- 강의정보 Card -->
+          <v-card class="mx-auto" height="800px" color="blue">
             <v-card-title>
               강의내용
             </v-card-title>
@@ -43,18 +55,18 @@
 </template>
 
 <script>
-  export default {
-    data: () => ({
-      isSubscribed: false,
-      dialog: false,
-    }),
-    methods:{
-      navigateToBack() {
-        this.$router.push("/LectureDetail");
-      },
-      navigateToViewer(){
-        this.$router.push("/LecturePlay");
-      },
-    }
-  }
+export default {
+  data: () => ({
+    isSubscribed: false,
+    dialog: false,
+  }),
+  methods: {
+    navigateToBack() {
+      this.$router.push("/LectureDetail");
+    },
+    navigateToViewer() {
+      this.$router.push("/LecturePlay");
+    },
+  },
+};
 </script>
