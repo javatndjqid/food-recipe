@@ -45,12 +45,14 @@ const routes = [
   {
     path: '/LectureDetail',
     name: 'LectureDetail',
-    component: () => import('../lecture/LectureDetail.vue')
+    component: () => import('../lecture/LectureDetail.vue'),
+    props: true,
   },
   {
     path: '/LecturePlay',
     name: 'LecturePlay',
-    component: () => import('../lecture/LecturePlay.vue')
+    component: () => import('../lecture/LecturePlay.vue'),
+    props: true,
   }
 
 ]
