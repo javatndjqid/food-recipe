@@ -8,7 +8,7 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home
-  //  component: () => import('../views/Home.vue')
+    //  component: () => import('../views/Home.vue')
   },
   {
     path: '/Search',
@@ -33,7 +33,8 @@ const routes = [
   {
     path: '/SearchDetail',
     name: 'SearchDetail',
-    component: () => import('../search/SearchDetail.vue')
+    component: () => import('../search/SearchDetail.vue'),
+    props: true
   },
 
   {
@@ -44,18 +45,20 @@ const routes = [
   {
     path: '/LectureDetail',
     name: 'LectureDetail',
-    component: () => import('../lecture/LectureDetail.vue')
+    component: () => import('../lecture/LectureDetail.vue'),
+    props: true,
   },
   {
     path: '/LecturePlay',
     name: 'LecturePlay',
-    component: () => import('../lecture/LecturePlay.vue')
+    component: () => import('../lecture/LecturePlay.vue'),
+    props: true,
   }
 
 ]
 
 const router = new VueRouter({
- // mode: 'history',
+  // mode: 'history',
   base: process.env.BASE_URL,
   routes
 })
