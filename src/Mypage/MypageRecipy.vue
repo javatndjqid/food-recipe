@@ -41,11 +41,13 @@
                 <v-col cols="12" md="2">
                   <v-img max-height="150" max-width="250"></v-img>
                   <template>
-                    <v-text-field
-                      v-model="recipe.imageSmall"
+                    <v-file-input
+                      v-model="files"
+                      accept="image/*"
                       prepend-icon="mdi-camera"
+                      multiple
                       label="대표사진URL"
-                    ></v-text-field>
+                    />
                   </template>
                 </v-col>
 
@@ -102,7 +104,7 @@
                   <div v-for="(item, i) in recipe.recipeProcedure" :key="i">
                     <v-col cols="12" md="10" style="float:left;">
                       <v-text-field
-                        v-model="item.recipeProcedure"
+                        v-model="filess"
                         solo
                         color="purple"
                         label="조리순서"
@@ -110,20 +112,21 @@
                       />
                     </v-col>
                     <v-col cols="12" md="2" style="float:left;">
-                      <template>
+                      <!-- <template>
                         <v-text-field
                           v-model="item.recipeProcedureImage"
                           prepend-icon="mdi-camera"
                           label="사진첨부URL"
                         ></v-text-field>
-                      </template>
-                      <!-- <template>
-                          <v-text-field
-                              v-model="recipe.recipeProcedure.recipeProcedureImage"
+                      </template> -->
+                      <template>
+                          <v-file-input
+                              v-model="item.recipeProcedureImage"
                               accept="image/*"
                               prepend-icon="mdi-camera"
-                              label="사진첨부"></v-text-field>
-                        </template> -->
+                              multiple
+                              label="사진첨부"/>      
+                        </template>
                     </v-col>
                   </div>
                 </v-col>
@@ -179,17 +182,19 @@ export default {
       tip:"",
       explanation:"",
       recipeName: "",
-      imageSmall: "",
+      // imageSmall: [],
       userId: 1,
       stuffRecipe: [{ quantity: "", stuffName: "" }],
       recipeProcedure: [
-        { recipeProcedure: "", recipeProcedureImage: "" }
+        { recipeProcedure: "", recipeProcedureImage:"" }
       ],
       category: ""
     },
     categorylist: [
     ],
     stuffs: [],
+    files:[],
+    filess:[],
 
     drawer: false, // drawer의 기본 값
     selectedItem: 0,
@@ -233,11 +238,36 @@ export default {
     },
 
     async addData() {
-      const recipedata = this.recipe
+    const recipedata = this.recipe
       
-     console.log(recipedata);
+    console.log(recipedata);
       const result = await api.postrecipelist(recipedata);
       if (result.status == 200) {
+        const newdata = result.data;
+        newdata.files = [];  // 파일목록 초기화
+         
+         
+
+        // this.files > file-input과 바인딩 되어있음         
+        // 파일 객체 여러개가 저장되는 배열
+        // 선택한 파일이 있으면
+        if(this.files && this.files.length > 0){
+          // 파일 업로드를 하고
+          for(let file of this.files){
+            const form = new FormData();
+            form.append('data',file);
+            const result = await api.uploadFile(newdata.recipeId, form);
+            console.log(result.status); // HTTP 상태코드
+            console.log(result.data); // 응답받은 데이터
+            newdata.files.push({
+              ...result.data
+            })
+          }
+        }
+
+
+
+
         
         this.$router.push("/Mypage");
       }
