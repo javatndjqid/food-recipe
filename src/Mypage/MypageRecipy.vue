@@ -67,20 +67,15 @@
                 <v-col cols="12">
                   <div v-for="(item, i) in recipe.stuffRecipe" :key="i">
                     <v-col cols="8" md="5" style="float:left;">
-                      <v-autocomplete
-                        solo
-                        label="재료"
+                      <v-combobox
                         v-model="item.stuffName"
                         :items="stuffs"
                         item-text="name"
+                        label="재료명"
+                        
+                        solo
                         clearable
-                        chips
-                        full-width
-                        hide-details
-                        hide-no-data
-                        hide-selected
-                        single-line
-                      />
+                      ></v-combobox>
                     </v-col>
                     <v-col cols="4" md="5" style="float:left;">
                       <v-text-field
@@ -99,12 +94,11 @@
                   >재료<v-icon right>mdi-minus</v-icon></v-btn
                 >
 
-                <v-col cols="12" >
-                  
+                <v-col cols="12">
                   <div v-for="(item, i) in recipe.recipeProcedure" :key="i">
                     <v-col cols="12" md="10" style="float:left;">
                       <v-text-field
-                        v-model="filess"
+                        v-model="item.recipeProcedure"
                         solo
                         color="purple"
                         label="조리순서"
@@ -112,21 +106,15 @@
                       />
                     </v-col>
                     <v-col cols="12" md="2" style="float:left;">
-                      <!-- <template>
-                        <v-text-field
-                          v-model="item.recipeProcedureImage"
-                          prepend-icon="mdi-camera"
-                          label="사진첨부URL"
-                        ></v-text-field>
-                      </template> -->
                       <template>
-                          <v-file-input
-                              v-model="item.recipeProcedureImage"
-                              accept="image/*"
-                              prepend-icon="mdi-camera"
-                              multiple
-                              label="사진첨부"/>      
-                        </template>
+                        <v-file-input
+                          v-model="item.recipeProcedureImage"
+                          accept="image/*"
+                          prepend-icon="mdi-camera"
+                          multiple
+                          label="사진첨부"
+                        />
+                      </template>
                     </v-col>
                   </div>
                 </v-col>
@@ -179,22 +167,18 @@ export default {
     isEditing: null,
     model: null,
     recipe: {
-      tip:"",
-      explanation:"",
+      tip: "",
+      explanation: "",
       recipeName: "",
       // imageSmall: [],
       userId: 1,
       stuffRecipe: [{ quantity: "", stuffName: "" }],
-      recipeProcedure: [
-        { recipeProcedure: "", recipeProcedureImage:"" }
-      ],
+      recipeProcedure: [{ recipeProcedure: "", recipeProcedureImage: "" }],
       category: ""
     },
-    categorylist: [
-    ],
+    categorylist: [],
     stuffs: [],
-    files:[],
-    filess:[],
+    files: [],
 
     drawer: false, // drawer의 기본 값
     selectedItem: 0,
@@ -208,7 +192,6 @@ export default {
     ]
   }),
   mounted() {
-
     this.getRecipeData();
     this.getCategoryData();
   },
@@ -238,40 +221,33 @@ export default {
     },
 
     async addData() {
-    const recipedata = this.recipe
-      
-    console.log(recipedata);
+      const recipedata = this.recipe;
+
+      console.log(recipedata);
       const result = await api.postrecipelist(recipedata);
       if (result.status == 200) {
         const newdata = result.data;
-        newdata.files = [];  // 파일목록 초기화
-         
-         
+        newdata.files = []; // 파일목록 초기화
 
-        // this.files > file-input과 바인딩 되어있음         
+        // this.files > file-input과 바인딩 되어있음
         // 파일 객체 여러개가 저장되는 배열
         // 선택한 파일이 있으면
-        if(this.files && this.files.length > 0){
+        if (this.files && this.files.length > 0) {
           // 파일 업로드를 하고
-          for(let file of this.files){
+          for (let file of this.files) {
             const form = new FormData();
-            form.append('data',file);
+            form.append("data", file);
             const result = await api.uploadFile(newdata.recipeId, form);
             console.log(result.status); // HTTP 상태코드
             console.log(result.data); // 응답받은 데이터
             newdata.files.push({
               ...result.data
-            })
+            });
           }
         }
 
-
-
-
-        
         this.$router.push("/Mypage");
       }
-    
     },
 
     async getRecipeData() {
