@@ -43,13 +43,13 @@ const routes = [
     component: () => import('../lecture/Lecture.vue')
   },
   {
-    path: '/LectureDetail',
+    path: '/LectureDetail/:id',
     name: 'LectureDetail',
     component: () => import('../lecture/LectureDetail.vue'),
     props: true,
   },
   {
-    path: '/LecturePlay',
+    path: '/LecturePlay/:id',
     name: 'LecturePlay',
     component: () => import('../lecture/LecturePlay.vue'),
     props: true,

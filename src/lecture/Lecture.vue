@@ -44,6 +44,8 @@
 
 <script>
 // import api from '@/api/Lecture'
+// import lectureList from '@/lecture/LectureItem.json'
+
 export default {
   data: () => ({
     page: 1,
@@ -142,10 +144,7 @@ export default {
     },
     navigateTo(item) {
       // console.log(item);
-      this.$router.push({
-        name: "LectureDetail",
-        params: { id: item.id },
-      });
+      this.$router.push(`/LectureDetail/${item.id}`);
     },
   },
 };
