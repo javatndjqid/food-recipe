@@ -36,6 +36,12 @@ const routes = [
     component: () => import('../search/SearchDetail.vue'),
     props: true
   },
+  {
+    path: '/MypageRecipyDetail',
+    name: 'MypageRecipyDetail',
+    component: () => import('../Mypage/MypageRecipyDetail.vue'),
+    props: true
+  },
 
   {
     path: '/Lecture',

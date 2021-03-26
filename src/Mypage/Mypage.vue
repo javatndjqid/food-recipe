@@ -224,7 +224,10 @@ export default {
     // },
     navigate() {
       this.$router.push("/MypageRecipy");
-    }
+    },
+    navigateTo(item) {
+      this.$router.push({ name: "MypageRecipyDetail", params: { recipeId: item.recipeId } });
+    },
   }
 };
 </script>

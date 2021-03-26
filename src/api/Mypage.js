@@ -10,7 +10,7 @@ export default {
     axios.get(`${process.env.VUE_APP_API_BASE}/recipe`),
   stufflist: () =>
     axios.get(`${process.env.VUE_APP_API_BASE}/stuff`),
-
+  recipe: (id) => axios.get(`${process.env.VUE_APP_API_BASE}/recipe/${id}`),
   postrecipelist: (data) =>
     axios.post(`${process.env.VUE_APP_API_BASE}/recipe`, data),
   uploadFile: (id, form) =>
