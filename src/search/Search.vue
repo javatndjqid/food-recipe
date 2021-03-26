@@ -42,7 +42,7 @@
             <v-expansion-panel>
               <v-expansion-panel-header v-slot="{ open }">
                 <v-row no-gutters>
-                  <v-col cols="4"> 카테고리 </v-col>
+                  <v-col cols="4"> 조리방법(카테고리) </v-col>
                   <v-col cols="8" class="text--secondary">
                     <v-fade-transition leave-absolute>
                       <span v-if="open" key="0" />
@@ -110,6 +110,7 @@ export default {
     page: 1,
     move: [{ text: "SearchDetail", path: "/SearchDetail" }],
     recipe: [],
+    searchRecipe: [],
   }),
   watch: {
     search(val) {
@@ -133,21 +134,45 @@ export default {
       }, 500);
     },
     addChip() {
-      if (this.select == null /*|| this.chips.c*/) return;
+      if (this.select == null || this.chips.indexOf(this.select) > -1) return;
       this.chips.push(this.select);
       console.log(this.chips);
       // this.getSearchStuff(this.select, this.recipe);
+      console.log(this.radio);
+
+      this.recipeFilter(this.chips);
+    },
+    async recipeFilter(chips) {
+      const results = await api.category(this.radio.id);
+      if (results.status == 200) {
+        this.searchRecipe = results.data;
+        for (let i in chips) {
+          console.log(chips[i]);
+          this.searchRecipe = this.searchRecipe.filter((search) => {
+            return search.stuff.indexOf(chips[i]) > -1;
+          });
+          console.log(this.searchRecipe);
+        }
+        this.recipe = this.searchRecipe;
+      }
     },
     delChip(i) {
       this.chips.splice(i, 1);
-      console.log(this.chips);
+      console.log(this.chips.length);
+      console.log(this.radio.id);
+      this.chips.length == 0
+        ? this.selectRadio(this.radio)
+        : this.recipeFilter(this.chips);
     },
     navigateTo(item) {
       this.$router.push({ name: "SearchDetail", params: { id: item.id } });
     },
     selectRadio(category) {
       this.radio = category;
-      this.radio.id == 0 ? this.recipe : this.getCategoryRecipe(this.radio.id);
+      // this.radio.id == 0
+      //   ? this.getItem()
+      //   : this.getCategoryRecipe(this.radio.id);
+      this.recipeFilter(this.chips);
     },
     async getItem() {
       const results = await api.list();
@@ -168,19 +193,20 @@ export default {
       }
     },
     async getCategoryRecipe(i) {
+      console.log("getCategoryRecipe실행");
       const results = await api.category(i);
       if (results.status === 200) {
         this.recipe = results.data;
       }
     },
-    // async getSearchStuff(stuff, recipe) {
-    //   // const recipe = JSON.stringify(recipeData);
-    //   const results = await api.searchRecipe(stuff, recipe);
-    //   if (results.status == 200) {
-    //     this.recipe = results.data;
-    //     console.log(results.data);
-    //   }
-    // },
+    async getSearchStuff(categoryId, stuff) {
+      // const recipe = JSON.parse(recipeData);
+      const results = await api.searchRecipe(categoryId, stuff);
+      if (results.status == 200) {
+        this.recipe = results.data;
+        console.log(results.data);
+      }
+    },
   },
 };
 </script>
