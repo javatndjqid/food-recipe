@@ -8,12 +8,7 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home
-  //  component: () => import('../views/Home.vue')
-  },
-  {
-    path: '/Class',
-    name: 'Class',
-    component: () => import('../class/Class.vue')
+    //  component: () => import('../views/Home.vue')
   },
   {
     path: '/Search',
@@ -38,14 +33,38 @@ const routes = [
   {
     path: '/SearchDetail',
     name: 'SearchDetail',
-    component: () => import('../search/SearchDetail.vue')
+    component: () => import('../search/SearchDetail.vue'),
+    props: true
   },
-  
+  {
+    path: '/MypageRecipyDetail',
+    name: 'MypageRecipyDetail',
+    component: () => import('../Mypage/MypageRecipyDetail.vue'),
+    props: true
+  },
+
+  {
+    path: '/Lecture',
+    name: 'Lecture',
+    component: () => import('../lecture/Lecture.vue')
+  },
+  {
+    path: '/LectureDetail/:id',
+    name: 'LectureDetail',
+    component: () => import('../lecture/LectureDetail.vue'),
+    props: true,
+  },
+  {
+    path: '/LecturePlay/:id',
+    name: 'LecturePlay',
+    component: () => import('../lecture/LecturePlay.vue'),
+    props: true,
+  }
 
 ]
 
 const router = new VueRouter({
- // mode: 'history',
+  // mode: 'history',
   base: process.env.BASE_URL,
   routes
 })

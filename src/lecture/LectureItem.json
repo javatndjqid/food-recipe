@@ -1,0 +1,12 @@
+[
+  { "count":1, "title":"쩝쩝박사", "category":"구이", "stuffs":["당근","고춧가루"] },
+  { "count":2, "title":"쩝쩝석사", "category":"볶음", "stuffs":["고춧가루"] },
+  { "count":3, "title":"쩝쩝학사", "category":"구이", "stuffs":["소고기"] },
+  { "count":4, "title":"쩝쩝고딩", "category":"볶음", "stuffs":["당근","고춧가루"] },
+  { "count":5, "title":"쩝쩝중딩", "category":"구이", "stuffs":["당근","새송이버섯"] },
+  { "count":6, "title":"쩝쩝초딩", "category":"볶음", "stuffs":["당근","고춧가루"] },
+  { "count":7, "title":"쩝쩝박사", "category":"구이", "stuffs":["당근","고춧가루"] },
+  { "count":8, "title":"쩝쩝석사", "category":"볶음", "stuffs":["당근","고춧가루"] },
+  { "count":9, "title":"쩝쩝학사", "category":"구이", "stuffs":["당근","고춧가루"] },
+  { "count":10, "title":"쩝쩝고딩", "category":"볶음", "stuffs":["당근","고춧가루"] } 
+]
