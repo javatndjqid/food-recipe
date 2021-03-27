@@ -10,9 +10,12 @@
               src="https://image.freepik.com/free-vector/healthy-recipe-illustration-concept_23-2148576281.jpg"
             />
             <v-data-table
+            
               :headers="recipyHeaders"
               :items="userRecipeList"
               :items-per-page="9"
+              :loading="loading"
+              loading-text="Loading... Please wait"
             >
               <template v-slot:item.image="{ item }">
                 <div>
@@ -20,18 +23,21 @@
                     v-if="item.image"
                     :src="item.image"
                     :alt="item.recipeName"
-                    height="40px"
-                    width="50px"
+                    height="60px"
+                    width="150px"
                   />
                   <v-img
                     v-else
                     :src="item.recipefile[0].dataUrl"
                     :alt="item.recipeName"
-                    height="40px"
-                    width="50px"
+                    height="60px"
+                    width="150px"
                   />
+                    <button @click="navigateTo(item)">상세정보</button>
                 </div>
+                
               </template>
+            
             </v-data-table>
           </v-card>
           <v-row cols="12" justify="end">
@@ -173,13 +179,14 @@ import api from "@/api/Mypage";
 export default {
   data: () => ({
     recipyHeaders: [
-      { text: "레시피넘버", align: "start", value: "recipeId" },
+
+      { text: "No.", align: "start", value: "recipeId",  class:"elevation-1", width:50},
       {
-        text: "레시피사진",
+        text: "레시피 사진",
         value: "image",
         sortable: false
       },
-      { text: "레시피이름", value: "recipeName", sortable: false }
+      { text: "레시피 이름", value: "recipeName", sortable: false }
     ],
     ClassHeaders: [
       { text: "no", align: "start", value: "recipeId" },
@@ -222,11 +229,14 @@ export default {
     //     this.$router.push(item.path);
     //   }
     // },
+
     navigate() {
       this.$router.push("/MypageRecipy");
     },
     navigateTo(item) {
-      this.$router.push({ name: "MypageRecipyDetail", params: { recipeId: item.recipeId } });
+     // this.$router.push(`/MypageRecipyDetail/${item.recipeId}`);
+     this.$router.push({ name: "MypageRecipyDetail", params: { recipeId: item.recipeId } });
+      console.log(item.recipeId)
     },
   }
 };

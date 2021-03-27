@@ -69,8 +69,8 @@
                     <v-col cols="8" md="5" style="float:left;">
                       <v-combobox
                         v-model="item.stuffName"
-                        :items="stuffs"
-                        item-text="name"
+                        :items="stuffs.name"
+                        
                         label="재료명"
                         
                         solo
@@ -105,7 +105,7 @@
                         clearable
                       />
                     </v-col>
-                    <v-col cols="12" md="2" style="float:left;">
+                    <!-- <v-col cols="12" md="2" style="float:left;">
                       <template>
                         <v-file-input
                           v-model="item.recipeProcedureImage"
@@ -115,7 +115,7 @@
                           label="사진첨부"
                         />
                       </template>
-                    </v-col>
+                    </v-col> -->
                   </div>
                 </v-col>
                 <v-btn @click="addproceduresslot()" text color="success">
