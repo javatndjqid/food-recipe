@@ -84,67 +84,9 @@ export default {
   data: () => ({
     show: false,
     recipe: [],
-    recipes: [
-      {
-        text:
-          "고구마는 깨끗이 씻어서 껍질을 벗기고 4cm 정도로 잘라준다.고구마는 깨끗이 씻어서 껍질을 벗기고 4cm 정도로 잘라준다.고구마는 깨끗이 씻어서 껍질을 벗기고 4cm 정도로 잘라준다.고구마는 깨끗이 씻어서 껍질을 벗기고 4cm 정도로 잘라준다.",
-        image: "http://www.foodsafetykorea.go.kr/uploadimg/cook/20_00017_1.png",
-      },
-      {
-        text:
-          "찜기에 고구마를 넣고 20~30분 정도 삶아 주고, 블렌더나 체를 이용하여 잘 으깨어 곱게 만든다.",
-        image: "http://www.foodsafetykorea.go.kr/uploadimg/cook/20_00017_2.png",
-      },
-      {
-        text:
-          "고구마와 물을 섞어 끓이면서 찹쌀가루로 농도를 맞추고 설탕을 넣어 맛을 낸다.",
-        image: "http://www.foodsafetykorea.go.kr/uploadimg/cook/20_00017_3.png",
-      },
-    ],
-    product: [
-      {
-        title: "죽",
-        image: "http://www.foodsafetykorea.go.kr/uploadimg/cook/10_00017_2.png",
-      },
-      {
-        title: "죽",
-        image: "http://www.foodsafetykorea.go.kr/uploadimg/cook/10_00017_2.png",
-      },
-      {
-        title: "죽",
-        image: "http://www.foodsafetykorea.go.kr/uploadimg/cook/10_00017_2.png",
-      },
-      {
-        title: "죽",
-        image: "http://www.foodsafetykorea.go.kr/uploadimg/cook/10_00017_2.png",
-      },
-      {
-        title: "죽",
-        image: "http://www.foodsafetykorea.go.kr/uploadimg/cook/10_00017_2.png",
-      },
-    ],
-    lecture: [
-      {
-        title: "죽",
-        image: "http://www.foodsafetykorea.go.kr/uploadimg/cook/10_00017_2.png",
-      },
-      {
-        title: "죽",
-        image: "http://www.foodsafetykorea.go.kr/uploadimg/cook/10_00017_2.png",
-      },
-      {
-        title: "죽",
-        image: "http://www.foodsafetykorea.go.kr/uploadimg/cook/10_00017_2.png",
-      },
-      {
-        title: "죽",
-        image: "http://www.foodsafetykorea.go.kr/uploadimg/cook/10_00017_2.png",
-      },
-      {
-        title: "죽",
-        image: "http://www.foodsafetykorea.go.kr/uploadimg/cook/10_00017_2.png",
-      },
-    ],
+    recipes: [],
+    product: [],
+    lecture: [],
   }),
   mounted() {
     this.getRecipeData();

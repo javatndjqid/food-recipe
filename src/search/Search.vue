@@ -137,7 +137,6 @@ export default {
       if (this.select == null || this.chips.indexOf(this.select) > -1) return;
       this.chips.push(this.select);
       console.log(this.chips);
-      // this.getSearchStuff(this.select, this.recipe);
       console.log(this.radio);
 
       this.recipeFilter(this.chips);
@@ -169,9 +168,6 @@ export default {
     },
     selectRadio(category) {
       this.radio = category;
-      // this.radio.id == 0
-      //   ? this.getItem()
-      //   : this.getCategoryRecipe(this.radio.id);
       this.recipeFilter(this.chips);
     },
     async getItem() {
@@ -190,21 +186,6 @@ export default {
       const categoriesResults = await api.categories();
       if (categoriesResults.status === 200) {
         this.category.push(...categoriesResults.data);
-      }
-    },
-    async getCategoryRecipe(i) {
-      console.log("getCategoryRecipe실행");
-      const results = await api.category(i);
-      if (results.status === 200) {
-        this.recipe = results.data;
-      }
-    },
-    async getSearchStuff(categoryId, stuff) {
-      // const recipe = JSON.parse(recipeData);
-      const results = await api.searchRecipe(categoryId, stuff);
-      if (results.status == 200) {
-        this.recipe = results.data;
-        console.log(results.data);
       }
     },
   },
