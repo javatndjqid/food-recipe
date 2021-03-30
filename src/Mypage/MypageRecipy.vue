@@ -65,23 +65,30 @@
                 </v-col>
 
                 <v-col cols="12">
-                  <div v-for="(item, i) in recipe.stuffRecipe" :key="i">
+                  <div v-for="(input, i) in recipe.stuffRecipe" :key="i">
                     <v-col cols="8" md="5" style="float:left;">
-                      <v-combobox
-                        v-model="item.stuffName"
-                        :items="stuffs.name"
-                        
+                      <v-autocomplete
+                        v-model="input.stuffName"
+                        solo
+                        :items="stufflist"
+                        item-text="stuffName"
                         label="재료명"
-                        
+                      ></v-autocomplete>
+                      <!-- <v-combobox
+                        v-model="input.stuffName"
+                        :items="stufflist"
+                        item-text="stuffName"
+                        label="재료명"
                         solo
                         clearable
-                      ></v-combobox>
+                       
+                      ></v-combobox> -->
                     </v-col>
                     <v-col cols="4" md="5" style="float:left;">
                       <v-text-field
                         solo
                         label="양"
-                        v-model="item.quantity"
+                        v-model="input.quantity"
                         clearable
                       />
                     </v-col>
@@ -105,13 +112,25 @@
                         clearable
                       />
                     </v-col>
-                    <!-- <v-col cols="12" md="2" style="float:left;">
+                    <v-col cols="12" md="2" style="float:left;">
                       <template>
                         <v-file-input
                           v-model="item.recipeProcedureImage"
                           accept="image/*"
                           prepend-icon="mdi-camera"
                           multiple
+                          label="사진첨부"
+                        />
+                      </template>
+                    </v-col>
+                  <!-- </div>
+                  <div v-for="(item, i) in file.recipeProcedure" :key="i">
+                    <v-col cols="12" md="2" style="float:right;">
+                      <template>
+                        <v-file-input
+                          v-model="item.recipeProcedureImage"
+                          accept="image/*"
+                          prepend-icon="mdi-camera"
                           label="사진첨부"
                         />
                       </template>
@@ -162,11 +181,20 @@
 import api from "@/api/Mypage";
 
 export default {
+  props: {
+    multiple: {
+      type: Boolean,
+      required: false,
+      default: true
+    }
+  },
   data: () => ({
     hasSaved: false,
     isEditing: null,
     model: null,
     recipe: {
+      image:
+        "https://3.bp.blogspot.com/-ZKBbW7TmQD4/U6P_DTbE2MI/AAAAAAAADjg/wdhBRyLv5e8/s1600/noimg.gif",
       tip: "",
       explanation: "",
       recipeName: "",
@@ -177,8 +205,10 @@ export default {
       category: ""
     },
     categorylist: [],
-    stuffs: [],
+    // stuffs: [],
     files: [],
+    stufflist: { stuffName: [] },
+    file: { recipeProcedure: [{ recipeProcedureImage: "" }] },
 
     drawer: false, // drawer의 기본 값
     selectedItem: 0,
@@ -209,6 +239,7 @@ export default {
     },
     addproceduresslot() {
       this.recipe.recipeProcedure.push({ quantity: "" });
+      this.file.recipeProcedure.push({ imageUrl: "" });
     },
     delstuffsslot(i) {
       this.recipe.stuffRecipe.splice(this.recipe.stuffRecipe.indexOf(i), 1);
@@ -227,23 +258,31 @@ export default {
       const result = await api.postrecipelist(recipedata);
       if (result.status == 200) {
         const newdata = result.data;
-        newdata.files = []; // 파일목록 초기화
-
-        // this.files > file-input과 바인딩 되어있음
-        // 파일 객체 여러개가 저장되는 배열
-        // 선택한 파일이 있으면
+        newdata.files = [];
         if (this.files && this.files.length > 0) {
-          // 파일 업로드를 하고
           for (let file of this.files) {
             const form = new FormData();
             form.append("data", file);
             const result = await api.uploadFile(newdata.recipeId, form);
-            console.log(result.status); // HTTP 상태코드
-            console.log(result.data); // 응답받은 데이터
             newdata.files.push({
               ...result.data
             });
           }
+        }
+        const newdata2 = result.data;
+        newdata2.recipeProcedure.recipeProcedureImage = []; 
+
+          for (let i = 0; i < newdata2.recipeProcedure.length; i++) {
+            let file = this.newdata2.recipeProcedure.recipeProcedureImage
+              const form2 = new FormData();
+             
+              form2.append("data2", file[i]);
+               console.log(form2)
+              const result2 = await api.uploadFile2(newdata2.recipeId, form2);
+              newdata2.recipeProcedure.recipeProcedureImage.push({
+                ...result2.data
+              })
+          
         }
 
         this.$router.push("/Mypage");
@@ -252,7 +291,8 @@ export default {
 
     async getRecipeData() {
       const result = await api.stufflist();
-      this.stuffs = result.data;
+      this.stufflist = result.data;
+      console.log(this.stufflist);
     },
     async getCategoryData() {
       const result = await api.categorylist();
