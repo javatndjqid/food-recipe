@@ -53,6 +53,18 @@ const routes = [
     name: 'LecturePlay',
     component: () => import('../lecture/LecturePlay.vue'),
     props: true,
+  },
+  {
+    path: '/Cart',
+    name: 'Cart',
+    component: () => import('../shopping/Cart.vue'),
+    props: true,
+  },
+  {
+    path: '/ProductDetail',
+    name: 'ProductDetail',
+    component: () => import('../shopping/ProductDetail.vue'),
+    props: true,
   }
 
 ]

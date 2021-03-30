@@ -1,0 +1,22 @@
+roductList: [
+      {
+        id: 1,
+        name: "무농약 손질 잎몸 대파",
+        price: "4800",
+        weight: "200g",
+        origin: "국산",
+        shelfLife: "농산물로 별도의 유통기한은 없으나 가급적 빠르게 드시기 바랍니다.",
+        productTitleImage: "cf.kurly.com/shop/data/goodsview/20191022/gv40000065394_1.jpg",
+        productDetailImage: "http://kclshop1.cafe24.com/openmarket/popo/veg/kcl_p_go.jpg",
+      },
+      {
+        id: 2,
+        name: "깐마늘",
+        price: "2000",
+        weight: "200g",
+        origin: "국산",
+        shelfLife: "농산물로 별도의 유통기한은 없으나 가급적 빠르게 드시기 바랍니다.",
+        productTitleImage: "https://img-cf.kurly.com/shop/data/goods/1604293153137m0.jpg",
+        productDetailImage: "https://cdn013.negagea.net/naturepang/naturepang/d_img/Kkanmaneul.jpg",
+      },
+    ],
