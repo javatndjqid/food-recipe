@@ -258,10 +258,7 @@ export default {
     },
     navigateToViewer(item) {
       console.log("진행한다 " + item.id);
-      this.$router.push({
-        name: "LecturePlay",
-        params: { id: item.id },
-      });
+      this.$router.push(`/LecturePlay/${item.id}`);
     },
   },
 };

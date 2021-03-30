@@ -44,6 +44,8 @@
 
 <script>
 // import api from '@/api/Lecture'
+// import lectureList from '@/lecture/LectureItem.json'
+
 export default {
   data: () => ({
     page: 1,
@@ -93,14 +95,14 @@ export default {
       {
         id: 7,
         picture: "https://picsum.photos/id/700",
-        title: "쩝쩝박사",
+        title: "쩝쩝유딩",
         category: "구이",
         stuffs: ["당근", "고춧가루"],
       },
       {
         id: 8,
         picture: "https://picsum.photos/id/800",
-        title: "쩝쩝석사",
+        title: "쩝쩝아기",
         category: "볶음",
         stuffs: ["당근", "고춧가루"],
       },
@@ -142,10 +144,7 @@ export default {
     },
     navigateTo(item) {
       // console.log(item);
-      this.$router.push({
-        name: "LectureDetail",
-        params: { id: item.id },
-      });
+      this.$router.push(`/LectureDetail/${item.id}`);
     },
   },
 };

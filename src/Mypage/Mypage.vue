@@ -4,40 +4,44 @@
       <v-col cols="10" md="8" lg="5">
         <template>
           <v-card style="height: 700px" class="overflow-y-auto" elevation="10">
-             <v-img
+            <v-img
               class="white--text align-end"
               height="150px"
               src="https://image.freepik.com/free-vector/healthy-recipe-illustration-concept_23-2148576281.jpg"
             />
             <v-data-table
               :headers="recipyHeaders"
-              :items="userRecipeList"
+              :items="itemsWithSno"
               :items-per-page="9"
+              :loading="loading"
+              loading-text="Loading... Please wait"
             >
+              <template v-slot:item.recipeId:="props">
+                      {{ props.item.recipe.length }}
+              </template>
               <template v-slot:item.image="{ item }">
-                <div>
+                <div v-if="item.recipefile[0]">
                   <v-img
-                    v-if="item.image"
-                    :src="item.image"
-                    :alt="item.recipeName"
-                    height="40px"
-                    width="50px"
-                  />
-                  <v-img
-                    v-else
                     :src="item.recipefile[0].dataUrl"
-                    :alt="item.recipeName"
-                    height="40px"
-                    width="50px"
+                    height="60px"
+                    width="150px"
                   />
                 </div>
+                <div v-else>
+                  <v-img :src="item.image" height="60px" width="150px" />
+                </div>
+              </template>
+              <template v-slot:item.details="{ item }"> 
+               
+                <v-icon @click="navigateTo(item)" fab dark color="black" >mdi-view-list</v-icon>
+              
               </template>
             </v-data-table>
           </v-card>
           <v-row cols="12" justify="end">
             <v-btn @click="navigate()" class="mx-2" fab dark color="cyan">
               <v-icon>
-                mdi-pencil
+                mdi-playlist-plus
               </v-icon>
             </v-btn>
           </v-row>
@@ -56,7 +60,7 @@
             <v-data-table
               style="height: 250px"
               :headers="ClassHeaders"
-              :items="userRecipeList"
+              :items="userLectureList"
               :items-per-page="3"
             >
               <template v-slot:item.image="{ item }">
@@ -91,26 +95,25 @@
             <v-data-table
               style="height: 250px"
               :headers="MarketHeaders"
-              :items="userRecipeList"
+              :items="userPerchaseList"
               :items-per-page="3"
             >
               <template v-slot:item.image="{ item }">
-                <div>
-                  <v-img
-                    v-if="item.image"
-                    :src="item.image"
-                    :alt="item.recipeName"
-                    height="40px"
-                    width="50px"
-                  />
-                  <v-img
-                    v-else
-                    :src="item.recipefile[0].dataUrl"
-                    :alt="item.recipeName"
-                    height="40px"
-                    width="50px"
-                  />
-                </div>
+                <v-img
+                  v-if="item.image"
+                  :src="item.image"
+                  :alt="item.recipeName"
+                  height="40px"
+                  width="50px"
+                />
+
+                <v-img
+                  v-if="item.recipefile[0].dataUrl"
+                  :src="item.recipefile[0].dataUrl"
+                  :alt="item.recipeName"
+                  height="40px"
+                  width="50px"
+                />
               </template>
             </v-data-table>
           </v-card>
@@ -173,13 +176,20 @@ import api from "@/api/Mypage";
 export default {
   data: () => ({
     recipyHeaders: [
-      { text: "레시피넘버", align: "start", value: "recipeId" },
       {
-        text: "레시피사진",
-        value: "image",
-        sortable: false
+        text: "No.",
+        align: "start",
+        value: "sno",
+        class: "elevation-1",
+        width: 10
       },
-      { text: "레시피이름", value: "recipeName", sortable: false }
+      {
+        text: "레시피 사진",
+        value: "image",
+        sortable: false,align:'center' 
+      },
+      { text: "레시피 이름", value: "recipeName", sortable: false,align:'center' },
+      { text: "상세정보", value: "details", sortable: false, width: 80,align:'center' }
     ],
     ClassHeaders: [
       { text: "no", align: "start", value: "recipeId" },
@@ -205,7 +215,12 @@ export default {
     },
     length() {
       return 10;
+    },
+    //데이터 리스트 넘버링
+    itemsWithSno() {
+      return this.userRecipeList.map((d, index) => ({ ...d, sno: index + 1 }))
     }
+  
   },
   methods: {
     async getRecipeList() {
@@ -213,17 +228,16 @@ export default {
       this.userRecipeList = result.data;
       console.log(result.data);
     },
-
-    // navigateTo(item) {
-    //   /* https://router.vuejs.org/kr/guide/essentials/navigation.html */
-    //   // 현재 경로와 다르면
-    //   if(this.$route.path != item.path){
-    //     // 라우터에 경로 추가
-    //     this.$router.push(item.path);
-    //   }
-    // },
     navigate() {
       this.$router.push("/MypageRecipy");
+    },
+    navigateTo(item) {
+      // this.$router.push(`/MypageRecipyDetail/${item.recipeId}`);
+      this.$router.push({
+        name: "MypageRecipyDetail",
+        params: { recipeId: item.recipeId }
+      });
+      console.log(item.recipeId);
     }
   }
 };

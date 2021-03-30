@@ -36,6 +36,12 @@ const routes = [
     component: () => import('../search/SearchDetail.vue'),
     props: true
   },
+  {
+    path: '/MypageRecipyDetail',
+    name: 'MypageRecipyDetail',
+    component: () => import('../Mypage/MypageRecipyDetail.vue'),
+    props: true
+  },
 
   {
     path: '/Lecture',
@@ -43,13 +49,13 @@ const routes = [
     component: () => import('../lecture/Lecture.vue')
   },
   {
-    path: '/LectureDetail',
+    path: '/LectureDetail/:id',
     name: 'LectureDetail',
     component: () => import('../lecture/LectureDetail.vue'),
     props: true,
   },
   {
-    path: '/LecturePlay',
+    path: '/LecturePlay/:id',
     name: 'LecturePlay',
     component: () => import('../lecture/LecturePlay.vue'),
     props: true,
