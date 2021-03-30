@@ -10,8 +10,8 @@
             <v-img
               width="100%"
               height="250px"
-              :src="`${item.picture}/600`"
-              :lazy-src="`${item.picture}/10`"
+              :src="`${item.imageSRC}/600`"
+              :lazy-src="`${item.imageSRC}/10`"
               @click="navigateTo(item)"
               style="cursor: pointer"
             >
@@ -43,88 +43,15 @@
 </template>
 
 <script>
-// import api from '@/api/Lecture'
-// import lectureList from '@/lecture/LectureItem.json'
-
+import api from "@/api/Lecture";
 export default {
   data: () => ({
     page: 1,
-    lectureList: [
-      {
-        id: 1,
-        picture: "https://picsum.photos/id/100",
-        title: "쩝쩝박사",
-        category: "구이",
-        stuffs: ["당근", "고춧가루"],
-      },
-      {
-        id: 2,
-        picture: "https://picsum.photos/id/200",
-        title: "쩝쩝석사",
-        category: "볶음",
-        stuffs: ["고춧가루"],
-      },
-      {
-        id: 3,
-        picture: "https://picsum.photos/id/301",
-        title: "쩝쩝학사",
-        category: "구이",
-        stuffs: ["소고기"],
-      },
-      {
-        id: 4,
-        picture: "https://picsum.photos/id/400",
-        title: "쩝쩝고딩",
-        category: "볶음",
-        stuffs: ["당근", "고춧가루"],
-      },
-      {
-        id: 5,
-        picture: "https://picsum.photos/id/502",
-        title: "쩝쩝중딩",
-        category: "구이",
-        stuffs: ["당근", "새송이버섯"],
-      },
-      {
-        id: 6,
-        picture: "https://picsum.photos/id/603",
-        title: "쩝쩝초딩",
-        category: "볶음",
-        stuffs: ["당근", "고춧가루"],
-      },
-      {
-        id: 7,
-        picture: "https://picsum.photos/id/700",
-        title: "쩝쩝유딩",
-        category: "구이",
-        stuffs: ["당근", "고춧가루"],
-      },
-      {
-        id: 8,
-        picture: "https://picsum.photos/id/800",
-        title: "쩝쩝아기",
-        category: "볶음",
-        stuffs: ["당근", "고춧가루"],
-      },
-      {
-        id: 9,
-        picture: "https://picsum.photos/id/900",
-        title: "쩝쩝학사",
-        category: "구이",
-        stuffs: ["당근", "고춧가루"],
-      },
-      {
-        id: 10,
-        picture: "https://picsum.photos/id/1000",
-        title: "쩝쩝고딩",
-        category: "볶음",
-        stuffs: ["당근", "고춧가루"],
-      },
-    ],
+    lectureList: [],
   }),
-  // mounted(){
-  //   this.getLectureList();
-  // },
+  mounted(){
+    this.getItem();
+  },
   computed: {
     items() {
       return Array.from({ length: this.length }, (k, v) => v + 1);
@@ -134,17 +61,18 @@ export default {
     },
   },
   methods: {
-    // async getLectureList() {
-    //   const result = await api.lectureListAll();
-    //   this.lectureList = result.data;
-    //   console.log(result.data);
+    // randomNumber() {
+    //   return Math.floor(Math.random() * 1000) + 1;
     // },
-    randomNumber() {
-      return Math.floor(Math.random() * 1000) + 1;
-    },
     navigateTo(item) {
       // console.log(item);
       this.$router.push(`/LectureDetail/${item.id}`);
+    },
+    async getItem() {
+      const results = await api.list();
+      if (results.status == 200) {
+        this.lectureList = results.data;
+      }
     },
   },
 };

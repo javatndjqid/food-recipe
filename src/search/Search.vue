@@ -89,8 +89,9 @@
     <div class="text-center">
       <v-pagination
         v-model="page"
-        :length="10"
-        :total-visible="9"
+        :length="pageLength"
+        :total-visible="7"
+        @input="movePage()"
       ></v-pagination>
     </div>
   </div>
@@ -108,6 +109,7 @@ export default {
     radio: { id: 0, name: "전체" },
     chips: [],
     page: 1,
+    pageLength: 0,
     move: [{ text: "SearchDetail", path: "/SearchDetail" }],
     recipe: [],
     searchRecipe: [],
@@ -118,7 +120,8 @@ export default {
     },
   },
   mounted() {
-    this.getItem();
+    this.getItem(this.page);
+    this.getCount();
     this.getState();
     this.getCategories();
   },
@@ -138,12 +141,20 @@ export default {
       this.chips.push(this.select);
       console.log(this.chips);
       console.log(this.radio);
-
+      this.recipeFilter(this.chips);
+    },
+    movePage() {
+      console.log(this.page);
       this.recipeFilter(this.chips);
     },
     async recipeFilter(chips) {
-      const results = await api.category(this.radio.id);
+      console.log("====== recipeFilter 실행 ======");
+      console.log(this.radio.id);
+      const results = await api.category(this.radio.id, this.page - 1);
+      console.log(results.status);
       if (results.status == 200) {
+        console.log("===== results.data =====");
+        console.log(results.data);
         this.searchRecipe = results.data;
         for (let i in chips) {
           console.log(chips[i]);
@@ -171,7 +182,7 @@ export default {
       this.recipeFilter(this.chips);
     },
     async getItem() {
-      const results = await api.list();
+      const results = await api.list(this.page - 1);
       if (results.status == 200) {
         this.recipe = results.data;
       }
@@ -186,6 +197,13 @@ export default {
       const categoriesResults = await api.categories();
       if (categoriesResults.status === 200) {
         this.category.push(...categoriesResults.data);
+      }
+    },
+    async getCount() {
+      const result = await api.count();
+      if (result.status == 200) {
+        this.pageLength = parseInt(result.data / 12 + 1);
+        console.log(this.pageLength);
       }
     },
   },
