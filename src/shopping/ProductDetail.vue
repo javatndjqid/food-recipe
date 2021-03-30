@@ -6,7 +6,6 @@
           text
           icon
           color="red"
-          dark
           style="margin-left: 1100px"
           @click="moveToCart()"
         >
@@ -15,7 +14,7 @@
             :style="{
               marginBottom: '50px',
               marginTop: '60px',
-              marginleft: '0px',
+              marginLeft: '0px',
             }"
             >mdi-cart</v-icon
           >
@@ -23,7 +22,11 @@
       </div>
       <v-row justify="center">
         <v-col cols="6" md="6">
-          <v-card class="mx-auto" max-width="450px">
+          <v-card
+            class="rounded-0"
+            max-width="450px"
+            :style="{ marginRight: '0px' }"
+          >
             <v-img
               :src="productDetail.productTitleImage"
               width="450px"
@@ -33,8 +36,14 @@
           </v-card>
         </v-col>
         <v-col cols="6" md="6" align-content="left">
-          <v-simple-table :style="{ marginBottom: '50px', marginTop: '60px' }">
-            <tbody :style="{ marginBottom: '50px' }">
+          <v-simple-table
+            :style="{
+              marginBottom: '50px',
+              marginTop: '60px',
+              marginLeft: '0px',
+            }"
+          >
+            <tbody :style="{ marginBottom: '70px' }">
               <tr>
                 <td>
                   <h1>{{ productDetail.name }}</h1>
@@ -65,8 +74,41 @@
               </tbody>
             </template>
           </v-simple-table>
+          <br />
+          <br /><br />
+          <v-bottom-sheet v-model="sheet" inset>
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn
+                depressed
+                elevation="2"
+                color="red"
+                class="rounded-0"
+                dark
+                x-large
+                @click="addCart()"
+                v-bind="attrs"
+                v-on="on"
+              >
+                장바구니 담기
+              </v-btn>
+            </template>
+            <v-sheet class="text-center" height="140px">
+              <v-btn class="mt-6" text color="red" @click="moveToMarket()">
+                쇼핑계속하기
+              </v-btn>
+              <v-btn class="mt-6" text color="red" @click="moveToCart()">
+                장바구니로 이동
+              </v-btn>
+              <div class="my-3">
+                장바구니로 추가되었습니다.<br />
+                장바구니로 이동하시겠습니까?
+              </div>
+            </v-sheet>
+          </v-bottom-sheet>
         </v-col>
-        <v-card class="mx-auto" max-width="450px"> </v-card>
+        <v-card class="mx-auto" max-width="1000px" max-height="100%">
+          <v-img :src="productDetail.pfoductDetailImage"></v-img>
+        </v-card>
       </v-row>
     </v-container>
   </div>
@@ -77,6 +119,7 @@ import api from "@/api/Market";
 export default {
   data: () => ({
     productDetail: [],
+    sheet: false,
   }),
   mounted() {
     this.getProductDetail();
@@ -90,7 +133,15 @@ export default {
       }
       console.log(result.data);
     },
-
+    async addCart() {
+      const result = await api.addCart({ product: { ...this.productDetail } });
+      if (result.status == 200) {
+        console.log(result.data);
+      }
+    },
+    moveToMarket() {
+      this.$router.push("/Shopping");
+    },
     moveToCart() {
       this.$router.push("/Cart");
     },
