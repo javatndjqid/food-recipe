@@ -107,7 +107,7 @@
           </v-bottom-sheet>
         </v-col>
         <v-card class="mx-auto" max-width="1000px" max-height="100%">
-          <v-img :src="productDetail.pfoductDetailImage"></v-img>
+          <v-img :src="productDetail.productDetailImage"></v-img>
         </v-card>
       </v-row>
     </v-container>

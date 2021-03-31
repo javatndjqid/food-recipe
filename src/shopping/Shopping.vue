@@ -1,6 +1,27 @@
 <template>
   <div>
     <v-container>
+      <v-toolbar color="red" dark>
+        <!-- <v-toolbar-title>State selection</v-toolbar-title> -->
+        <v-text-field
+          cache-items
+          class="mx-4"
+          flat
+          hide-no-data
+          hide-details
+          solo-inverted
+          v-model="stuff"
+          @keyup.enter="findByStuff(), findByName()"
+        ></v-text-field>
+
+        <v-btn icon @click="findByStuff(), findByName()">
+          <v-icon size="60" :style="{ marginRight: '10px' }"
+            >mdi-card-search</v-icon
+          >
+        </v-btn>
+      </v-toolbar>
+    </v-container>
+    <v-container>
       <div>
         <v-btn
           text
@@ -18,6 +39,7 @@
       <v-row justify="center" :style="{ marginTop: '10px' }">
         <v-col cols="9" md="3" v-for="(item, i) in productList" :key="i">
           <v-card
+            flat
             style="cursor: pointer"
             class="rounded-0"
             @click="moveToDetail(item)"
@@ -32,7 +54,11 @@
                 </v-row>
               </template>
             </v-img>
-            <v-card-title>{{ item.name }}</v-card-title>
+            <v-card-title
+              ><div>
+                {{ item.name }}
+              </div></v-card-title
+            >
             <v-card-subtitle>
               <div>{{ item.price }}원</div>
             </v-card-subtitle>
@@ -50,6 +76,7 @@ import api from "@/api/Market";
 
 export default {
   data: () => ({
+    stuff: "",
     productList: [],
   }),
   mounted() {
@@ -62,6 +89,23 @@ export default {
         this.productList = result.data;
       }
     },
+    async findByStuff() {
+      console.log(this.stuff);
+      const result = await api.findByStuff(this.stuff);
+      if (result.status == 200) {
+        this.productList = result.data;
+        this.stuff = "";
+      }
+    },
+    async findByName() {
+      console.log(this.stuff);
+      const result = await api.findByName(this.stuff);
+      if (result.status == 200) {
+        this.productList = result.data;
+        this.stuff = "";
+      }
+    },
+
     moveToCart() {
       this.$router.push("/Cart");
     },

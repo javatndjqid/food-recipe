@@ -3,7 +3,7 @@
     <v-container>
       <v-col v-for="(item, i) in cartList" :key="i" :item="item">
         <v-card class="mx-auto" max-width="900" outlined>
-          <v-btn outlined rounded text @click="removeCart(item)"> X </v-btn>
+          <v-btn rounded text @click="removeCart(item)"> X </v-btn>
           <v-list-item three-line @click="moveToDetail(item)">
             <v-list-item-content>
               <v-card-actions> </v-card-actions>
@@ -21,10 +21,34 @@
           </v-list-item>
         </v-card>
       </v-col>
-      <v-btn color="red" class="rounded-0" dark @click="purchase()"
-        >구매하기</v-btn
-      >
+      <h1>{{ nullCart }}</h1>
+      <br />
       <h1>총 금액 : {{ price }}원</h1>
+      <v-bottom-sheet v-model="sheet" inset>
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn
+            depressed
+            elevation="2"
+            color="red"
+            class="rounded-0"
+            dark
+            x-large
+            v-bind="attrs"
+            v-on="on"
+          >
+            구매하기
+          </v-btn>
+        </template>
+        <v-sheet class="text-center" height="140px">
+          <v-btn class="mt-6" text color="red" @click="moveToMarket()">
+            메인페이지로
+          </v-btn>
+          <v-btn class="mt-6" text color="red" @click="purchase()">
+            구매하기
+          </v-btn>
+          <div class="my-3">구매하시겠습니까?</div>
+        </v-sheet>
+      </v-bottom-sheet>
     </v-container>
   </div>
 </template>
@@ -36,6 +60,7 @@ export default {
     cartList: [],
     price: "",
     sheet: false,
+    nullCart: "",
   }),
   mounted() {
     this.getCartList();
@@ -51,6 +76,9 @@ export default {
           sumPrice += result.data[i].product.price;
         }
         this.price = sumPrice;
+        if (this.cartList.length == 0) {
+          this.nullCart = "상품이 없습니다.";
+        }
       }
       console.log(sumPrice);
       console.log(this.cartList);
