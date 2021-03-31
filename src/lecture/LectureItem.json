@@ -1,12 +1,92 @@
 [
-  { "count":1, "title":"쩝쩝박사", "category":"구이", "stuffs":["당근","고춧가루"] },
-  { "count":2, "title":"쩝쩝석사", "category":"볶음", "stuffs":["고춧가루"] },
-  { "count":3, "title":"쩝쩝학사", "category":"구이", "stuffs":["소고기"] },
-  { "count":4, "title":"쩝쩝고딩", "category":"볶음", "stuffs":["당근","고춧가루"] },
-  { "count":5, "title":"쩝쩝중딩", "category":"구이", "stuffs":["당근","새송이버섯"] },
-  { "count":6, "title":"쩝쩝초딩", "category":"볶음", "stuffs":["당근","고춧가루"] },
-  { "count":7, "title":"쩝쩝박사", "category":"구이", "stuffs":["당근","고춧가루"] },
-  { "count":8, "title":"쩝쩝석사", "category":"볶음", "stuffs":["당근","고춧가루"] },
-  { "count":9, "title":"쩝쩝학사", "category":"구이", "stuffs":["당근","고춧가루"] },
-  { "count":10, "title":"쩝쩝고딩", "category":"볶음", "stuffs":["당근","고춧가루"] } 
+  {
+    "id": 1,
+    "length": 406,
+    "title": "돼지고기 김치찌개",
+    "summary": "간단하면서도 성공 확률이 높은 김치찌개 끓이는 방법을 알려드릴게요. 이 방법으로 푹~ 끓이셔서 든든한 한끼 식사하세요~",
+    "imageSRC": "https://picsum.photos/id/104",
+    "videoSRC": "https://youtu.be/DnQ09ZZCjCs",
+    "category": "끓이기"
+  },
+  {
+    "id": 2,
+    "length": 314,
+    "title": "뚝배기 계란찜",
+    "summary": "계란찜도 종류가 참 많지요. 오늘은 찜솥이 아닌， 불 위에 올려 뚝배기에 끓이는 계란찜을 소개합니다. 하면 할 수록 실력이 늘어나는 계란찜! 이번 기회에 한 번 도전해보는 것은 어떨까요? ",
+    "imageSRC": "https://picsum.photos/id/204",
+    "videoSRC": "https://youtu.be/_H64Kz7Mgz4",
+    "category": "끓이기"
+  },
+  {
+    "id": 3,
+    "length": 791,
+    "title": "이탈리아 정통 말고 한국 스타일! K-알리오올리오",
+    "summary": "여러분 마늘 좋아하세요? 간단하게 만드는 파스타의 기본 '알리오 올리오'를 마늘을 듬뿍 넣어 한국의 맛으로 만들어봅시다 추운 요즘， 마늘 듬뿍 드시고 건강하게 지내세요!",
+    "imageSRC": "https://picsum.photos/id/304",
+    "videoSRC": "https://youtu.be/ohihzV6Z85k",
+    "category": "기타"
+  },
+  {
+    "id": 4,
+    "length": 1149,
+    "title": "추석 소갈비찜은 행복이에요",
+    "summary": "추석에 소갈비찜 하실 것 같아 같이 준비해봤습니다. 시간이 좀 걸리지만 미리 재우지 않고 핏물만 빼서 바로 만들 수 있는 방법입니다. 모두들 맛있는거 많이 드시고 풍성한 한가위 되세요! ",
+    "imageSRC": "https://picsum.photos/id/404",
+    "videoSRC": "https://youtu.be/v32NjYn5pSc",
+    "category": "찌기"
+  },
+  {
+    "id": 5,
+    "length": 589,
+    "title": "닭똥집볶음에 맥주 한 잔! ㅋ ㅑ (feat.맥주 상식)",
+    "summary": "오늘은 닭똥집 볶음 입니다! 맥주 한 잔이 생각나는 고~소한 맛! 이건 꼭 저녁에 해 드셔야 합니다. (과음 조심..)",
+    "imageSRC": "https://picsum.photos/id/504",
+    "videoSRC": "https://youtu.be/IasQ3XURCTI",
+    "category": "굽기"
+  },
+  {
+    "id": 6,
+    "length": 742,
+    "title": "자연스러운 감칠맛의 다시마칼국수!",
+    "summary": "오늘은 자연스러운 감칠맛을 느낄 수 있는 다시마칼국수입니다. 국물이 정~말 끝내줍니다!",
+    "imageSRC": "https://picsum.photos/id/604",
+    "videoSRC": "https://youtu.be/iij0bMkadEw",
+    "category": "끓이기"
+  },
+  {
+    "id": 7,
+    "length": 667,
+    "title": "숙취로 고생하는 분들 꼭 해보세요! 숙취박살 해장라면",
+    "summary": "해장이 아니라 자칫하면 술을 부를 수도 있는 '황태콩나물라면' 레시피 입니다. 양도 두배， 맛도 두배!! 황태를 넣어 구수~하고 콩나물을 넣어 아주 시원~해요.",
+    "imageSRC": "https://picsum.photos/id/704",
+    "videoSRC": "https://youtu.be/rTAWqq4I3JA",
+    "category": "끓이기"
+  },
+  {
+    "id": 8,
+    "length": 411,
+    "title": "삼색나물 마지막 고사리나물 ^^. 새해 복 많이 받으세요 ! ",
+    "summary": "삼색 나물 마지막 시리즈 고사리나물입니다. 가족과 함께 즐거운 설날 되시고 새해 복 많이 받으시기 바랍니다!",
+    "imageSRC": "https://picsum.photos/id/804",
+    "videoSRC": "https://youtu.be/JmiW-dD1RqM",
+    "category": "기타"
+  },
+  {
+    "id": 9,
+    "length": 537,
+    "title": "폭신~폭신한 에그 샌드위치",
+    "summary": "집에서 간단하게 할 수 있는 달걀샌드위치! 마요네즈 듬~뿍 넣어 맛있게 드세요~",
+    "imageSRC": "https://picsum.photos/id/904",
+    "videoSRC": "https://youtu.be/YXMxnHx7yZQ",
+    "category": "굽기"
+  },
+  {
+    "id": 10,
+    "length": 301,
+    "title": "라면땅 업그레이드. 설탕+마요+스프 꿀맛탱",
+    "summary": "백파더에서 잠깐 보여드렸던 설탕과 마요네즈로 만드는 라면땅 레시피입니다. 입 심심할 때 한번 만들어 보세요~ 맥주 안주로 아주 끝-!",
+    "imageSRC": "https://picsum.photos/id/1004",
+    "videoSRC": "https://youtu.be/CVtdTM6gJTY",
+    "category": "튀기기"
+  }
 ]

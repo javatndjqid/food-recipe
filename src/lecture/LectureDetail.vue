@@ -1,11 +1,11 @@
 <template>
   <div>
     <v-container>
-      <v-row justify="center" v-bind="detail">
+      <v-row justify="center" v-bind="item">
         <!-- UI -->
         <!-- 뒤로가기/구독취소/이미지/강의시청/연관카테고리(재료) 강의 위젯 -->
         <v-col cols="12" md="6">
-          <v-card color="blue" class="mx-auto" width="800px">
+          <v-card color="red lighten-3" class="mx-auto" width="800px">
             <!-- Vuetify 카드 컴포넌트 설명 페이지 https://vuetifyjs.com/en/components/cards/ -->
             <!-- Vuetify 색상 설명 페이지 https://vuetifyjs.com/en/styles/colors/#material-colors -->
             <v-card-actions>
@@ -19,6 +19,7 @@
               <v-btn
                 depressed
                 color="red"
+                class="white--text"
                 v-if="isSubscribed"
                 @click="dialog = true"
                 >구독 취소</v-btn
@@ -30,7 +31,7 @@
                   </v-card-title>
 
                   <v-card-text class="text-center">
-                    {{ detail.title }} 강의의 구독을 취소합니다.
+                    {{ item.title }} 강의의 구독을 취소합니다.
                     취소하시겠습니까?
                   </v-card-text>
 
@@ -56,7 +57,7 @@
 
             <v-card-actions>
               <v-img
-                :src="`${detail.picture}/600`"
+                :src="`${item.imageSRC}/600`"
                 width="100%"
                 height="320px"
               />
@@ -74,9 +75,10 @@
               <v-btn
                 depressed
                 block
-                color="blue lighten-2"
+                class="white--text"
+                color="pink"
                 v-if="isSubscribed"
-                @click="navigateToViewer(detail)"
+                @click="navigateToViewer(item)"
               >
                 강의 시청
               </v-btn>
@@ -86,7 +88,7 @@
           <v-card flat class="mx-auto" width="800px" height="20px"> </v-card>
 
           <!-- 연관강의 창 -->
-          <v-card class="mx-auto" width="800px" color="blue">
+          <v-card class="mx-auto" width="800px" color="red lighten-3">
             <v-card-actions>
               <v-container>
                 <v-row>
@@ -101,10 +103,10 @@
                       </v-card-actions>
                       <v-card-title class="justify-center">
                         <!-- https://stackoverflow.com/questions/55574599/how-to-align-the-contents-to-the-center-of-the-v-card-component-in-vuetify -->
-                        {{ detail.title }} 연관강의 Title
+                        {{ item.title }} 연관강의 Title
                       </v-card-title>
                       <v-card-subtitle class="text-center">
-                        {{ detail.title }} 연관강의 summary
+                        {{ item.title }} 연관강의 summary
                       </v-card-subtitle>
                     </v-card>
                   </v-col>
@@ -120,10 +122,10 @@
                       </v-card-actions>
                       <v-card-title class="justify-center">
                         <!-- https://stackoverflow.com/questions/55574599/how-to-align-the-contents-to-the-center-of-the-v-card-component-in-vuetify -->
-                        {{ detail.title }} 연관강의 Title
+                        {{ item.title }} 연관강의 Title
                       </v-card-title>
                       <v-card-subtitle class="text-center">
-                        {{ detail.title }} 연관강의 summary
+                        {{ item.title }} 연관강의 summary
                       </v-card-subtitle>
                     </v-card>
                   </v-col>
@@ -135,17 +137,32 @@
 
         <!-- 강의정보 Card -->
         <v-col cols="12" md="6">
-          <v-card class="mx-auto" width="800px" min-height="800px" color="blue">
+          <v-card class="mx-auto" width="800px" min-height="800px" color="red lighten-3">
             <v-card-title>
-              {{ detail.title }}
+              강의 제목
+              {{ item.title }}
             </v-card-title>
 
             <v-card-subtitle>
-              {{ detail.category }}
+              강의 요약
+              {{ item.summary }}
             </v-card-subtitle>
+
             <v-card-text>
-              {{ detail.stuffs }}
+              강의 시간(초)
+              {{ item.length }}
             </v-card-text>
+
+            <v-card-text>
+              조리방법 분류
+              {{ item.category}}
+            </v-card-text>
+
+            <v-card-text>
+              재료(공란)
+              {{ item.stuffs }}
+            </v-card-text>
+          
           </v-card>
         </v-col>
 
@@ -157,94 +174,18 @@
 </template>
 
 <script>
+import api from "@/api/Lecture";
 export default {
   data: () => ({
     isSubscribed: false,
     dialog: false,
-    detail: {},
-    lectureList: [
-      {
-        id: 1,
-        picture: "https://picsum.photos/id/100",
-        title: "쩝쩝박사",
-        category: "구이",
-        stuffs: ["당근", "고춧가루"],
-      },
-      {
-        id: 2,
-        picture: "https://picsum.photos/id/200",
-        title: "쩝쩝석사",
-        category: "볶음",
-        stuffs: ["고춧가루"],
-      },
-      {
-        id: 3,
-        picture: "https://picsum.photos/id/301",
-        title: "쩝쩝학사",
-        category: "구이",
-        stuffs: ["소고기"],
-      },
-      {
-        id: 4,
-        picture: "https://picsum.photos/id/400",
-        title: "쩝쩝고딩",
-        category: "볶음",
-        stuffs: ["당근", "고춧가루"],
-      },
-      {
-        id: 5,
-        picture: "https://picsum.photos/id/502",
-        title: "쩝쩝중딩",
-        category: "구이",
-        stuffs: ["당근", "새송이버섯"],
-      },
-      {
-        id: 6,
-        picture: "https://picsum.photos/id/603",
-        title: "쩝쩝초딩",
-        category: "볶음",
-        stuffs: ["당근", "고춧가루"],
-      },
-      {
-        id: 7,
-        picture: "https://picsum.photos/id/700",
-        title: "쩝쩝박사",
-        category: "구이",
-        stuffs: ["당근", "고춧가루"],
-      },
-      {
-        id: 8,
-        picture: "https://picsum.photos/id/800",
-        title: "쩝쩝석사",
-        category: "볶음",
-        stuffs: ["당근", "고춧가루"],
-      },
-      {
-        id: 9,
-        picture: "https://picsum.photos/id/900",
-        title: "쩝쩝학사",
-        category: "구이",
-        stuffs: ["당근", "고춧가루"],
-      },
-      {
-        id: 10,
-        picture: "https://picsum.photos/id/1000",
-        title: "쩝쩝고딩",
-        category: "볶음",
-        stuffs: ["당근", "고춧가루"],
-      },
-    ],
+    item: {},
+    lectureList: [],
   }),
   mounted() {
     this.getItem();
-  },
+},
   methods: {
-    getItem() {
-      const id = this.$route.params.id;
-      // console.log(id);
-      this.detail = this.lectureList[id - 1];
-      // console.log(this.detail);
-    },
     subscribe() {
       console.log("subscribing!");
       this.isSubscribed = !this.isSubscribed;
@@ -259,6 +200,14 @@ export default {
     navigateToViewer(item) {
       console.log("진행한다 " + item.id);
       this.$router.push(`/LecturePlay/${item.id}`);
+    },
+    async getItem() {
+      const results = await api.list();
+      if (results.status == 200) {
+        this.lectureList = results.data;
+      }
+      const id = this.$route.params.id;
+      this.item = this.lectureList[id -1];
     },
   },
 };

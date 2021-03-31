@@ -1,11 +1,11 @@
 <template>
   <div>
-    <v-container v-bind="detail">
+    <v-container v-bind="item">
       <!-- 버튼 공간 -->
       <v-row>
         <v-card flat height="40px">
           <v-card-actions>
-            <v-btn depressed color="grey" @click="navigateTo(detail)"
+            <v-btn depressed color="grey" @click="navigateTo(item)"
               >시청 종료</v-btn
             >
           </v-card-actions>
@@ -16,7 +16,7 @@
         <v-col cols="12" md="9">
           <!-- 동영상 플레이어 공간 -->
           <v-card
-            color="blue"
+            color="red lighten-3"
             height="780px"
             class="d-flex align-center justify-center"
           >
@@ -24,7 +24,7 @@
             <iframe
               height="98%"
               width="99%"
-              src="https://www.youtube.com/embed/AlK2Gl6kHZI"
+              :src="item.videoSRC"
               title="YouTube video player"
               frameborder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -36,17 +36,30 @@
         <!-- 강의정보 공간 -->
         <v-col cols="12" md="3">
           <!-- 강의정보 Card -->
-          <v-card class="mx-auto" min-height="780px" color="blue">
+          <v-card class="mx-auto" min-height="780px" color="red lighten-3">
             <v-card-title>
-              {{ detail.title }}
+              강의 제목
+              {{ item.title }}
             </v-card-title>
 
             <v-card-subtitle>
-              {{ detail.category }}
+              강의 요약
+              {{ item.summary }}
             </v-card-subtitle>
 
             <v-card-text>
-              {{ detail.stuffs }}
+              강의 시간(초)
+              {{ item.length }}
+            </v-card-text>
+
+            <v-card-text>
+              조리방법 분류
+              {{ item.category}}
+            </v-card-text>
+
+            <v-card-text>
+              재료(공란)
+              {{ item.stuffs }}
             </v-card-text>
           </v-card>
         </v-col>
@@ -56,100 +69,29 @@
 </template>
 
 <script>
+import api from "@/api/Lecture";
 export default {
   data: () => ({
     isSubscribed: false,
     dialog: false,
-    detail: {},
-    lectureList: [
-      {
-        id: 1,
-        picture: "https://picsum.photos/id/100",
-        title: "쩝쩝박사",
-        category: "구이",
-        stuffs: ["당근", "고춧가루"],
-      },
-      {
-        id: 2,
-        picture: "https://picsum.photos/id/200",
-        title: "쩝쩝석사",
-        category: "볶음",
-        stuffs: ["고춧가루"],
-      },
-      {
-        id: 3,
-        picture: "https://picsum.photos/id/301",
-        title: "쩝쩝학사",
-        category: "구이",
-        stuffs: ["소고기"],
-      },
-      {
-        id: 4,
-        picture: "https://picsum.photos/id/400",
-        title: "쩝쩝고딩",
-        category: "볶음",
-        stuffs: ["당근", "고춧가루"],
-      },
-      {
-        id: 5,
-        picture: "https://picsum.photos/id/502",
-        title: "쩝쩝중딩",
-        category: "구이",
-        stuffs: ["당근", "새송이버섯"],
-      },
-      {
-        id: 6,
-        picture: "https://picsum.photos/id/603",
-        title: "쩝쩝초딩",
-        category: "볶음",
-        stuffs: ["당근", "고춧가루"],
-      },
-      {
-        id: 7,
-        picture: "https://picsum.photos/id/700",
-        title: "쩝쩝박사",
-        category: "구이",
-        stuffs: ["당근", "고춧가루"],
-      },
-      {
-        id: 8,
-        picture: "https://picsum.photos/id/800",
-        title: "쩝쩝석사",
-        category: "볶음",
-        stuffs: ["당근", "고춧가루"],
-      },
-      {
-        id: 9,
-        picture: "https://picsum.photos/id/900",
-        title: "쩝쩝학사",
-        category: "구이",
-        stuffs: ["당근", "고춧가루"],
-      },
-      {
-        id: 10,
-        picture: "https://picsum.photos/id/1000",
-        title: "쩝쩝고딩",
-        category: "볶음",
-        stuffs: ["당근", "고춧가루"],
-      },
-    ],
+    item: {},
+    lectureList: [],
   }),
   mounted() {
     this.getItem();
   },
   methods: {
-    getItem() {
+    async getItem() {
+      const results = await api.list();
+      if (results.status == 200) {
+        this.lectureList = results.data;
+      }
       const id = this.$route.params.id;
-      console.log(id);
-      this.detail = this.lectureList[id - 1];
-      console.log(this.detail);
+      this.item = this.lectureList[id -1];
     },
     navigateTo(item) {
       console.log("돌아간다 " + item.id);
-      this.$router.push({
-        name: "LectureDetail",
-        params: { id:item.id },
-      });
+      this.$router.push(`/LectureDetail/${item.id}`);
     },
   },
 };

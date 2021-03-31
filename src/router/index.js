@@ -3,6 +3,9 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 Vue.use(VueRouter)
 
+// https://router.vuejs.org/kr/guide/essentials/passing-props.html
+
+
 const routes = [
   {
     path: '/',
