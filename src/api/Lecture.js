@@ -11,6 +11,6 @@ export default {
   // subscribe:
 
   // subscribedList: (),
-  subscribe: (id) => axios.post(`${process.env.VUE_APP_API_BASE_LECTURE}/lecture-users/${id}`),
-  unSubscribe: (id) => axios.delete(`${process.env.VUE_APP_API_BASE_LECTURE}/lecture-users/${id}`)
+  subscribe: (lectureId) => axios.post(`${process.env.VUE_APP_API_BASE_LECTURE}/lecture-users/${lectureId}`),
+  unSubscribe: (lectureId) => axios.delete(`${process.env.VUE_APP_API_BASE_LECTURE}/lecture-users/${lectureId}`)
 }
