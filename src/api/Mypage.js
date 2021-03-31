@@ -2,8 +2,10 @@
 import axios from 'axios'
 
 export default {
-
-
+  getUser: () =>
+    axios.get(`${process.env.VUE_APP_API_BASE}/User`),
+  purchaselist: () =>
+    axios.get(`${process.env.VUE_APP_API_BASE}/PurchaseOrder`),
   categorylist: () =>
     axios.get(`${process.env.VUE_APP_API_BASE}/category`),
   recipelist: () =>
@@ -16,7 +18,7 @@ export default {
   uploadFile: (id, form) =>
     axios.post(`${process.env.VUE_APP_API_BASE}/recipe/${id}/recipe-files`, form, { headers: { 'content-type': 'multipart/form-data' } }),
   uploadFile2: (id, form) =>
-    axios.post(`${process.env.VUE_APP_API_BASE}/recipe/${id}/ProcedureFile-files`, form, { headers: { 'content-type': 'multipart/form-data' } }),
+    axios.post(`${process.env.VUE_APP_API_BASE}/procedure/${id}/files`, form, { headers: { 'content-type': 'multipart/form-data' } }),
 
   delrecipe: (id) => axios.delete(`${process.env.VUE_APP_API_BASE}/recipe/${id}`),
 }

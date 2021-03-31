@@ -12,12 +12,12 @@
             <v-data-table
               :headers="recipyHeaders"
               :items="itemsWithSno"
-              :items-per-page="9"
+              :items-per-page="7"
               :loading="loading"
               loading-text="Loading... Please wait"
             >
               <template v-slot:item.recipeId:="props">
-                      {{ props.item.recipe.length }}
+                {{ props.item.recipe.length }}
               </template>
               <template v-slot:item.image="{ item }">
                 <div v-if="item.recipefile[0]">
@@ -31,10 +31,19 @@
                   <v-img :src="item.image" height="60px" width="150px" />
                 </div>
               </template>
-              <template v-slot:item.details="{ item }"> 
-               
-                <v-icon @click="navigateTo(item)" fab dark color="black" >mdi-view-list</v-icon>
-              
+              <template v-slot:item.details="{ item }">
+                <v-icon @click="navigateTo(item)" fab dark color="black"
+                  >mdi-view-list</v-icon
+                >
+              </template>
+              <template v-slot:item.del="{ item }">
+                <v-icon
+                  @click="deleteitem(item.recipeId)"
+                  fab
+                  dark
+                  color="black"
+                  >mdi-window-close</v-icon
+                >
               </template>
             </v-data-table>
           </v-card>
@@ -98,22 +107,42 @@
               :items="userPerchaseList"
               :items-per-page="3"
             >
+              <template v-slot:item.orderDate="{ item }">
+                {{ $moment(item.orderDate).format("YYYY-MM-DD-HH-MM") }}
+              </template>
               <template v-slot:item.image="{ item }">
                 <v-img
-                  v-if="item.image"
-                  :src="item.image"
-                  :alt="item.recipeName"
+                  :src="item.orderProduct[0].productTitleImage"
                   height="40px"
                   width="50px"
                 />
+              </template>
+              <template v-slot:item.productName="{ item }">
+                {{ item.orderProduct[0].productName }}
+                {{ item.orderProduct.length != 1 ? "외" : null }}
+                {{
+                  item.orderProduct.length != 1
+                    ? item.orderProduct.length - 1
+                    : null
+                }}
+              </template>
 
-                <v-img
-                  v-if="item.recipefile[0].dataUrl"
-                  :src="item.recipefile[0].dataUrl"
-                  :alt="item.recipeName"
-                  height="40px"
-                  width="50px"
-                />
+              <template v-slot:item.productNames="{ item }">
+                <v-dialog v-model="dialog" max-width="500px">
+                  <template v-slot:activator="{ on, attrs }">
+                    <v-icon v-bind="attrs" v-on="on">
+                      mdi-format-list-bulleted
+                    </v-icon>
+                  </template>
+                  <v-card>
+                    <v-card-title
+                      v-for="(input, i) in item.orderProduct"
+                      :key="i"
+                    >
+                      {{ input.productName }}
+                    </v-card-title>
+                  </v-card>
+                </v-dialog>
               </template>
             </v-data-table>
           </v-card>
@@ -142,7 +171,7 @@
                       유저ID
                     </th>
                     <th class="text-center">
-                      쩝쩝박사
+                      {{user[0].userName}}
                     </th>
                   </tr>
                   <tr>
@@ -150,7 +179,7 @@
                       이름
                     </th>
                     <th class="text-center">
-                      오지해
+                       {{user[0].name}}
                     </th>
                   </tr>
                   <tr>
@@ -158,7 +187,7 @@
                       E-mail
                     </th>
                     <th class="text-center">
-                      쩝쩝박사@gmail.com
+                      {{user[0].email}}
                     </th>
                   </tr>
                 </tbody>
@@ -170,9 +199,10 @@
     </v-row>
   </v-container>
 </template>
-
+Vue.use(require('vue-moment'));
 <script>
 import api from "@/api/Mypage";
+
 export default {
   data: () => ({
     recipyHeaders: [
@@ -186,10 +216,29 @@ export default {
       {
         text: "레시피 사진",
         value: "image",
-        sortable: false,align:'center' 
+        sortable: false,
+        align: "center"
       },
-      { text: "레시피 이름", value: "recipeName", sortable: false,align:'center' },
-      { text: "상세정보", value: "details", sortable: false, width: 80,align:'center' }
+      {
+        text: "레시피 이름",
+        value: "recipeName",
+        sortable: false,
+        align: "center"
+      },
+      {
+        text: "상세정보",
+        value: "details",
+        sortable: false,
+        width: 80,
+        align: "center"
+      },
+      {
+        text: "삭제",
+        value: "del",
+        sortable: false,
+        width: 10,
+        align: "center"
+      }
     ],
     ClassHeaders: [
       { text: "no", align: "start", value: "recipeId" },
@@ -197,17 +246,22 @@ export default {
       { text: "구독내역", value: "recipeName", sortable: false }
     ],
     MarketHeaders: [
-      { text: "no", align: "start", value: "recipeId" },
+      { text: "구매시간", align: "start", value: "orderDate" },
       { text: "구매사진", value: "image", sortable: false },
-      { text: "구매내역", value: "recipeName", sortable: false }
+      { text: "구매내역", value: "productName", sortable: false },
+      { text: "상세내역", value: "productNames", sortable: false }
     ],
     userRecipeList: [],
     userLectureList: [],
-    userPerchaseList: []
+    userPerchaseList: [],
+    user: []
+
   }),
   mounted() {
     // 목록 조회 함수
     this.getRecipeList();
+    this.getpurchaselist();
+    this.getUsers();
   },
   computed: {
     items() {
@@ -218,26 +272,52 @@ export default {
     },
     //데이터 리스트 넘버링
     itemsWithSno() {
-      return this.userRecipeList.map((d, index) => ({ ...d, sno: index + 1 }))
+      return this.userRecipeList.map((d, index) => ({ ...d, sno: index + 1 }));
     }
-  
   },
   methods: {
+     async getUsers() {
+      const result = await api.getUser();
+
+      if (result.status == 200) {
+        this.user = result.data;
+        console.log(result.data);
+      
+      }
+    },
+    async getpurchaselist() {
+      const result = await api.purchaselist();
+
+      if (result.status == 200) {
+        this.userPerchaseList = result.data;
+      }
+      console.log(this.userPerchaseList);
+    },
     async getRecipeList() {
       const result = await api.recipelist();
-      this.userRecipeList = result.data;
-      console.log(result.data);
+
+      if (result.status == 200) {
+        this.userRecipeList = result.data;
+        // console.log(result.data);
+      }
     },
     navigate() {
       this.$router.push("/MypageRecipy");
     },
     navigateTo(item) {
-      // this.$router.push(`/MypageRecipyDetail/${item.recipeId}`);
       this.$router.push({
         name: "MypageRecipyDetail",
         params: { recipeId: item.recipeId }
       });
       console.log(item.recipeId);
+    },
+    async deleteitem(item) {
+      const result = await api.delrecipe(item);
+      if (result.status == 200) {
+        const result = await api.recipelist();
+        this.userRecipeList = result.data;
+        // this.userRecipeList.splice(this.userRecipeList.indexOf(item), 1);
+      }
     }
   }
 };

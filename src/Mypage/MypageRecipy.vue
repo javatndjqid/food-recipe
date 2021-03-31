@@ -2,29 +2,42 @@
   <v-container id="user-profile-view" fluid tag="section">
     <v-row justify="center">
       <v-col cols="12" md="8">
-        <material-card color="primary" icon="mdi-account-outline">
-          <template #title>
-            Edit Profile —
-            <small class="text-body-1">레시피를 등록하세요</small>
-          </template>
-
+        <v-card
+          color="gray"
+          elevation="10"
+          filled
+          rounded
+          dense
+          img="https://pgnqdrjultom1827145.cdn.ntruss.com/img/a9/e3/a9e36b76eb3e50ced783d443a69bbb8ba93cd2189d8233041fe1da370758fd34_v1.jpg"
+        >
+          <!-- <v-img
+            class="white--text align-end"
+            height="220px"
+            src="./doma.jpg"
+          /> -->
           <v-form>
             <v-container class="py-0">
               <v-row>
                 <v-col cols="12" md="8">
-                  <v-text-field disabled label="당신의 레시피를 등록하세요" />
+                  <v-text-field
+                    dark
+                    disabled
+                    label="당신의 레시피를 등록하세요"
+                  />
                 </v-col>
-
-                <v-col cols="12" md="4">
+                <v-col cols="12" md="8">
                   <v-text-field
                     v-model="recipe.recipeName"
-                    style="float:right;"
+                    style="float:left;"
                     placeholder="레시피이름을 입력하세요"
                     filled
                     rounded
                     dense
-                    color="purple"
+                    color="red"
                     label="레시피 이름"
+                    dark
+                    background-color="brown"
+                    outline
                   />
                 </v-col>
                 <v-col cols="12" md="10">
@@ -36,17 +49,22 @@
                     name="input-7-4"
                     color="purple"
                     label="레시피 설명"
+                    dark
+                    background-color="brown"
+                    outline
+                    rounded
                   />
                 </v-col>
                 <v-col cols="12" md="2">
                   <v-img max-height="150" max-width="250"></v-img>
                   <template>
                     <v-file-input
+                      dark
                       v-model="files"
                       accept="image/*"
                       prepend-icon="mdi-camera"
                       multiple
-                      label="대표사진URL"
+                      label="대표사진"
                     />
                   </template>
                 </v-col>
@@ -61,58 +79,76 @@
                     color="white"
                     item-text="type"
                     label="카테고리"
+                    dark
+                    background-color="brown"
+                    outline
+                    rounded
                   ></v-autocomplete>
                 </v-col>
 
                 <v-col cols="12">
                   <div v-for="(input, i) in recipe.stuffRecipe" :key="i">
                     <v-col cols="8" md="5" style="float:left;">
-                      <v-autocomplete
+                      <v-combobox
+                        hide-no-data
                         v-model="input.stuffName"
                         solo
-                        :items="stufflist"
-                        item-text="stuffName"
+                        :items="stuffs"
                         label="재료명"
-                      ></v-autocomplete>
-                      <!-- <v-combobox
-                        v-model="input.stuffName"
-                        :items="stufflist"
-                        item-text="stuffName"
-                        label="재료명"
-                        solo
-                        clearable
-                       
-                      ></v-combobox> -->
+                        dark
+                        background-color="brown"
+                        return-object
+                      ></v-combobox>
                     </v-col>
                     <v-col cols="4" md="5" style="float:left;">
                       <v-text-field
+                        dark
                         solo
                         label="양"
                         v-model="input.quantity"
                         clearable
+                        background-color="brown"
+                        outline
                       />
                     </v-col>
                   </div>
                 </v-col>
-                <v-btn @click="addstuffslot()" text color="success"
-                  >재료<v-icon right>mdi-plus</v-icon></v-btn
-                >
-                <v-btn @click="delstuffsslot(i)" text color="error"
-                  >재료<v-icon right>mdi-minus</v-icon></v-btn
-                >
+                <v-col justify-center>
+                  <v-btn
+                    @click="addstuffslot()"
+                    text
+                    color="success"
+                    elevation="15"
+                    dark
+                    >재료<v-icon right>mdi-plus</v-icon></v-btn
+                  >
+                </v-col>
+                <v-col style="float:center">
+                  <v-btn
+                    @click="delstuffsslot(i)"
+                    text
+                    color="error"
+                    elevation="15"
+                    dark
+                    >재료<v-icon right>mdi-minus</v-icon></v-btn
+                  >
+                </v-col>
 
                 <v-col cols="12">
                   <div v-for="(item, i) in recipe.recipeProcedure" :key="i">
                     <v-col cols="12" md="10" style="float:left;">
                       <v-text-field
+                        dark
                         v-model="item.recipeProcedure"
                         solo
                         color="purple"
                         label="조리순서"
                         clearable
+                        background-color="brown"
+                        outline
                       />
                     </v-col>
-                    <v-col cols="12" md="2" style="float:left;">
+                    <!-- <v-col cols="12" md="2" style="float:left;">
                       <template>
                         <v-file-input
                           v-model="item.recipeProcedureImage"
@@ -122,10 +158,10 @@
                           label="사진첨부"
                         />
                       </template>
-                    </v-col>
-                  <!-- </div>
+                    </v-col>  -->
+                  </div>
                   <div v-for="(item, i) in file.recipeProcedure" :key="i">
-                    <v-col cols="12" md="2" style="float:right;">
+                    <v-col cols="12" md="2" style="float:left;">
                       <template>
                         <v-file-input
                           v-model="item.recipeProcedureImage"
@@ -134,44 +170,66 @@
                           label="사진첨부"
                         />
                       </template>
-                    </v-col> -->
+                    </v-col>
                   </div>
                 </v-col>
-                <v-btn @click="addproceduresslot()" text color="success">
-                  조리순서<v-icon right>mdi-plus</v-icon></v-btn
-                >
-                <v-btn @click="delproceduresslot(i)" text color="error">
-                  조리순서<v-icon right>mdi-minus</v-icon></v-btn
-                >
+                <v-col cols="12" justify="center">
+                  <v-btn
+                    @click="addproceduresslot()"
+                    text
+                    color="success"
+                    elevation="15"
+                  >
+                    조리순서<v-icon right>mdi-plus</v-icon></v-btn
+                  >
+                </v-col>
+                <v-col justify="center">
+                  <v-btn
+                    @click="delproceduresslot(i)"
+                    text
+                    color="error"
+                    elevation="15"
+                  >
+                    조리순서<v-icon right>mdi-minus</v-icon></v-btn
+                  >
+                </v-col>
                 <v-col cols="12">
                   <v-textarea
                     v-model="recipe.tip"
                     no-resize
                     rows="5"
                     solo
+                    rounded
                     color="purple"
                     label="조리팁"
+                    dark
+                    background-color="brown"
+                    outline
                   />
                 </v-col>
 
                 <v-col cols="12" class="text-right">
-                  <v-btn
-                    @click="addData()"
-                    class="mx-2"
-                    fab
-                    dark
-                    large
-                    color="purple"
-                  >
+                  <v-btn @click="addData()" dark large color="brown">
                     <v-icon dark>
                       mdi-plus
                     </v-icon>
+                    레시피등록
                   </v-btn>
                 </v-col>
               </v-row>
+              <v-alert
+                :value="alert"
+                color="pink"
+                dark
+                border="top"
+                icon="mdi-home"
+                transition="scale-transition"
+                >정말 삭제하시겠습니까?
+                <v-btn @click="addData()" dark large color="brown">예</v-btn>
+              </v-alert>
             </v-container>
           </v-form>
-        </material-card>
+        </v-card>
       </v-col>
     </v-row>
   </v-container>
@@ -189,6 +247,7 @@ export default {
     }
   },
   data: () => ({
+    alert: false,
     hasSaved: false,
     isEditing: null,
     model: null,
@@ -207,7 +266,7 @@ export default {
     categorylist: [],
     // stuffs: [],
     files: [],
-    stufflist: { stuffName: [] },
+    stuffs: [],
     file: { recipeProcedure: [{ recipeProcedureImage: "" }] },
 
     drawer: false, // drawer의 기본 값
@@ -255,6 +314,7 @@ export default {
       const recipedata = this.recipe;
 
       console.log(recipedata);
+
       const result = await api.postrecipelist(recipedata);
       if (result.status == 200) {
         const newdata = result.data;
@@ -269,30 +329,32 @@ export default {
             });
           }
         }
-        const newdata2 = result.data;
-        newdata2.recipeProcedure.recipeProcedureImage = []; 
+        result.data.recipeProcedure.forEach((procedure, index) => {
+          const form = new FormData();
+          form.append("data", this.file.recipeProcedure[index]);
+          api.uploadFile2(procedure.id, form);
+        });
+        //  console.log(this.file.recipeProcedure);
+        // for(const procedure of result.data.recipeProcedure){
+        //   const form = new FormData();
+        //   form.append("data2", this.file.recipeProcedure);
+        //   api.uploadFile2(procedure.id, form )
+        // }
 
-          for (let i = 0; i < newdata2.recipeProcedure.length; i++) {
-            let file = this.newdata2.recipeProcedure.recipeProcedureImage
-              const form2 = new FormData();
-             
-              form2.append("data2", file[i]);
-               console.log(form2)
-              const result2 = await api.uploadFile2(newdata2.recipeId, form2);
-              newdata2.recipeProcedure.recipeProcedureImage.push({
-                ...result2.data
-              })
-          
-        }
+        //recipeProcedureImage
 
-        this.$router.push("/Mypage");
+        // this.$router.push("/Mypage");
       }
     },
 
     async getRecipeData() {
       const result = await api.stufflist();
-      this.stufflist = result.data;
-      console.log(this.stufflist);
+      console.log(result.data[0].stuffName);
+
+      for (let i = 0; i < result.data.length; i++) {
+        this.stuffs.push(result.data[i].stuffName);
+      }
+      console.log(this.stuffs);
     },
     async getCategoryData() {
       const result = await api.categorylist();
