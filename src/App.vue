@@ -64,7 +64,7 @@ export default {
       { text: "Home", path: "/" },
       { text: "SEARCH", path: "/Search" },
       { text: "Market", path: "/Shopping" },
-      { text: "강의", path: "/Lecture" },
+      { text: "Lecture", path: "/Lecture" },
       { text: "MYPAGE", path: "/Mypage" },
     ],
   }),
