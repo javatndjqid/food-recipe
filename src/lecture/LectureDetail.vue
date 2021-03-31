@@ -57,9 +57,9 @@
 
             <v-card-actions>
               <v-img
-                :src="`${item.imageSRC}/600`"
+                :src="`${item.imageSRC}`"
                 width="100%"
-                height="320px"
+                height="100%"
               />
             </v-card-actions>
             <v-card-actions>

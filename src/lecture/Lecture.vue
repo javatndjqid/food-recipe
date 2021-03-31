@@ -5,14 +5,13 @@
       <v-container>
         <v-row justify="center">
           <v-col cols="12" md="3" v-for="(item, i) in calData" :key="i">
-            <v-card height="350px">
+            <v-card height="370px">
               <!-- https://vuetifyjs.com/en/components/cards/#card-reveal -->
 
               <v-img
                 width="100%"
-                height="200px"
-                :src="`${item.imageSRC}/600`"
-                :lazy-src="`${item.imageSRC}/10`"
+                :src="`${item.imageSRC}`"
+                :lazy-src="`${item.imageSRC}`"
                 @click="navigateTo(item)"
                 style="cursor: pointer"
               >
