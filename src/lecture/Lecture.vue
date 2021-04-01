@@ -1,40 +1,65 @@
 <template>
-  <div height="100%">
+  <div>
+    <v-toolbar dark color="red" height="40px">
+      <v-autocomplete
+        v-model="select"
+        :loading="loading"
+        :items="items"
+        :search-input.sync="search"
+        cache-items
+        class="mx-4"
+        flat
+        hide-no-data
+        hide-details
+        @keyup.enter="addChip()"
+      ></v-autocomplete>
+      <v-btn icon @click="addChip()">
+        <v-icon size="40" :style="{ marginRight: '10px' }"
+          >mdi-card-search</v-icon
+        >
+      </v-btn>
+    </v-toolbar>
     <div height="100%" class="d-flex align-content-start flex-wrap">
       <!-- 반응형 grid Layout 컨테이너 -->
       <v-container>
         <v-row justify="center">
           <v-col cols="12" md="3" v-for="(item, i) in calData" :key="i">
-            <v-card height="350px">
+            <v-card min-height="360px">
               <!-- https://vuetifyjs.com/en/components/cards/#card-reveal -->
+              <v-card-actions>
+                <v-img
+                  width="90%"
+                  :src="
+                    `http://i.ytimg.com/vi/${item.imageSRC}/maxresdefault.jpg`
+                  "
+                  :lazy-src="
+                    `https://img.youtube.com/vi/${item.imageSRC}/default.jpg`
+                  "
+                  @click="navigateTo(item)"
+                  style="cursor: pointer"
+                >
+                  <!-- https://kr.vuejs.org/v2/api/#v-bind -->
+                  <!-- https://vuetifyjs.com/en/components/images/#grid -->
 
-              <v-img
-                width="100%"
-                height="200px"
-                :src="`${item.imageSRC}/600`"
-                :lazy-src="`${item.imageSRC}/10`"
-                @click="navigateTo(item)"
-                style="cursor: pointer"
-              >
-                <!-- https://kr.vuejs.org/v2/api/#v-bind -->
-                <!-- https://vuetifyjs.com/en/components/images/#grid -->
-
-                <template v-slot:placeholder>
-                  <v-row
-                    class="fill-height ma-0"
-                    align="center"
-                    justify="center"
-                  >
-                    <v-progress-circular
-                      indeterminate
-                      color="grey lighten-5"
-                    ></v-progress-circular>
-                  </v-row>
-                </template>
-              </v-img>
-              <v-card-title>{{ item.title }}</v-card-title>
+                  <template v-slot:placeholder>
+                    <v-row
+                      class="fill-height ma-0"
+                      align="center"
+                      justify="center"
+                    >
+                      <v-progress-circular
+                        indeterminate
+                        color="grey lighten-5"
+                      ></v-progress-circular>
+                    </v-row>
+                  </template>
+                </v-img>
+              </v-card-actions>
+              <v-card-title style="margin-top: -16px; margin-bottom: -16px;">
+                <span>{{ item.title }}</span>
+              </v-card-title>
               <v-card-text>
-                <div>{{ item.summary }}</div>
+                <span>{{ item.summary }}</span>
               </v-card-text>
             </v-card>
           </v-col>
@@ -84,6 +109,7 @@ export default {
     },
     async getItem() {
       const results = await api.list();
+      console.log("Welcome!");
       if (results.status == 200) {
         this.lectureList = results.data.reverse();
         // console.log(this.lectureList);
