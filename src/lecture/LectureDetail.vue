@@ -5,7 +5,7 @@
         <!-- UI -->
         <!-- 뒤로가기/구독취소/이미지/강의시청/연관카테고리(재료) 강의 위젯 -->
         <v-col cols="12" md="6">
-          <v-card color="red lighten-3" class="mx-auto" width="100%">
+          <v-card color="red lighten-3" class="mx-auto" width="100%" style="margin-bottom: 10px;">
             <!-- Vuetify 카드 컴포넌트 설명 페이지 https://vuetifyjs.com/en/components/cards/ -->
             <!-- Vuetify 색상 설명 페이지 https://vuetifyjs.com/en/styles/colors/#material-colors -->
             <v-card-actions>
@@ -85,8 +85,6 @@
               </v-btn>
             </v-card-actions>
           </v-card>
-
-          <v-card flat class="mx-auto" width="100%" height="20px"> </v-card>
 
           <!-- 연관강의 창 -->
           <v-card class="mx-auto" width="100%" color="red lighten-3">
@@ -187,6 +185,7 @@ export default {
   mounted() {
     this.getItem();
     this.getSubscribed();
+    // this.getRelatedLecture();
 },
   methods: {
     subscribe() {
@@ -223,6 +222,13 @@ export default {
       if (results.status == 200) {
         this.isSubscribed = results.data;
         // console.log("isSubscribed? : " + this.isSubscribed);
+      }
+    },
+    async getRelatedLecture() {
+      const id = this.$route.params.id;
+      const results = await api.related(id);
+      if (results.status == 200){
+        this.isSubscribed = results.data;
       }
     },
   },
