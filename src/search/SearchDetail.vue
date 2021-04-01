@@ -4,7 +4,7 @@
       <v-card class="mx-auto" style="padding: 20px">
         <v-img max-height="500px" :src="recipe.image"></v-img>
 
-        <div style="margintop: 5px; display: flex; float: right">
+        <div style="marginTop: 5px; display: flex; float: right">
           <v-avatar style="flex: 1"
             ><v-img src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
           /></v-avatar>
@@ -27,7 +27,7 @@
         </v-expand-transition>
       </v-card>
 
-      <v-card style="margintop: 30px">
+      <v-card style="marginTop: 30px">
         <v-card-title>재료</v-card-title>
         <v-divider></v-divider>
 
@@ -38,7 +38,7 @@
         </v-list-item>
       </v-card>
 
-      <v-card style="margintop: 30px">
+      <v-card style="marginTop: 30px">
         <v-list>
           <v-list-item v-for="(item, i) in recipes" :key="i">
             <v-list-item-action>{{ i + 1 }}</v-list-item-action>
@@ -53,7 +53,7 @@
           </v-list-item>
         </v-list>
       </v-card>
-      <v-card style="margintop: 30px">
+      <v-card style="marginTop: 30px">
         <v-card-title>판매 재료</v-card-title>
         <v-divider></v-divider>
         <v-list-item>
@@ -62,7 +62,7 @@
           }}</v-list-item-title>
         </v-list-item>
       </v-card>
-      <v-card style="margintop: 30px">
+      <v-card style="marginTop: 30px">
         <v-card-title>강의</v-card-title>
         <v-divider></v-divider>
         <v-list-item>
