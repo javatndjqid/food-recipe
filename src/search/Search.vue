@@ -185,7 +185,9 @@ export default {
         : this.recipeFilter(this.chips);
     },
     navigateTo(item) {
-      this.$router.push({ name: "SearchDetail", params: { id: item.id } });
+      // this.$router.push({ name: "SearchDetail", params: { id: item.id } });
+      console.log(item);
+      this.$router.push({ name: "SearchDetail", params: { id: 3 } });
     },
     selectRadio(category) {
       this.radio = category;
