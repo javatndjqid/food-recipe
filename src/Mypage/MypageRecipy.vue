@@ -313,7 +313,7 @@ export default {
     async addData() {
       const recipedata = this.recipe;
 
-      console.log(recipedata);
+     console.log(recipedata);
 
       const result = await api.postrecipelist(recipedata);
       if (result.status == 200) {
@@ -329,15 +329,15 @@ export default {
             });
           }
         }
-        result.data.recipeProcedure.forEach((procedure, index) => {
+        result.data.recipeProcedure.forEach((recipe, index) => {
           const form = new FormData();
-          form.append("data", this.file.recipeProcedure[index]);
-          api.uploadFile2(procedure.id, form);
+          form.append("data", this.file.recipeProcedure[index].recipeProcedureImage);
+          api.uploadFile2(recipe.id, form);
         });
         //  console.log(this.file.recipeProcedure);
         // for(const procedure of result.data.recipeProcedure){
         //   const form = new FormData();
-        //   form.append("data2", this.file.recipeProcedure);
+        //   form.append("data2", this.file.recipeProcedure.recipeProcedureImage);
         //   api.uploadFile2(procedure.id, form )
         // }
 
