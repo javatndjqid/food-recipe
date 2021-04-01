@@ -1,103 +1,116 @@
 <template>
-  <v-container>
-    <v-row>
-      <v-col cols="8" style="margin-left: auto; margin-right: auto">
-        <v-card class="mx-auto" style="padding: 20px">
-          <v-img
-            v-if="recipe[0].recipefile[0]"
-            :src="recipe[0].recipefile[0].dataUrl"
-            :alt="recipe[0].recipeName"
-            max-height="500px"
-          />
+  <v-parallax src="./tablecloth.jpg" height="800">
+    <v-container>
+      <v-row>
+        <v-col cols="8" style="margin-left: auto; margin-right: auto">
+          <v-card class="mx-auto" style="padding: 20px">
+            <v-img
+              v-if="recipe[0].recipefile[0]"
+              :src="recipe[0].recipefile[0].dataUrl"
+              :alt="recipe[0].recipeName"
+              max-height="500px"
+            />
 
-          <v-img
-            v-else
-            :src="recipe[0].image"
-            :alt="recipe[0].recipeName"
-            max-height="500px"
-          />
-          <!-- <v-img
-            v-if="recipe[0].image"
-            :src="recipe[0].image"
-            :alt="recipe[0].recipeName"
-            max-height="500px"
-          />
-          <v-img
-            v-else
-            :src="recipe[0].recipefile[0].dataUrl"
-            :alt="recipe[0].recipeName"
-            max-height="500px"
-          /> -->
-          <v-card-title>
-            {{ recipe[0].name }}
-          </v-card-title>
+            <v-img
+              v-else
+              :src="recipe[0].image"
+              :alt="recipe[0].recipeName"
+              max-height="500px"
+            />
+            <v-card-title>
+              {{ recipe[0].name }}
+            </v-card-title>
 
-          <v-expand-transition>
-            <div>
-              <v-divider></v-divider>
-              <v-card-text>
-                {{ recipe[0].explanation }}
-              </v-card-text>
-            </div>
-          </v-expand-transition>
-        </v-card>
-        <v-card style="margintop: 30px">
-          <v-card-title>재료</v-card-title>
-          <v-divider></v-divider>
-          <v-list-item>
-            <v-list-item-title
-              v-for="(item, i) in recipe[0].stuffRecipe"
-              :key="i"
-            >
-              재료: {{ item.stuffName }} 양: {{ item.quantity }}
-            </v-list-item-title>
-          </v-list-item>
-        </v-card>
-        <v-card style="margintop: 30px">
-          <v-list>
-            <v-list-item
-              v-for="(item, i) in recipe[0].recipeProcedure"
-              :key="i"
-            >
-              <v-list-item-action>{{ i + 1 }}</v-list-item-action>
-              <v-list-item-action-text style="font-size: 15px"
-                >{{ item.recipeProcedure }}
-              </v-list-item-action-text>
+            <v-expand-transition>
+              <div>
+                <v-divider></v-divider>
+                <v-card-text>
+                  {{ recipe[0].explanation }}
+                </v-card-text>
+              </div>
+            </v-expand-transition>
+          </v-card>
+          <v-card style="margintop: 30px">
+            <v-card-title>재료</v-card-title>
+            <v-divider></v-divider>
+            <v-list-item>
+              <v-list-item-title
+                v-for="(item, i) in recipe[0].stuffRecipe"
+                :key="i"
+              >
+                재료: {{ item.stuffName }} 양: {{ item.quantity }}
+              </v-list-item-title>
             </v-list-item>
-          </v-list>
-          <v-expand-transition>
-            <div>
-              <v-divider></v-divider>
-              <v-card-text>
-                {{ recipe[0].tip }}
-              </v-card-text>
-            </div>
-          </v-expand-transition>
-        </v-card>
-        <v-card> <v-btn
-            justify="end"
-            :loading="loading3"
-            :disabled="loading3"
-            color="blue-grey"
-            class="ma-2 white--text"
-            @click="navigate()"
-          >
-            뒤로가기
-          </v-btn>
-          <v-btn
-            justify="end"
-            :loading="loading3"
-            :disabled="loading3"
-            color="blue-grey"
-            class="ma-2 white--text"
-            @click="del(id)"
-          >
-            레시피삭제
-          </v-btn>
-        </v-card>
-      </v-col>
-    </v-row>
-  </v-container>
+          </v-card>
+          <v-card style="margintop: 30px">
+            <v-list>
+              <v-list-item
+                v-for="(item, i) in recipe[0].recipeProcedure"
+                :key="i"
+              >
+                <v-row>
+                  <v-col>
+                    <v-list-item-action>{{ i + 1 }}</v-list-item-action>
+                  </v-col>
+                  <v-col>
+                    <div width="80%">
+                      <v-list-item-action-text style="font-size: 15px"
+                        >{{ item.recipeProcedure }}
+                      </v-list-item-action-text>
+                    </div>
+                  </v-col>
+                  <v-col>
+                    <div width="20%" v-if="item.recipeProcedurefile[0].dataUrl">
+                      <v-img
+                        
+                        :src="item.recipeProcedurefile[0].dataUrl"
+                        height="50px"
+                        width="50px"
+                      />
+                    </div>
+                      <div v-else>
+                        <v-img :src="item.image" height="60px" width="150px" />
+                      </div>
+                   
+                  </v-col>
+                </v-row>
+              </v-list-item>
+            </v-list>
+            <v-expand-transition>
+              <div>
+                <v-divider></v-divider>
+                <v-card-text>
+                  {{ recipe[0].tip }}
+                </v-card-text>
+              </div>
+            </v-expand-transition>
+          </v-card>
+          <v-card>
+            <v-btn
+              justify="end"
+              :loading="loading3"
+              :disabled="loading3"
+              color="blue-grey"
+              class="ma-2 white--text"
+              @click="navigate()"
+            >
+              뒤로가기
+            </v-btn>
+            <v-btn
+              justify="end"
+              :loading="loading3"
+              :disabled="loading3"
+              color="blue-grey"
+              class="ma-2 white--text"
+              @click="del(id)"
+            >
+              레시피삭제
+            </v-btn>
+          </v-card>
+        </v-col>
+      </v-row>
+    </v-container>
+  </v-parallax>
 </template>
 <script>
 import api from "@/api/Mypage";
@@ -107,9 +120,10 @@ export default {
   }),
   mounted() {
     this.getRecipeData();
+    //  this.getRecipeData2()
   },
   methods: {
-     navigate() {
+    navigate() {
       this.$router.push("/Mypage");
     },
     async getRecipeData() {
@@ -121,6 +135,15 @@ export default {
         console.log(this.recipe);
       }
     },
+    // async getRecipeData2() {
+    //   console.log(this.$route.params.recipeId);
+    //   const id = this.$route.params.recipeId;
+    //   const result = await api.recipeProcedureFile(id);
+    //   if (result.status == 200) {
+    //     this.recipe = result.data;
+    //     console.log(this.recipe);
+    //   }
+    // },
     async del() {
       const id = this.$route.params.recipeId;
       const result = await api.delrecipe(id);

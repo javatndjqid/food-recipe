@@ -25,18 +25,105 @@
         <span class="mr-2">LOGIN</span>
         <v-icon></v-icon>
       </v-btn> -->
+      <!-- <template>
+          <v-card class="overflow-y-auto" elevation="10">
+            <v-img
+              class="white--text align-end"
+              height="90px"
+              src="https://cdn.crowdpic.net/list-thumb/thumb_l_756C27E1062B73D39C8E3E51165172E2.jpg"
+            >
+            </v-img>
+            <v-data-table
+              style="height: 250px"
+              :headers="ClassHeaders"
+              :items="userLectureList"
+              :items-per-page="3"
+            >
+              <template v-slot:item.image="{ item }">
+                <div>
+                  <v-img
+                    v-if="item.image"
+                    :src="item.image"
+                    :alt="item.recipeName"
+                    height="40px"
+                    width="50px"
+                  />
+                  <v-img
+                    v-else
+                    :src="item.recipefile[0].dataUrl"
+                    :alt="item.recipeName"
+                    height="40px"
+                    width="50px"
+                  />
+                </div>
+              </template>
+            </v-data-table>
+          </v-card>
+        </template> -->
 
-      <div class="d-flex align-center">
-        <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
-          src="./assets/jjub.png"
-          transition="scale-transition"
-          width="90"
-          @click="helloWorld()"
-          style="cursor: pointer"
-        />
+      <div style="width:100%; text-align:right;">
+        <v-menu offset-y>
+          <template v-slot:activator="{ on, attrs }">
+            <v-avatar size="80" class="mr-3" v-bind="attrs" v-on="on">
+              <v-img
+                alt="Vuetify Logo"
+                class="shrink mr-2"
+                contain
+                src="./assets/jjub.png"
+                transition="scale-transition"
+                width="90"
+                style="cursor: pointer"
+              />
+            </v-avatar>
+          </template>
+
+          <v-card>
+            <v-card-actions>
+              <v-simple-table>
+              <template v-slot:default>
+                <thead>
+                  <tr>
+                    <th class="text-center">
+                      <v-img
+                        src="./assets/jjub.png"
+                        height="40px"
+                        width="40px"
+                      ></v-img>
+                    </th>
+                    <th class="text-center"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th class="text-center">
+                      유저ID
+                    </th>
+                    <th class="text-center">
+                      {{user[0].userName}}
+                    </th>
+                  </tr>
+                  <tr>
+                    <th class="text-center">
+                      이름
+                    </th>
+                    <th class="text-center">
+                       {{user[0].name}}
+                    </th>
+                  </tr>
+                  <tr>
+                    <th class="text-center">
+                      E-mail
+                    </th>
+                    <th class="text-center">
+                      {{user[0].email}}
+                    </th>
+                  </tr>
+                </tbody>
+              </template>
+            </v-simple-table>
+            </v-card-actions>
+          </v-card>
+        </v-menu>
       </div>
     </v-app-bar>
 
@@ -51,6 +138,8 @@
 </template>
 
 <script>
+import api from "@/api/Mypage";
+
 export default {
   name: "App",
   // components: {
@@ -65,14 +154,24 @@ export default {
       { text: "SEARCH", path: "/Search" },
       { text: "Market", path: "/Shopping" },
       { text: "Lecture", path: "/Lecture" },
-      { text: "MYPAGE", path: "/Mypage" },
-    ],
+      { text: "MYPAGE", path: "/Mypage" }
+    ]
   }),
+  user: [],
+   mounted() {
 
+
+    this.getUsers();
+  },
   methods: {
-    helloWorld() {
-      console.log("Hello World!");
+    async getUsers() {
+      const result = await api.getUser();
+      if (result.status == 200) {
+        this.user = result.data;
+        console.log(result.data);
+      }
     },
+
     navigateTo(item) {
       /* https://router.vuejs.org/kr/guide/essentials/navigation.html */
       // 현재 경로와 다르면
@@ -80,7 +179,7 @@ export default {
         // 라우터에 경로 추가
         this.$router.push(item.path);
       }
-    },
-  },
+    }
+  }
 };
 </script>

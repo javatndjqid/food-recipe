@@ -3,16 +3,20 @@ import axios from 'axios'
 
 export default {
   getUser: () =>
-    axios.get(`${process.env.VUE_APP_API_BASE}/User`),
+    axios.get(`${process.env.VUE_APP_API_BASE}/user`),
   purchaselist: () =>
-    axios.get(`${process.env.VUE_APP_API_BASE}/PurchaseOrder`),
+    axios.get(`${process.env.VUE_APP_API_BASE}/purchase-order`),
+  lecturelist: () =>
+    axios.get(`${process.env.VUE_APP_API_BASE}/user-lecture`),
   categorylist: () =>
     axios.get(`${process.env.VUE_APP_API_BASE}/category`),
   recipelist: () =>
-    axios.get(`${process.env.VUE_APP_API_BASE}/recipe`),
+    axios.get(`${process.env.VUE_APP_API_BASE}/recipes`),
   stufflist: () =>
     axios.get(`${process.env.VUE_APP_API_BASE}/stuff`),
   recipe: (id) => axios.get(`${process.env.VUE_APP_API_BASE}/recipes/${id}`),
+  recipeProcedureFile: (id) => axios.get(`${process.env.VUE_APP_API_BASE}/RecipeProcedureFile/${id}`),
+
   postrecipelist: (data) =>
     axios.post(`${process.env.VUE_APP_API_BASE}/recipe`, data),
   uploadFile: (id, form) =>
