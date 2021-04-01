@@ -10,8 +10,8 @@
 
               <v-img
                 width="100%"
-                :src="`${item.imageSRC}`"
-                :lazy-src="`${item.imageSRC}`"
+                :src="`http://i.ytimg.com/vi/${item.imageSRC}/maxresdefault.jpg`"
+                :lazy-src="`https://img.youtube.com/vi/${item.imageSRC}/default.jpg`"
                 @click="navigateTo(item)"
                 style="cursor: pointer"
               >
@@ -83,6 +83,7 @@ export default {
     },
     async getItem() {
       const results = await api.list();
+      console.log("Welcome!");
       if (results.status == 200) {
         this.lectureList = results.data.reverse();
         // console.log(this.lectureList);
