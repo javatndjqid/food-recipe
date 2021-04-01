@@ -20,5 +20,7 @@ export default {
     axios.get(`${process.env.VUE_APP_API_BASE}/product/search/stuff?keyword=${keyword}`),
   findByName: (keyword) =>
     axios.get(`${process.env.VUE_APP_API_BASE}/product/search/name?keyword=${keyword}`),
+  findByCategory: (keyword) =>
+    axios.get(`${process.env.VUE_APP_API_BASE}/product/search/category?keyword=${keyword}`),
 
 }

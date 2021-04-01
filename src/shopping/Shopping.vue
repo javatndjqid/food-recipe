@@ -22,7 +22,7 @@
       </v-toolbar>
     </v-container>
     <v-container>
-      <div>
+      <v-row align="center" justify="space-around">
         <v-btn
           text
           icon
@@ -31,11 +31,73 @@
           style="margin-left: 1100px"
           @click="moveToCart()"
         >
-          <v-icon size="65" :style="{ marginBottom: '50px', marginTop: '40px' }"
+          <v-icon size="65" :style="{ marginBottom: '50px', marginTop: '70px' }"
             >mdi-cart</v-icon
           >
         </v-btn>
-      </div>
+      </v-row>
+      <v-row justify="center">
+        <v-btn
+          depressed
+          color="red"
+          dark
+          small
+          :style="{ marginLeft: '0px' }"
+          @click="getProductList()"
+        >
+          전체보기
+        </v-btn>
+        <v-btn
+          depressed
+          color="red"
+          dark
+          small
+          :style="{ marginLeft: '10px' }"
+          @click="findByCategory(1)"
+        >
+          채소
+        </v-btn>
+        <v-btn
+          depressed
+          color="red"
+          dark
+          small
+          :style="{ marginLeft: '10px' }"
+          @click="findByCategory(2)"
+        >
+          과일·견과·쌀
+        </v-btn>
+        <v-btn
+          depressed
+          color="red"
+          dark
+          small
+          :style="{ marginLeft: '10px' }"
+          @click="findByCategory(3)"
+        >
+          수산·해산·건어물
+        </v-btn>
+        <v-btn
+          depressed
+          color="red"
+          dark
+          small
+          :style="{ marginLeft: '10px' }"
+          @click="findByCategory(4)"
+        >
+          정육·계란
+        </v-btn>
+        <v-btn
+          depressed
+          color="red"
+          dark
+          small
+          :style="{ marginLeft: '10px' }"
+          @click="findByCategory(5)"
+        >
+          면·양념·오일
+        </v-btn>
+      </v-row>
       <v-row justify="center" :style="{ marginTop: '10px' }">
         <v-col cols="9" md="3" v-for="(item, i) in productList" :key="i">
           <v-card
@@ -78,6 +140,13 @@ export default {
   data: () => ({
     stuff: "",
     productList: [],
+    category: {
+      a: "채소",
+      b: "과일",
+      c: "수산·해산·건어물",
+      d: "정육·계란",
+      e: "면·양념·오일",
+    },
   }),
   mounted() {
     this.getProductList();
@@ -103,6 +172,34 @@ export default {
       if (result.status == 200) {
         this.productList = result.data;
         this.stuff = "";
+      }
+    },
+    async findByCategory(cate) {
+      if (cate == 1) {
+        const result = await api.findByCategory(this.category.a);
+        if (result.status == 200) {
+          this.productList = result.data;
+        }
+      } else if (cate == 2) {
+        const result = await api.findByCategory(this.category.b);
+        if (result.status == 200) {
+          this.productList = result.data;
+        }
+      } else if (cate == 3) {
+        const result = await api.findByCategory(this.category.c);
+        if (result.status == 200) {
+          this.productList = result.data;
+        }
+      } else if (cate == 4) {
+        const result = await api.findByCategory(this.category.d);
+        if (result.status == 200) {
+          this.productList = result.data;
+        }
+      } else if (cate == 5) {
+        const result = await api.findByCategory(this.category.e);
+        if (result.status == 200) {
+          this.productList = result.data;
+        }
       }
     },
 
