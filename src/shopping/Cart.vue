@@ -1,4 +1,4 @@
-<template>
+<template >
   <div>
     <v-container>
       <v-col v-for="(item, i) in cartList" :key="i" :item="item">
@@ -10,9 +10,10 @@
               <v-list-item-title class="headline mb-1">
                 {{ item.product.name }}
               </v-list-item-title>
-              <v-list-item-subtitle
-                >{{ item.product.price }}원</v-list-item-subtitle
+              <v-list-item-title
+                >{{ item.product.price * item.quantity }}원</v-list-item-title
               >
+              <v-list-item-title>수량 : {{ item.quantity }}</v-list-item-title>
             </v-list-item-content>
 
             <v-list-item-avatar tile size="180"
@@ -73,7 +74,7 @@ export default {
         this.cartList = result.data;
         var sumPrice = 0;
         for (var i = 0; i < result.data.length; i++) {
-          sumPrice += result.data[i].product.price;
+          sumPrice += result.data[i].product.price * result.data[i].quantity;
         }
         this.price = sumPrice;
         if (this.cartList.length == 0) {
