@@ -11,21 +11,17 @@
           <v-card-text style="flex: 20">유저 아이디</v-card-text>
         </div>
         <v-card-title>
-          {{ recipe.name }}
+          {{ recipe.recipeName }}
         </v-card-title>
 
-        <v-card-subtitle> 1,000 miles of wonder </v-card-subtitle>
+        <v-card-subtitle> {{ recipe.tip }} </v-card-subtitle>
 
         <v-expand-transition>
           <div>
             <v-divider></v-divider>
 
             <v-card-text>
-              I'm a thing. But, like most politicians, he promised more than he
-              could deliver. You won't have time for sleeping, soldier, not with
-              all the bed making you'll be doing. Then we'll go with that data
-              file! Hey, you add a one and two zeros to that or we walk! You're
-              going to do his laundry? I've got to find a way to escape.
+              {{ recipe.explanation }}
             </v-card-text>
           </div>
         </v-expand-transition>
@@ -36,7 +32,7 @@
         <v-divider></v-divider>
 
         <v-list-item>
-          <v-list-item-title v-for="(item, i) in recipe.stuff" :key="i">{{
+          <v-list-item-title v-for="(item, i) in recipe.stuffRecipe" :key="i">{{
             item
           }}</v-list-item-title>
         </v-list-item>
@@ -95,9 +91,9 @@ export default {
     async getRecipeData() {
       console.log(this.$route.params.id);
       const id = this.$route.params.id;
-      const result = await api.recipe(id);
+      const result = await api.detail(id);
       if (result.status == 200) {
-        this.recipe = result.data;
+        this.recipe = result.data[0];
         console.log(this.recipe);
       }
     },
