@@ -3,7 +3,8 @@
   <v-img src="./tablecloth.jpg" alt="배경" height="”bgHeight”">
     <v-container color="primary">
       <v-row>
-        <v-col cols="12" md="6" lg="4" xs="12">
+        <v-col cols="12" md="6" lg="5
+        " xs="12">
           <template>
             <v-card
               style="height: 700px"
@@ -23,7 +24,7 @@
               <v-data-table
                 :headers="recipyHeaders"
                 :items="itemsWithSno"
-                :items-per-page="7"
+                :items-per-page="5"
               >
                 <template v-slot:item.recipeId:="props">
                   {{ props.item.recipe.length }}
@@ -34,7 +35,7 @@
                       :src="item.recipefile[0].dataUrl"
                       :alt="item.recipeName"
                       height="60px"
-                      width="150px"
+                      width="60px"
                     />
                   </div>
                   <div v-else>
@@ -42,7 +43,7 @@
                       :src="item.image"
                       :alt="item.recipeName"
                       height="60px"
-                      width="150px"
+                      width="60px"
                     />
                   </div>
                 </template>
@@ -119,7 +120,7 @@
                         mdi-format-list-bulleted
                       </v-icon>
                     </template>
-                    <v-card>
+                    <v-card><v-card-text/>
                       <v-card-text
                         v-for="(input, i) in item.orderProduct"
                         :key="i"
@@ -133,7 +134,7 @@
             </v-card>
           </template>
         </v-col>
-        <v-col cols="12" md="6" lg="4">
+        <v-col cols="12" md="6" lg="3">
           <template>
             <v-card>
               <template>
