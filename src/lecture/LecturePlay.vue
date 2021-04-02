@@ -16,7 +16,7 @@
         <v-col cols="12" md="9">
           <!-- 동영상 플레이어 공간 -->
           <v-card
-            color="red lighten-3"
+            color="#eeeeee"
             height="780px"
             class="d-flex align-center justify-center"
           >
@@ -37,7 +37,7 @@
         <!-- 강의정보 공간 -->
         <v-col cols="12" md="3">
           <!-- 강의정보 Card -->
-          <v-card class="mx-auto" min-height="780px" color="red lighten-3">
+          <v-card class="mx-auto" min-height="780px" color="#eeeeee">
             <v-card-title>
               강의 제목
               {{ item.title }}
