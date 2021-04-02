@@ -99,14 +99,19 @@
         </v-btn>
       </v-row>
       <v-row justify="center" :style="{ marginTop: '10px' }">
-        <v-col cols="9" md="3" v-for="(item, i) in productList" :key="i">
+        <v-col cols="6" md="3" v-for="(item, i) in productList" :key="i">
           <v-card
             flat
             style="cursor: pointer"
             class="rounded-0"
             @click="moveToDetail(item)"
           >
-            <v-img width="100%" height="300px" :src="item.productTitleImage">
+            <v-img
+              width="100%"
+              height="300px"
+              :alt="item.name"
+              :src="item.productTitleImage"
+            >
               <template v-slot:placeholder>
                 <v-row class="fill-height ma-0" align="center" justify="center">
                   <v-progress-circular

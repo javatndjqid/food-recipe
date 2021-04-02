@@ -31,6 +31,7 @@
               :src="productDetail.productTitleImage"
               width="450px"
               height="600px"
+              :alt="productDetail.name"
               :style="{ marginBottom: '50px', marginTop: '60px' }"
             ></v-img>
           </v-card>
@@ -107,7 +108,10 @@
           </v-bottom-sheet>
         </v-col>
         <v-card class="mx-auto" max-width="1000px" max-height="100%">
-          <v-img :src="productDetail.productDetailImage"></v-img>
+          <v-img
+            :alt="productDetail.name"
+            :src="productDetail.productDetailImage"
+          ></v-img>
         </v-card>
       </v-row>
     </v-container>
