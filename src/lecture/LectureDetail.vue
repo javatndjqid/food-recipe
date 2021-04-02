@@ -5,7 +5,12 @@
         <!-- UI -->
         <!-- 뒤로가기/구독취소/이미지/강의시청/연관카테고리(재료) 강의 위젯 -->
         <v-col cols="12" md="6">
-          <v-card color="red lighten-3" class="mx-auto" width="100%" style="margin-bottom: 10px;">
+          <v-card
+            color="red lighten-3"
+            class="mx-auto"
+            width="100%"
+            style="margin-bottom: 10px;"
+          >
             <!-- Vuetify 카드 컴포넌트 설명 페이지 https://vuetifyjs.com/en/components/cards/ -->
             <!-- Vuetify 색상 설명 페이지 https://vuetifyjs.com/en/styles/colors/#material-colors -->
             <v-card-actions>
@@ -26,13 +31,16 @@
               >
               <v-dialog v-model="dialog" width="400px">
                 <v-card>
-                  <v-card-title class="justify-center align-content-center headline grey lighten-2">
+                  <v-card-title
+                    class="justify-center align-content-center headline grey lighten-2"
+                  >
                     구독 취소 확인
                   </v-card-title>
 
                   <v-card-text class="text-center">
+                    <br />
                     {{ item.title }} 강의의 구독을 취소합니다.
-                    <br/>
+                    <br />
                     취소하시겠습니까?
                   </v-card-text>
 
@@ -43,8 +51,14 @@
                       취소하지 않는다
                     </v-btn>
                     <v-spacer></v-spacer>
-                    <v-btn color="primary" text @click="unSubscribe();
-                    dialog = false;">
+                    <v-btn
+                      color="primary"
+                      text
+                      @click="
+                        unSubscribe();
+                        dialog = false;
+                      "
+                    >
                       구독을 취소한다
                     </v-btn>
                   </v-card-actions>
@@ -58,8 +72,11 @@
             </v-card-actions>
 
             <v-card-actions>
-              <v-img v-if="item.imageSRC"
-                :src="`http://i.ytimg.com/vi/${item.imageSRC}/maxresdefault.jpg`"
+              <v-img
+                v-if="item.imageSRC"
+                :src="
+                  `http://i.ytimg.com/vi/${item.imageSRC}/maxresdefault.jpg`
+                "
                 :alt="item.title"
                 width="100%"
               />
@@ -99,7 +116,7 @@
                         <v-img
                           src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
                           style="cursor: pointer"
-                          :alt="(item.title)+' 의 연관강의 Title 1'"
+                          :alt="item.title + ' 의 연관강의 Title 1'"
                         />
                       </v-card-actions>
                       <v-card-title class="justify-center">
@@ -119,7 +136,7 @@
                         <v-img
                           src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
                           style="cursor: pointer"
-                          :alt="(item.title)+' 의 연관강의 Title 2'"
+                          :alt="item.title + ' 의 연관강의 Title 2'"
                         />
                       </v-card-actions>
                       <v-card-title class="justify-center">
@@ -139,7 +156,12 @@
 
         <!-- 강의정보 Card -->
         <v-col cols="12" md="6">
-          <v-card class="mx-auto" width="100%" min-height="800px" color="red lighten-3">
+          <v-card
+            class="mx-auto"
+            width="100%"
+            min-height="800px"
+            color="red lighten-3"
+          >
             <v-card-title>
               강의 제목
               {{ item.title }}
@@ -157,14 +179,13 @@
 
             <v-card-text>
               조리방법 분류
-              {{ item.category}}
+              {{ item.category }}
             </v-card-text>
 
             <v-card-text>
               재료(공란)
               {{ item.stuffs }}
             </v-card-text>
-          
           </v-card>
         </v-col>
 
@@ -189,7 +210,7 @@ export default {
     this.getItem();
     this.getSubscribed();
     // this.getRelatedLecture();
-},
+  },
   methods: {
     subscribe() {
       const id = this.$route.params.id;
@@ -208,7 +229,7 @@ export default {
     },
     navigateToViewer(item) {
       console.log("진행한다 " + item.id);
-      this.$router.push(`/LecturePlay/${item.id}`);
+      this.$router.push(`/Lecture/Play/${item.id}`);
     },
     async getItem() {
       const id = this.$route.params.id;
@@ -216,8 +237,8 @@ export default {
       if (results.status == 200) {
         this.lectureList = results.data;
       }
-      this.item = this.lectureList[id -1];
-      console.log("display : "+this.item.title);
+      this.item = this.lectureList[id - 1];
+      console.log("display : " + this.item.title);
     },
     async getSubscribed() {
       const id = this.$route.params.id;
@@ -230,7 +251,7 @@ export default {
     async getRelatedLecture() {
       const id = this.$route.params.id;
       const results = await api.related(id);
-      if (results.status == 200){
+      if (results.status == 200) {
         this.isSubscribed = results.data;
       }
     },

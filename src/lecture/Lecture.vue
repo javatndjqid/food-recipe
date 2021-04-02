@@ -106,7 +106,7 @@ export default {
     //   return Math.floor(Math.random() * 1000) + 1;
     // },
     navigateTo(item) {
-      this.$router.push(`/LectureDetail/${item.id}`);
+      this.$router.push(`/Lecture/Detail/${item.id}`);
     },
     async getItem() {
       const results = await api.list();

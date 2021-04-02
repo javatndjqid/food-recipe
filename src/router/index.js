@@ -52,13 +52,13 @@ const routes = [
     component: () => import('../lecture/Lecture.vue')
   },
   {
-    path: '/LectureDetail/:id',
+    path: '/Lecture/Detail/:id',
     name: 'LectureDetail',
     component: () => import('../lecture/LectureDetail.vue'),
     props: true,
   },
   {
-    path: '/LecturePlay/:id',
+    path: '/Lecture/Play/:id',
     name: 'LecturePlay',
     component: () => import('../lecture/LecturePlay.vue'),
     props: true,
