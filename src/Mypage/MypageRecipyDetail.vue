@@ -17,6 +17,7 @@
               :alt="recipe[0].recipeName"
               max-height="500px"
             />
+
             <v-card-title>
               {{ recipe[0].name }}
             </v-card-title>
@@ -33,14 +34,28 @@
           <v-card style="margintop: 30px">
             <v-card-title>재료</v-card-title>
             <v-divider></v-divider>
-            <v-list-item>
-              <v-list-item-title
-                v-for="(item, i) in recipe[0].stuffRecipe"
-                :key="i"
-              >
-                재료 :   {{ item.stuffName }} 양 :   {{ item.quantity }}
-              </v-list-item-title>
-            </v-list-item>
+            <v-list>
+              <v-list-item>
+                <v-list-item-action>
+                  <v-simple-table dense>
+                    <template v-slot:default>
+                      <thead>
+                        <tr>
+                          <th class="text-left">Stuff</th>
+                          <th class="text-left">Quentity</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr v-for="(item, i) in recipe[0].stuffRecipe" :key="i">
+                          <td>{{ item.stuffName }}</td>
+                          <td>{{ item.quantity }}</td>
+                        </tr>
+                      </tbody>
+                    </template>
+                  </v-simple-table>
+                </v-list-item-action>
+              </v-list-item>
+            </v-list>
           </v-card>
           <v-card style="margintop: 30px">
             <v-list>
@@ -48,33 +63,38 @@
                 v-for="(item, i) in recipe[0].recipeProcedure"
                 :key="i"
               >
-                <v-row>
-                  <v-col>
-                    <v-list-item-action>{{ i + 1 }}</v-list-item-action>
-                  </v-col>
-                  <v-col>
-                    <div width="80%">
-                      <v-list-item-action-text style="font-size: 15px"
-                        >{{ item.recipeProcedure }}
-                      </v-list-item-action-text>
-                    </div>
-                  </v-col>
-                  <v-col>
-                    <div>
-                      <v-img
-                        v-if="item.recipeProcedurefile[0]"
-                        :src="item.recipeProcedurefile[0].dataUrl"
-                        :alt="item.recipeProcedurefile[0].fileName"
-                        height="50px"
-                        width="50px"
-                      />
-
-                      <v-img v-else src="./1.png" alt="빈이미지" height="60px" width="50px" />
-                    </div>
-                  </v-col>
-                </v-row>
+                <v-list-item-action>{{ i + 1 }}</v-list-item-action>
+                <v-list-item-action-text style="font-size: 15px"
+                  >{{ item.recipeProcedure }}
+                </v-list-item-action-text>
+                <div style="float: right; marginleft: 10px">
+                  <v-list-item-action>
+                    <v-img
+                      v-if="item.recipeProcedurefile[0]"
+                      :src="item.recipeProcedurefile[0].dataUrl"
+                      :alt="item.recipeProcedurefile[0].fileName"
+                      height="50px"
+                      width="50px"
+                    />
+                    <v-img
+                      v-else-if="item.recipeProcedureImage != null"
+                      :src="item.recipeProcedureImage"
+                      alt="빈이미지"
+                      height="60px"
+                      width="50px"
+                    />
+                    <v-img
+                      v-else
+                      src="./1.png"
+                      alt="빈이미지"
+                      height="60px"
+                      width="50px"
+                    />
+                  </v-list-item-action>
+                </div>
               </v-list-item>
             </v-list>
+
             <v-expand-transition>
               <div>
                 <v-divider></v-divider>
@@ -84,6 +104,7 @@
               </div>
             </v-expand-transition>
           </v-card>
+
           <v-card>
             <v-btn
               justify="end"

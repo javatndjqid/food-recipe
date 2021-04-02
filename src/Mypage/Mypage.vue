@@ -275,7 +275,7 @@ export default {
     },
     //레시피리스트호출
     async getRecipeList() {
-      const result = await api.recipelist();
+      const result = await api.recipelist(2);
 
       if (result.status == 200) {
         this.userRecipeList = result.data;
