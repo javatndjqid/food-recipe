@@ -9,15 +9,20 @@
               <v-card-actions> </v-card-actions>
               <v-list-item-title class="headline mb-1">
                 {{ item.product.name }}
+                <v-list-item-title
+                  >{{ item.product.price }}원</v-list-item-title
+                >
               </v-list-item-title>
+              <v-list-item-title>수량 : {{ item.quantity }}</v-list-item-title>
               <v-list-item-title
                 >{{ item.product.price * item.quantity }}원</v-list-item-title
               >
-              <v-list-item-title>수량 : {{ item.quantity }}</v-list-item-title>
             </v-list-item-content>
 
             <v-list-item-avatar tile size="180"
-              ><img :src="item.product.productTitleImage"
+              ><img
+                :alt="item.product.name"
+                :src="item.product.productTitleImage"
             /></v-list-item-avatar>
           </v-list-item>
         </v-card>
@@ -25,6 +30,18 @@
       <h1>{{ nullCart }}</h1>
       <br />
       <h1>총 금액 : {{ price }}원</h1>
+      <v-btn
+        depressed
+        elevation="2"
+        color="red"
+        class="rounded-0"
+        dark
+        x-large
+        @click="moveToMarket()"
+        >상품보기</v-btn
+      >
+      <br />
+      <br />
       <v-bottom-sheet v-model="sheet" inset>
         <template v-slot:activator="{ on, attrs }">
           <v-btn
@@ -44,7 +61,12 @@
           <v-btn class="mt-6" text color="red" @click="moveToMarket()">
             메인페이지로
           </v-btn>
-          <v-btn class="mt-6" text color="red" @click="purchase()">
+          <v-btn
+            class="mt-6"
+            text
+            color="red"
+            @click="purchase(), (sheet = !sheet)"
+          >
             구매하기
           </v-btn>
           <div class="my-3">구매하시겠습니까?</div>
