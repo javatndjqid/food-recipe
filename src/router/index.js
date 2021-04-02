@@ -34,7 +34,7 @@ const routes = [
     component: () => import('../mypage/MypageRecipy.vue')
   },
   {
-    path: '/SearchDetail?:id',
+    path: '/SearchDetail:id',
     name: 'SearchDetail',
     component: () => import('../search/SearchDetail.vue'),
     props: true

@@ -144,16 +144,17 @@ export default {
     selectedItem: 0,
     items: [
       /* https://cdn.materialdesignicons.com/5.4.55/ */
-      { text: "Home", path: "/" },
-      { text: "SEARCH", path: "/Search" },
-      { text: "Market", path: "/Shopping" },
-      { text: "Lecture", path: "/Lecture" },
-      { text: "MYPAGE", path: "/Mypage" },
+      { text: "Home", path: "/", count: 0 },
+      { text: "SEARCH", path: "/Search", count: 1 },
+      { text: "Market", path: "/Shopping", count: 2 },
+      { text: "Lecture", path: "/Lecture", count: 3 },
+      { text: "MYPAGE", path: "/Mypage", count: 4 },
     ],
   }),
   user: [],
   mounted() {
     this.getUsers();
+    this.selectItem();
   },
   methods: {
     async getUsers() {
@@ -163,16 +164,21 @@ export default {
         console.log(result.data);
       }
     },
-    selectItem() {},
+    selectItem() {
+      console.log("==== route.path ====");
+      console.log(this.$route);
+      this.items.forEach((item) => {
+        if (this.$route.path == item.path) this.selectedItem = item.count;
+      });
+    },
 
     navigateTo(item) {
       /* https://router.vuejs.org/kr/guide/essentials/navigation.html */
       // 현재 경로와 다르면
       if (this.$route.path != item.path) {
         // 라우터에 경로 추가
-        console.log(this.selectedItem);
+        console.log(this.$route.path);
         this.$router.push(item.path);
-        console.log(this.selectedItem);
       }
     },
   },
