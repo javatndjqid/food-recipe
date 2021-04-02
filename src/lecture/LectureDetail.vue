@@ -60,6 +60,7 @@
             <v-card-actions>
               <v-img v-if="item.imageSRC"
                 :src="`http://i.ytimg.com/vi/${item.imageSRC}/maxresdefault.jpg`"
+                :alt="item.title"
                 width="100%"
               />
             </v-card-actions>
@@ -98,6 +99,7 @@
                         <v-img
                           src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
                           style="cursor: pointer"
+                          :alt="(item.title)+' 의 연관강의 Title 1'"
                         />
                       </v-card-actions>
                       <v-card-title class="justify-center">
@@ -117,6 +119,7 @@
                         <v-img
                           src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
                           style="cursor: pointer"
+                          :alt="(item.title)+' 의 연관강의 Title 2'"
                         />
                       </v-card-actions>
                       <v-card-title class="justify-center">
