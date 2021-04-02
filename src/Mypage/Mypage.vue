@@ -3,7 +3,7 @@
   <v-img src="./tablecloth.jpg" alt="배경" height="”bgHeight”">
     <v-container color="primary">
       <v-row>
-        <v-col cols="12" md="6" lg="5" xs="12">
+        <v-col cols="12" md="6" lg="4" xs="12">
           <template>
             <v-card
               style="height: 700px"
@@ -133,11 +133,11 @@
             </v-card>
           </template>
         </v-col>
-        <v-col cols="12" md="6" lg="3">
+        <v-col cols="12" md="6" lg="4">
           <template>
             <v-card>
               <template>
-                <v-card class="overflow-y-auto" elevation="10">
+                <v-card class="overflow-y-auto" elevation="10" style="height: 700px">
                   <v-card-subtitle>나의 강의</v-card-subtitle>
                   <v-img
                     class="white--text align-end"
