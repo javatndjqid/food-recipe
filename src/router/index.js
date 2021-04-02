@@ -26,12 +26,12 @@ const routes = [
   {
     path: '/Mypage',
     name: 'Mypage',
-    component: () => import('../Mypage/Mypage.vue')
+    component: () => import('../mypage/Mypage.vue')
   },
   {
     path: '/MypageRecipy',
     name: 'MypageRecipy',
-    component: () => import('../Mypage/MypageRecipy.vue')
+    component: () => import('../mypage/MypageRecipy.vue')
   },
   {
     path: '/SearchDetail',
@@ -42,7 +42,7 @@ const routes = [
   {
     path: '/MypageRecipyDetail',
     name: 'MypageRecipyDetail',
-    component: () => import('../Mypage/MypageRecipyDetail.vue'),
+    component: () => import('../mypage/MypageRecipyDetail.vue'),
     props: true
   },
 

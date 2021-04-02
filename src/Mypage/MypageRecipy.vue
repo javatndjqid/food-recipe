@@ -1,5 +1,5 @@
 <template>
-  <v-img src="./kitchen.png" height=”bgHeight”>
+  <v-img src="./kitchen.png" alt="배경이미지" height="”bgHeight”">
     <v-container id="user-profile-view" fluid tag="section">
       <v-row justify="center">
         <v-col cols="12" md="8">
@@ -222,8 +222,8 @@ export default {
     multiple: {
       type: Boolean,
       required: false,
-      default: true,
-    },
+      default: true
+    }
   },
   data: () => ({
     alert: false,
@@ -240,7 +240,7 @@ export default {
       userId: 1,
       stuffRecipe: [{ quantity: "", stuffName: "" }],
       recipeProcedure: [{ recipeProcedure: "", recipeProcedureImage: "" }],
-      category: "",
+      category: ""
     },
     categorylist: [],
     // stuffs: [],
@@ -255,9 +255,9 @@ export default {
       {
         text: "레시피등록",
         icon: "mdi-book-open-page-variant",
-        path: "/MypageRecipy",
-      },
-    ],
+        path: "/MypageRecipy"
+      }
+    ]
   }),
   mounted() {
     this.getRecipeData();
@@ -305,7 +305,7 @@ export default {
             form.append("data", file);
             const result = await api.uploadFile(newdata.recipeId, form);
             newdata.files.push({
-              ...result.data,
+              ...result.data
             });
           }
         }
@@ -342,7 +342,7 @@ export default {
     async getCategoryData() {
       const result = await api.categorylist();
       this.categorylist = result.data;
-    },
-  },
+    }
+  }
 };
 </script>

@@ -1,21 +1,23 @@
 
 <template>
-  <v-img src="./tablecloth.jpg" height="”bgHeight”">
+  <v-img src="./tablecloth.jpg" alt="배경" height="”bgHeight”">
     <v-container color="primary">
       <v-row>
-        <v-col cols="12" md="6" lg="5">
+        <v-col cols="12" md="6" lg="5" xs="12">
           <template>
             <v-card
               style="height: 700px"
               class="overflow-y-auto"
               elevation="10"
               img="https://pgnqdrjultom1827145.cdn.ntruss.com/img/bf/43/bf43dc0fd6c604082f713030601b9bc5d9d8d26047ab1eeb7efff8e31cf65e5c_v1.jpg"
+              alt="카드이미지"
             >
               <v-card-subtitle>나의 레시피</v-card-subtitle>
               <v-img
                 class="white--text align-end"
                 height="150px"
                 src="https://image.freepik.com/free-vector/healthy-recipe-illustration-concept_23-2148576281.jpg"
+                alt="카드상단이미지"
               />
 
               <v-data-table
@@ -30,12 +32,18 @@
                   <div v-if="item.recipefile[0]">
                     <v-img
                       :src="item.recipefile[0].dataUrl"
+                      :alt="item.recipeName"
                       height="60px"
                       width="150px"
                     />
                   </div>
                   <div v-else>
-                    <v-img :src="item.image" height="60px" width="150px" />
+                    <v-img
+                      :src="item.image"
+                      :alt="item.recipeName"
+                      height="60px"
+                      width="150px"
+                    />
                   </div>
                 </template>
                 <template v-slot:item.details="{ item }">
@@ -74,6 +82,7 @@
                 class="white--text align-end"
                 height="100px"
                 src="https://en.pimg.jp/001/710/411/1/1710411.jpg"
+                alt="카드상단이미지"
               >
               </v-img>
               <v-data-table
@@ -88,6 +97,7 @@
                 <template v-slot:item.image="{ item }">
                   <v-img
                     :src="item.orderProduct[0].productTitleImage"
+                    :alt="item.orderProduct[0].productName"
                     height="40px"
                     width="50px"
                   />
@@ -133,6 +143,7 @@
                     class="white--text align-end"
                     height="90px"
                     src="https://cdn.crowdpic.net/list-thumb/thumb_l_756C27E1062B73D39C8E3E51165172E2.jpg"
+                    alt="카드상단이미지"
                   >
                   </v-img>
                   <v-data-table
@@ -147,7 +158,12 @@
                     <template v-slot:item.image="{ item }">
                       <div>
                         <v-img
-                          :src="`http://i.ytimg.com/vi/${item.lectureImageSRC}/default.jpg`"
+                          :src="
+                            `http://i.ytimg.com/vi/${item.lectureImageSRC}/default.jpg`
+                          "
+                          :alt="
+                            item.lectureTitle
+                          "
                           height="40px"
                           width="50px"
                         />
@@ -174,63 +190,61 @@ export default {
         align: "start",
         value: "sno",
         class: "elevation-1",
-        width: 10,
+        width: 10
       },
       {
         text: "레시피 사진",
         value: "image",
         sortable: false,
-        align: "center",
+        align: "center"
       },
       {
         text: "레시피 이름",
         value: "recipeName",
         sortable: false,
-        align: "center",
+        align: "center"
       },
       {
         text: "상세정보",
         value: "details",
         sortable: false,
         width: 80,
-        align: "center",
+        align: "center"
       },
       {
         text: "삭제",
         value: "del",
         sortable: false,
         width: 10,
-        align: "center",
-      },
+        align: "center"
+      }
     ],
     ClassHeaders: [
       { text: "썸네일", value: "image", sortable: false, align: "center" },
       {
         text: "구독내역",
         value: "lectureName",
-        sortable: false,
-        
+        sortable: false
       }
     ],
     MarketHeaders: [
-      { text: "구매시간", align: "start", value: "orderDate", },
+      { text: "구매시간", align: "start", value: "orderDate" },
       { text: "구매사진", value: "image", sortable: false, align: "center" },
       {
         text: "구매내역",
         value: "productName",
-        sortable: false,
-        
+        sortable: false
       },
       {
         text: "상세내역",
         value: "productNames",
         sortable: false,
         align: "center"
-      },
+      }
     ],
     userRecipeList: [],
     userlectureList: [],
-    userPurchaseList: [],
+    userPurchaseList: []
   }),
   mounted() {
     this.getlecturelist();
@@ -247,9 +261,10 @@ export default {
     //데이터 리스트 넘버링
     itemsWithSno() {
       return this.userRecipeList.map((d, index) => ({ ...d, sno: index + 1 }));
-    },
+    }
   },
   methods: {
+    //구매리스트호출
     async getpurchaselist() {
       const result = await api.purchaselist();
 
@@ -258,31 +273,36 @@ export default {
       }
       console.log(this.userPurchaseList);
     },
+    //레시피리스트호출
     async getRecipeList() {
       const result = await api.recipelist();
 
       if (result.status == 200) {
         this.userRecipeList = result.data;
-        // console.log(result.data);
+         console.log(result.data);
       }
     },
+    //구독리스트호출
     async getlecturelist() {
       const result = await api.lecturelist();
       if (result.status == 200) {
         this.userlectureList = result.data;
       }
-      //   console.log(this.userLectureList);
+    console.log(this.userlectureList);
     },
+    //레시피등록페이지로 이동
     navigate() {
       this.$router.push("/MypageRecipy");
     },
+    //레시피 상세 화면으로 이동
     navigateTo(item) {
       this.$router.push({
         name: "MypageRecipyDetail",
-        params: { recipeId: item.recipeId },
+        params: { recipeId: item.recipeId }
       });
       //    console.log(item.recipeId);
     },
+    //레시피 삭제
     async deleteitem(item) {
       const result = await api.delrecipe(item);
       if (result.status == 200) {
@@ -290,7 +310,7 @@ export default {
         this.userRecipeList = result.data;
         // this.userRecipeList.splice(this.userRecipeList.indexOf(item), 1);
       }
-    },
-  },
+    }
+  }
 };
 </script>
