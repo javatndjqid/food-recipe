@@ -3,26 +3,26 @@ import axios from 'axios'
 
 export default {
   getUser: () =>
-    axios.get(`${process.env.VUE_APP_API_BASE}/user`),
+    axios.get(`${process.env.VUE_APP_API_MYPAGE}/user`),
   purchaselist: () =>
-    axios.get(`${process.env.VUE_APP_API_BASE}/purchase-order`),
+    axios.get(`${process.env.VUE_APP_API_MYPAGE}/purchase-order`),
   lecturelist: () =>
-    axios.get(`${process.env.VUE_APP_API_BASE}/user-lecture`),
+    axios.get(`${process.env.VUE_APP_API_MYPAGE}/user-lecture`),
   categorylist: () =>
-    axios.get(`${process.env.VUE_APP_API_BASE}/category`),
+    axios.get(`${process.env.VUE_APP_API_MYPAGE}/category`),
   recipelist: () =>
-    axios.get(`${process.env.VUE_APP_API_BASE}/recipes`),
+    axios.get(`${process.env.VUE_APP_API_MYPAGE}/recipes`),
   stufflist: () =>
-    axios.get(`${process.env.VUE_APP_API_BASE}/stuff`),
-  recipe: (id) => axios.get(`${process.env.VUE_APP_API_BASE}/recipes/${id}`),
-  recipeProcedureFile: (id) => axios.get(`${process.env.VUE_APP_API_BASE}/RecipeProcedureFile/${id}`),
+    axios.get(`${process.env.VUE_APP_API_MYPAGE}/stuff`),
+  recipe: (id) => axios.get(`${process.env.VUE_APP_API_MYPAGE}/recipes/${id}`),
+  recipeProcedureFile: (id) => axios.get(`${process.env.VUE_APP_API_MYPAGE}/RecipeProcedureFile/${id}`),
 
   postrecipelist: (data) =>
-    axios.post(`${process.env.VUE_APP_API_BASE}/recipe`, data),
+    axios.post(`${process.env.VUE_APP_API_MYPAGE}/recipe`, data),
   uploadFile: (id, form) =>
-    axios.post(`${process.env.VUE_APP_API_BASE}/recipe/${id}/recipe-files`, form, { headers: { 'content-type': 'multipart/form-data' } }),
+    axios.post(`${process.env.VUE_APP_API_MYPAGE}/recipe/${id}/recipe-files`, form, { headers: { 'content-type': 'multipart/form-data' } }),
   uploadFile2: (id, form) =>
-    axios.post(`${process.env.VUE_APP_API_BASE}/procedure/${id}/files`, form, { headers: { 'content-type': 'multipart/form-data' } }),
+    axios.post(`${process.env.VUE_APP_API_MYPAGE}/procedure/${id}/files`, form, { headers: { 'content-type': 'multipart/form-data' } }),
 
-  delrecipe: (id) => axios.delete(`${process.env.VUE_APP_API_BASE}/recipe/${id}`),
+  delrecipe: (id) => axios.delete(`${process.env.VUE_APP_API_MYPAGE}/recipe/${id}`),
 }
