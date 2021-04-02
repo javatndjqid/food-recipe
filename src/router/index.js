@@ -34,7 +34,7 @@ const routes = [
     component: () => import('../Mypage/MypageRecipy.vue')
   },
   {
-    path: '/SearchDetail',
+    path: '/SearchDetail?:id',
     name: 'SearchDetail',
     component: () => import('../search/SearchDetail.vue'),
     props: true
@@ -79,7 +79,7 @@ const routes = [
 ]
 
 const router = new VueRouter({
-  // mode: 'history',
+  mode: 'history',
   base: process.env.BASE_URL,
   routes
 })

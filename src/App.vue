@@ -61,7 +61,7 @@
           </v-card>
         </template> -->
 
-      <div style="width:100%; text-align:right;">
+      <div style="width: 100%; text-align: right">
         <v-menu offset-y>
           <template v-slot:activator="{ on, attrs }">
             <v-avatar size="80" class="mr-3" v-bind="attrs" v-on="on">
@@ -80,47 +80,41 @@
           <v-card>
             <v-card-actions>
               <v-simple-table>
-              <template v-slot:default>
-                <thead>
-                  <tr>
-                    <th class="text-center">
-                      <v-img
-                        src="./assets/jjub.png"
-                        height="40px"
-                        width="40px"
-                      ></v-img>
-                    </th>
-                    <th class="text-center"></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th class="text-center">
-                      유저ID
-                    </th>
-                    <th class="text-center">
-                      {{user[0].userName}}
-                    </th>
-                  </tr>
-                  <tr>
-                    <th class="text-center">
-                      이름
-                    </th>
-                    <th class="text-center">
-                       {{user[0].name}}
-                    </th>
-                  </tr>
-                  <tr>
-                    <th class="text-center">
-                      E-mail
-                    </th>
-                    <th class="text-center">
-                      {{user[0].email}}
-                    </th>
-                  </tr>
-                </tbody>
-              </template>
-            </v-simple-table>
+                <template v-slot:default>
+                  <thead>
+                    <tr>
+                      <th class="text-center">
+                        <v-img
+                          src="./assets/jjub.png"
+                          height="40px"
+                          width="40px"
+                        ></v-img>
+                      </th>
+                      <th class="text-center"></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th class="text-center">유저ID</th>
+                      <th class="text-center">
+                        {{ user[0].userName }}
+                      </th>
+                    </tr>
+                    <tr>
+                      <th class="text-center">이름</th>
+                      <th class="text-center">
+                        {{ user[0].name }}
+                      </th>
+                    </tr>
+                    <tr>
+                      <th class="text-center">E-mail</th>
+                      <th class="text-center">
+                        {{ user[0].email }}
+                      </th>
+                    </tr>
+                  </tbody>
+                </template>
+              </v-simple-table>
             </v-card-actions>
           </v-card>
         </v-menu>
@@ -154,13 +148,11 @@ export default {
       { text: "SEARCH", path: "/Search" },
       { text: "Market", path: "/Shopping" },
       { text: "Lecture", path: "/Lecture" },
-      { text: "MYPAGE", path: "/Mypage" }
-    ]
+      { text: "MYPAGE", path: "/Mypage" },
+    ],
   }),
   user: [],
-   mounted() {
-
-
+  mounted() {
     this.getUsers();
   },
   methods: {
@@ -171,15 +163,18 @@ export default {
         console.log(result.data);
       }
     },
+    selectItem() {},
 
     navigateTo(item) {
       /* https://router.vuejs.org/kr/guide/essentials/navigation.html */
       // 현재 경로와 다르면
       if (this.$route.path != item.path) {
         // 라우터에 경로 추가
+        console.log(this.selectedItem);
         this.$router.push(item.path);
+        console.log(this.selectedItem);
       }
-    }
-  }
+    },
+  },
 };
 </script>

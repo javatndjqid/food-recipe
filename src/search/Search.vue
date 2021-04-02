@@ -75,7 +75,11 @@
           <v-row>
             <v-col v-for="(item, n) in calData" :key="n" cols="3">
               <v-card class="mx-auto" max-width="344" @click="navigateTo(item)">
-                <v-img :src="item.image" height="200px"></v-img>
+                <v-img
+                  :src="item.image"
+                  height="200px"
+                  :alt="item.name"
+                ></v-img>
 
                 <v-card-title>
                   {{ item.name }}
@@ -84,11 +88,11 @@
             </v-col>
           </v-row>
         </v-container>
+        <div class="text-center">
+          <v-pagination v-model="page" :length="numOfPages"></v-pagination>
+        </div>
       </v-main>
     </v-app>
-    <div class="text-center">
-      <v-pagination v-model="page" :length="numOfPages"></v-pagination>
-    </div>
   </div>
 </template>
 <script>
@@ -185,9 +189,13 @@ export default {
         : this.recipeFilter(this.chips);
     },
     navigateTo(item) {
-      // this.$router.push({ name: "SearchDetail", params: { id: item.id } });
+      this.$router.push({
+        path: "/SearchDetail",
+        name: "SearchDetail",
+        query: { id: item.recipeId },
+      });
       console.log(item);
-      this.$router.push({ name: "SearchDetail", params: { id: 3 } });
+      // this.$router.push({ name: "SearchDetail", params: { id: 3 } });
     },
     selectRadio(category) {
       this.radio = category;
