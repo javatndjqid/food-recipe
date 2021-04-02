@@ -176,7 +176,8 @@
             <v-img
               :src="`https://img.youtube.com/vi/${item.imageSRC}/0.jpg`"
               style="margin: 20px"
-              max-width="150px"
+              height="150px"
+              width="200px"
               alt="Lecture Image"
             />
             <v-list-item-title
@@ -237,9 +238,10 @@ export default {
       const results = await api.lectureList();
       if (results.status == 200) {
         this.lectures = results.data;
+        console.log("===== this.lectures =====");
         console.log(this.lectures);
-        this.lectures.filter((lec) => {
-          return lec.id <= 5;
+        this.lectures = this.lectures.filter((lec) => {
+          return lec.category == this.recipe.category;
         });
       }
     },
@@ -247,6 +249,7 @@ export default {
       const results = await api.productList();
       if (results.status == 200) {
         this.products = results.data;
+        console.log("===== this.products =====");
         console.log(this.products);
         this.products = this.products.filter((pro) => {
           return pro.id <= 5;
