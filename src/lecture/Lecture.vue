@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-toolbar dark color="red" height="40px">
+    <!-- <v-toolbar dark color="red" height="40px">
       <v-autocomplete
         v-model="select"
         :loading="loading"
@@ -18,7 +18,7 @@
           >mdi-card-search</v-icon
         >
       </v-btn>
-    </v-toolbar>
+    </v-toolbar> -->
     <div height="100%" class="d-flex align-content-start flex-wrap">
       <!-- 반응형 grid Layout 컨테이너 -->
       <v-container>
@@ -37,6 +37,7 @@
                   "
                   @click="navigateTo(item)"
                   style="cursor: pointer"
+                  :alt="item.title"
                 >
                   <!-- https://kr.vuejs.org/v2/api/#v-bind -->
                   <!-- https://vuetifyjs.com/en/components/images/#grid -->
@@ -105,7 +106,7 @@ export default {
     //   return Math.floor(Math.random() * 1000) + 1;
     // },
     navigateTo(item) {
-      this.$router.push(`/LectureDetail/${item.id}`);
+      this.$router.push(`/Lecture/Detail/${item.id}`);
     },
     async getItem() {
       const results = await api.list();

@@ -29,6 +29,7 @@
               frameborder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowfullscreen
+              :alt="item.title + ' 동영상 플레이어'"
             />
           </v-card>
         </v-col>
@@ -54,7 +55,7 @@
 
             <v-card-text>
               조리방법 분류
-              {{ item.category}}
+              {{ item.category }}
             </v-card-text>
 
             <v-card-text>
@@ -87,11 +88,11 @@ export default {
         this.lectureList = results.data;
       }
       const id = this.$route.params.id;
-      this.item = this.lectureList[id -1];
+      this.item = this.lectureList[id - 1];
     },
     navigateTo(item) {
       console.log("돌아간다 " + item.id);
-      this.$router.push(`/LectureDetail/${item.id}`);
+      this.$router.push(`/Lecture/Detail/${item.id}`);
     },
   },
 };

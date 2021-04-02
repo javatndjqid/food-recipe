@@ -26,12 +26,12 @@ const routes = [
   {
     path: '/Mypage',
     name: 'Mypage',
-    component: () => import('../Mypage/Mypage.vue')
+    component: () => import('../mypage/Mypage.vue')
   },
   {
     path: '/MypageRecipy',
     name: 'MypageRecipy',
-    component: () => import('../Mypage/MypageRecipy.vue')
+    component: () => import('../mypage/MypageRecipy.vue')
   },
   {
     path: '/SearchDetail?:id',
@@ -42,7 +42,7 @@ const routes = [
   {
     path: '/MypageRecipyDetail',
     name: 'MypageRecipyDetail',
-    component: () => import('../Mypage/MypageRecipyDetail.vue'),
+    component: () => import('../mypage/MypageRecipyDetail.vue'),
     props: true
   },
 
@@ -52,13 +52,13 @@ const routes = [
     component: () => import('../lecture/Lecture.vue')
   },
   {
-    path: '/LectureDetail/:id',
+    path: '/Lecture/Detail/:id',
     name: 'LectureDetail',
     component: () => import('../lecture/LectureDetail.vue'),
     props: true,
   },
   {
-    path: '/LecturePlay/:id',
+    path: '/Lecture/Play/:id',
     name: 'LecturePlay',
     component: () => import('../lecture/LecturePlay.vue'),
     props: true,

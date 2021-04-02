@@ -1,8 +1,8 @@
 <template>
-  <v-img src="./tablecloth.jpg" height=”bgHeight”>
+  <v-img src="./vegetables.jpg" alt="배경이미지" height="”bgHeight”">
     <v-container>
       <v-row>
-        <v-col cols="8" style="margin-left: auto; margin-right: auto">
+        <v-col cols="5" style="margin-left: auto; margin-right: auto">
           <v-card class="mx-auto" style="padding: 20px">
             <v-img
               v-if="recipe[0].recipefile[0]"
@@ -17,6 +17,7 @@
               :alt="recipe[0].recipeName"
               max-height="500px"
             />
+
             <v-card-title>
               {{ recipe[0].name }}
             </v-card-title>
@@ -33,14 +34,28 @@
           <v-card style="margintop: 30px">
             <v-card-title>재료</v-card-title>
             <v-divider></v-divider>
-            <v-list-item>
-              <v-list-item-title
-                v-for="(item, i) in recipe[0].stuffRecipe"
-                :key="i"
-              >
-                재료: {{ item.stuffName }} 양: {{ item.quantity }}
-              </v-list-item-title>
-            </v-list-item>
+            <v-list>
+              <v-list-item>
+                <v-list-item-action>
+                  <v-simple-table dense>
+                    <template v-slot:default>
+                      <thead>
+                        <tr>
+                          <th class="text-left">Stuff</th>
+                          <th class="text-left">Quentity</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr v-for="(item, i) in recipe[0].stuffRecipe" :key="i">
+                          <td>{{ item.stuffName }}</td>
+                          <td>{{ item.quantity }}</td>
+                        </tr>
+                      </tbody>
+                    </template>
+                  </v-simple-table>
+                </v-list-item-action>
+              </v-list-item>
+            </v-list>
           </v-card>
           <v-card style="margintop: 30px">
             <v-list>
@@ -48,34 +63,38 @@
                 v-for="(item, i) in recipe[0].recipeProcedure"
                 :key="i"
               >
-                <v-row>
-                  <v-col>
-                    <v-list-item-action>{{ i + 1 }}</v-list-item-action>
-                  </v-col>
-                  <v-col>
-                    <div width="80%">
-                      <v-list-item-action-text style="font-size: 15px"
-                        >{{ item.recipeProcedure }}
-                      </v-list-item-action-text>
-                    </div>
-                  </v-col>
-                  <v-col>
-                    <div width="20%" v-if="item.recipeProcedurefile[0].dataUrl">
-                      <v-img
-                        
-                        :src="item.recipeProcedurefile[0].dataUrl"
-                        height="50px"
-                        width="50px"
-                      />
-                    </div>
-                      <div v-else>
-                        <v-img :src="item.image" height="60px" width="150px" />
-                      </div>
-                   
-                  </v-col>
-                </v-row>
+                <v-list-item-action>{{ i + 1 }}</v-list-item-action>
+                <v-list-item-action-text style="font-size: 15px"
+                  >{{ item.recipeProcedure }}
+                </v-list-item-action-text>
+                <div style="float: right; marginleft: 10px">
+                  <v-list-item-action>
+                    <v-img
+                      v-if="item.recipeProcedurefile[0]"
+                      :src="item.recipeProcedurefile[0].dataUrl"
+                      :alt="item.recipeProcedurefile[0].fileName"
+                      height="50px"
+                      width="50px"
+                    />
+                    <v-img
+                      v-else-if="item.recipeProcedureImage != null"
+                      :src="item.recipeProcedureImage"
+                      alt="빈이미지"
+                      height="60px"
+                      width="50px"
+                    />
+                    <v-img
+                      v-else
+                      src="./1.png"
+                      alt="빈이미지"
+                      height="60px"
+                      width="50px"
+                    />
+                  </v-list-item-action>
+                </div>
               </v-list-item>
             </v-list>
+
             <v-expand-transition>
               <div>
                 <v-divider></v-divider>
@@ -85,6 +104,7 @@
               </div>
             </v-expand-transition>
           </v-card>
+
           <v-card>
             <v-btn
               justify="end"
@@ -126,6 +146,7 @@ export default {
     navigate() {
       this.$router.push("/Mypage");
     },
+    //레시피 id의 해당 정보호출
     async getRecipeData() {
       console.log(this.$route.params.recipeId);
       const id = this.$route.params.recipeId;
@@ -135,15 +156,7 @@ export default {
         console.log(this.recipe);
       }
     },
-    // async getRecipeData2() {
-    //   console.log(this.$route.params.recipeId);
-    //   const id = this.$route.params.recipeId;
-    //   const result = await api.recipeProcedureFile(id);
-    //   if (result.status == 200) {
-    //     this.recipe = result.data;
-    //     console.log(this.recipe);
-    //   }
-    // },
+    //레시피삭제
     async del() {
       const id = this.$route.params.recipeId;
       const result = await api.delrecipe(id);
