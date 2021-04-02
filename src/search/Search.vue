@@ -2,7 +2,7 @@
   <div>
     <v-app>
       <v-container>
-        <v-toolbar dark color="teal">
+        <v-toolbar color="red" dark>
           <!-- <v-toolbar-title>State selection</v-toolbar-title> -->
           <v-autocomplete
             v-model="select"
@@ -14,12 +14,11 @@
             flat
             hide-no-data
             hide-details
-            label="What state are you from?"
             solo-inverted
             @keyup.enter="addChip()"
           ></v-autocomplete>
           <v-btn icon @click="addChip()">
-            <v-icon size="40" :style="{ marginRight: '10px' }"
+            <v-icon size="60" :style="{ marginRight: '10px' }"
               >mdi-card-search</v-icon
             >
           </v-btn>
