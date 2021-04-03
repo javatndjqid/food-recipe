@@ -3,8 +3,13 @@
   <v-img src="./tablecloth.jpg" alt="배경" height="”bgHeight”">
     <v-container color="primary">
       <v-row>
-        <v-col cols="12" md="6" lg="5
-        " xs="12">
+        <v-col
+          cols="12"
+          md="6"
+          lg="5
+        "
+          xs="12"
+        >
           <template>
             <v-card
               style="height: 700px"
@@ -22,9 +27,14 @@
               />
 
               <v-data-table
+                style="height: 430px"
                 :headers="recipyHeaders"
                 :items="itemsWithSno"
-                :items-per-page="5"
+                :page.sync="page"
+                :items-per-page="6"
+                hide-default-footer
+                class="elevation-1"
+                @page-count="pageCount = $event"
               >
                 <template v-slot:item.recipeId:="props">
                   {{ props.item.recipe.length }}
@@ -62,6 +72,14 @@
                   >
                 </template>
               </v-data-table>
+              <div class="text-xs-center pt-2">
+                <v-pagination
+                  :total-visible="5"
+                  v-model="page"
+                  :length="pageCount"
+                  circle
+                ></v-pagination>
+              </div>
             </v-card>
             <v-row cols="12" justify="end">
               <v-btn @click="navigate()" class="mx-2" fab dark color="cyan">
@@ -87,10 +105,14 @@
               >
               </v-img>
               <v-data-table
-                style="height: 250px"
+                style="height: 480px"
                 :headers="MarketHeaders"
                 :items="userPurchaseList"
+                :page.sync="page2"
                 :items-per-page="9"
+                hide-default-footer
+                class="elevation-1"
+                @page-count="pageCount2 = $event"
               >
                 <template v-slot:item.orderDate="{ item }">
                   {{ $moment(item.orderDate).format("YYYY-MM-DD-HH-MM") }}
@@ -120,7 +142,8 @@
                         mdi-format-list-bulleted
                       </v-icon>
                     </template>
-                    <v-card><v-card-text/>
+                    <v-card
+                      ><v-card-text />
                       <v-card-text
                         v-for="(input, i) in item.orderProduct"
                         :key="i"
@@ -131,6 +154,15 @@
                   </v-dialog>
                 </template>
               </v-data-table>
+              <div class="text-xs-center pt-2">
+                <v-pagination
+                  circle
+                  :total-visible="5"
+                  v-model="page2"
+                  :length="pageCount2"
+                ></v-pagination>
+              </div>
+              <div class="text-xs-center pt-2"></div>
             </v-card>
           </template>
         </v-col>
@@ -138,20 +170,28 @@
           <template>
             <v-card>
               <template>
-                <v-card class="overflow-y-auto" elevation="10" style="height: 700px">
+                <v-card
+                  class="overflow-y-auto"
+                  elevation="10"
+                  style="height: 700px"
+                >
                   <v-card-subtitle>나의 강의</v-card-subtitle>
                   <v-img
                     class="white--text align-end"
-                    height="90px"
+                    height="100px"
                     src="https://cdn.crowdpic.net/list-thumb/thumb_l_756C27E1062B73D39C8E3E51165172E2.jpg"
                     alt="카드상단이미지"
                   >
                   </v-img>
                   <v-data-table
-                    style="height: 350px"
+                    style="height: 480px"
                     :headers="ClassHeaders"
                     :items="userlectureList"
-                    :items-per-page="4"
+                    :page.sync="page3"
+                    :items-per-page="9"
+                    hide-default-footer
+                    class="elevation-1"
+                    @page-count="pageCount3 = $event"
                   >
                     <template v-slot:item.lectureName="{ item }">
                       {{ item.lectureTitle }}
@@ -159,18 +199,22 @@
                     <template v-slot:item.image="{ item }">
                       <div>
                         <v-img
-                          :src="
-                            `http://i.ytimg.com/vi/${item.lectureImageSRC}/default.jpg`
-                          "
-                          :alt="
-                            item.lectureTitle
-                          "
+                          :src="`http://i.ytimg.com/vi/${item.lectureImageSRC}/default.jpg`"
+                          :alt="item.lectureTitle"
                           height="40px"
                           width="50px"
                         />
                       </div>
                     </template>
                   </v-data-table>
+                  <div class="text-xs-center pt-2">
+                    <v-pagination
+                      circle
+                      :total-visible="5"
+                      v-model="page3"
+                      :length="pageCount3"
+                    ></v-pagination>
+                  </div>
                 </v-card>
               </template>
             </v-card>
@@ -191,42 +235,42 @@ export default {
         align: "start",
         value: "sno",
         class: "elevation-1",
-        width: 10
+        width: 10,
       },
       {
         text: "레시피 사진",
         value: "image",
         sortable: false,
-        align: "center"
+        align: "center",
       },
       {
         text: "레시피 이름",
         value: "recipeName",
         sortable: false,
-        align: "center"
+        align: "center",
       },
       {
         text: "상세정보",
         value: "details",
         sortable: false,
         width: 80,
-        align: "center"
+        align: "center",
       },
       {
         text: "삭제",
         value: "del",
         sortable: false,
         width: 10,
-        align: "center"
-      }
+        align: "center",
+      },
     ],
     ClassHeaders: [
       { text: "썸네일", value: "image", sortable: false, align: "center" },
       {
         text: "구독내역",
         value: "lectureName",
-        sortable: false
-      }
+        sortable: false,
+      },
     ],
     MarketHeaders: [
       { text: "구매시간", align: "start", value: "orderDate" },
@@ -234,18 +278,24 @@ export default {
       {
         text: "구매내역",
         value: "productName",
-        sortable: false
+        sortable: false,
       },
       {
         text: "상세내역",
         value: "productNames",
         sortable: false,
-        align: "center"
-      }
+        align: "center",
+      },
     ],
     userRecipeList: [],
     userlectureList: [],
-    userPurchaseList: []
+    userPurchaseList: [],
+    page: 1,
+    pageCount: 0,
+    page2: 1,
+    pageCount2: 0,
+    page3: 1,
+    pageCount3: 0,
   }),
   mounted() {
     this.getlecturelist();
@@ -262,7 +312,7 @@ export default {
     //데이터 리스트 넘버링
     itemsWithSno() {
       return this.userRecipeList.map((d, index) => ({ ...d, sno: index + 1 }));
-    }
+    },
   },
   methods: {
     //구매리스트호출
@@ -280,7 +330,7 @@ export default {
 
       if (result.status == 200) {
         this.userRecipeList = result.data;
-         console.log(result.data);
+        console.log(result.data);
       }
     },
     //구독리스트호출
@@ -289,7 +339,7 @@ export default {
       if (result.status == 200) {
         this.userlectureList = result.data;
       }
-    console.log(this.userlectureList);
+      console.log(this.userlectureList);
     },
     //레시피등록페이지로 이동
     navigate() {
@@ -299,7 +349,7 @@ export default {
     navigateTo(item) {
       this.$router.push({
         name: "MypageRecipyDetail",
-        params: { recipeId: item.recipeId }
+        params: { recipeId: item.recipeId },
       });
       //    console.log(item.recipeId);
     },
@@ -311,7 +361,7 @@ export default {
         this.userRecipeList = result.data;
         // this.userRecipeList.splice(this.userRecipeList.indexOf(item), 1);
       }
-    }
-  }
+    },
+  },
 };
 </script>
