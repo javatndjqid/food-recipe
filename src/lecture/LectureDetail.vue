@@ -4,7 +4,7 @@
 
 <template>
   <div>
-    <v-img src="../mypage/tablecloth.jpg" alt="배경" height="”bgHeight”">
+    <!-- <v-img src="../mypage/tablecloth.jpg" alt="배경" height="”bgHeight”"> -->
       <v-container>
         <v-row justify="center" v-bind="item">
           <!-- UI -->
@@ -148,8 +148,9 @@
                     </v-container>
                   </v-card>
 
-                  <v-row>
-                    <!-- 연관강의 slot 1 -->
+                  <!-- https://stackoverflow.com/questions/55574599/how-to-align-the-contents-to-the-center-of-the-v-card-component-in-vuetify -->
+
+                  <!-- <v-row>
                     <v-col cols="12" md="6">
                       <v-card class="mx-auto" width="100%" color="grey">
                         <v-card-actions>
@@ -160,7 +161,6 @@
                           />
                         </v-card-actions>
                         <v-card-title class="justify-center">
-                          <!-- https://stackoverflow.com/questions/55574599/how-to-align-the-contents-to-the-center-of-the-v-card-component-in-vuetify -->
                           {{ item.title }} 연관강의 Title
                         </v-card-title>
                         <v-card-subtitle class="text-center">
@@ -169,7 +169,6 @@
                       </v-card>
                     </v-col>
 
-                    <!-- 연관강의 slot 2 -->
                     <v-col cols="12" md="6">
                       <v-card class="mx-auto" width="100%" color="grey">
                         <v-card-actions>
@@ -180,7 +179,6 @@
                           />
                         </v-card-actions>
                         <v-card-title class="justify-center">
-                          <!-- https://stackoverflow.com/questions/55574599/how-to-align-the-contents-to-the-center-of-the-v-card-component-in-vuetify -->
                           {{ item.title }} 연관강의 Title
                         </v-card-title>
                         <v-card-subtitle class="text-center">
@@ -188,14 +186,14 @@
                         </v-card-subtitle>
                       </v-card>
                     </v-col>
-                  </v-row>
+                  </v-row> -->
                 </v-container>
               </v-card-actions>
             </v-card>
           </v-col>
         </v-row>
       </v-container>
-    </v-img>
+    <!-- </v-img> -->
   </div>
 </template>
 
