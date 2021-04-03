@@ -1,3 +1,7 @@
+<style scoped>
+  @import './textstyle.css';
+</style>
+
 <template>
   <div>
     <v-container v-bind="item">
@@ -31,6 +35,8 @@
               allowfullscreen
               :alt="item.title + ' 동영상 플레이어'"
             />
+
+
           </v-card>
         </v-col>
 

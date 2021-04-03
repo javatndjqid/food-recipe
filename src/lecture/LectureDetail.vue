@@ -1,3 +1,7 @@
+<style scoped>
+@import "./textstyle.css";
+</style>
+
 <template>
   <div>
     <v-img src="../mypage/tablecloth.jpg" alt="배경" height="”bgHeight”">
@@ -5,7 +9,7 @@
         <v-row justify="center" v-bind="item">
           <!-- UI -->
           <!-- 뒤로가기/구독취소/이미지/강의시청/연관카테고리(재료) 강의 위젯 -->
-          <v-col cols="12" md="6">
+          <v-col cols="12" md="8">
             <v-card
               color="#eeeeee"
               class="mx-auto"
@@ -37,11 +41,9 @@
                     >
                       구독 취소 확인
                     </v-card-title>
-
+                    <v-card-text> </v-card-text>
                     <v-card-text class="text-center">
-                      <br />
-                      {{ item.title }} 강의의 구독을 취소합니다.
-                      <br />
+                      "{{ item.title }}" 강의의 구독을 취소합니다.<br />
                       취소하시겠습니까?
                     </v-card-text>
 
@@ -104,15 +106,52 @@
                 </v-btn>
               </v-card-actions>
             </v-card>
+          </v-col>
 
+          <!-- 강의정보 Card -->
+          <v-col cols="12" md="4">
             <!-- 연관강의 창 -->
             <v-card class="mx-auto" width="100%" color="#eeeeee">
               <v-card-actions>
                 <v-container>
+                  <v-card
+                    class="mx-auto"
+                    width="100%"
+                    min-height="300px"
+                    style="margin-bottom:20px;"
+                  >
+                    <v-card-title
+                      style="font-size:30px; margin-bottom:20px"
+                      class="boldtext eclipse"
+                    >
+                      {{ item.title }}
+                    </v-card-title>
+
+                    <v-card-subtitle class="description eclipse">
+                      {{ item.summary }}
+                    </v-card-subtitle>
+                    <v-container>
+                      <table class="meta">
+                        <tr>
+                          <th scope="row">강의 시간 (초)</th>
+                          <td>{{ item.length }}</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">주요 조리방법</th>
+                          <td>{{ item.category }}</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">재료</th>
+                          <td>{{ item.stuffs }}</td>
+                        </tr>
+                      </table>
+                    </v-container>
+                  </v-card>
+
                   <v-row>
                     <!-- 연관강의 slot 1 -->
                     <v-col cols="12" md="6">
-                      <v-card class="mx-auto" width="400px" color="red">
+                      <v-card class="mx-auto" width="100%" color="grey">
                         <v-card-actions>
                           <v-img
                             src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
@@ -132,7 +171,7 @@
 
                     <!-- 연관강의 slot 2 -->
                     <v-col cols="12" md="6">
-                      <v-card class="mx-auto" width="400px" color="red">
+                      <v-card class="mx-auto" width="100%" color="grey">
                         <v-card-actions>
                           <v-img
                             src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
@@ -154,44 +193,6 @@
               </v-card-actions>
             </v-card>
           </v-col>
-
-          <!-- 강의정보 Card -->
-          <v-col cols="12" md="6">
-            <v-card
-              color="#eeeeee"
-              class="mx-auto"
-              width="100%"
-              min-height="800px"
-            >
-              <v-card-title>
-                강의 제목
-                {{ item.title }}
-              </v-card-title>
-
-              <v-card-subtitle>
-                강의 요약
-                {{ item.summary }}
-              </v-card-subtitle>
-
-              <v-card-text>
-                강의 시간(초)
-                {{ item.length }}
-              </v-card-text>
-
-              <v-card-text>
-                조리방법 분류
-                {{ item.category }}
-              </v-card-text>
-
-              <v-card-text>
-                재료(공란)
-                {{ item.stuffs }}
-              </v-card-text>
-            </v-card>
-          </v-col>
-
-          <!-- 연관강의 Card -->
-          <!-- 연관강의 slot이 페이지 사이즈에 따라 반응하지 않음, 해결필요 -->
         </v-row>
       </v-container>
     </v-img>
@@ -206,7 +207,9 @@ export default {
     dialog: false,
     item: {},
     // lectureUser: {},
+    stuffList: [],
     lectureList: [],
+    relatedLectureList: [],
   }),
   mounted() {
     this.getItem();

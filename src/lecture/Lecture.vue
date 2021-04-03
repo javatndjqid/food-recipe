@@ -1,3 +1,7 @@
+<style scoped>
+  @import './textstyle.css';
+</style>
+
 <template>
   <div>
     <!-- <v-toolbar dark color="red" height="40px">
@@ -36,7 +40,7 @@
                     `https://img.youtube.com/vi/${item.imageSRC}/default.jpg`
                   "
                   @click="navigateTo(item)"
-                  style="cursor: pointer"
+                  style="cursor: pointer;"
                   :alt="item.title"
                 >
                   <!-- https://kr.vuejs.org/v2/api/#v-bind -->
@@ -56,11 +60,11 @@
                   </template>
                 </v-img>
               </v-card-actions>
-              <v-card-title style="margin-top: -16px; margin-bottom: -16px;">
-                <span>{{ item.title }}</span>
+              <v-card-title class="boldtext eclipse" style="margin-top: -13px; margin-bottom: -13px;">
+                {{ item.title }}
               </v-card-title>
-              <v-card-text>
-                <span>{{ item.summary }}</span>
+              <v-card-text class="description eclipse">
+                {{ item.summary }}
               </v-card-text>
             </v-card>
           </v-col>

@@ -1,0 +1,70 @@
+@charset "utf-8";
+
+@font-face {
+  font-family: "NanumBarunGothic";
+  src: url("../../fonts/NanumBarunGothic.eot");
+  src: url("../../fonts/NanumBarunGothic.eot") format("embedded-opentype"),
+    url("../../fonts/NanumBarunGothic.woff") format("woff");
+}
+/* https://3months.tistory.com/222 */
+
+* {
+  font-family: "NanumBarunGothic", "serif";
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+.boldtext {
+  font-family: "NanumBarunGothic", "bold";
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.description {
+  font-family: "NanumBarunGothic";
+  font-size: 1.1rem;
+}
+
+.eclipse{
+  display: inline-block;
+  width: 100%;
+  /* white-space: nowrap; */
+  overflow: hidden;
+  
+  /* 여러 줄 자르기 추가 스타일 */
+  white-space: normal;
+  line-height: 1.2;
+  max-height: 3.6em;
+  text-align: left;
+  word-wrap: break-word;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+
+  /* https://webdir.tistory.com/483 */
+}
+
+
+table.meta {
+  border-collapse: separate;
+  border-spacing: 1px;
+  text-align: left;
+  line-height: 1.5;
+  border-top: 1px solid #ccc;
+  margin: 20px 10px;
+}
+table.meta th {
+  width: 150px;
+  padding: 10px;
+  font-weight: bold;
+  vertical-align: top;
+  border-bottom: 1px solid #ccc;
+  background: #efefef;
+}
+table.meta td {
+  width: 350px;
+  padding: 10px;
+  vertical-align: top;
+  border-bottom: 1px solid #ccc;
+}
