@@ -193,8 +193,10 @@
                     class="elevation-1"
                     @page-count="pageCount3 = $event"
                   >
-                    <template v-slot:item.lectureName="{ item }">
+                    <template v-slot:item.lectureName="{ item }" >
+                      <div @click="navigateTolect(item)">
                       {{ item.lectureTitle }}
+                      </div>
                     </template>
                     <template v-slot:item.image="{ item }">
                       <div>
@@ -315,6 +317,9 @@ export default {
     },
   },
   methods: {
+      navigateTolect(item) {
+      this.$router.push(`../Lecture/Detail/${item.lectureId}`);
+    },
     //구매리스트호출
     async getpurchaselist() {
       const result = await api.purchaselist();
