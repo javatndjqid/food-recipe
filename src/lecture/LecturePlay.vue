@@ -1,5 +1,5 @@
 <style scoped>
-  @import './textstyle.css';
+@import "./textstyle.css";
 </style>
 
 <template>
@@ -35,8 +35,6 @@
               allowfullscreen
               :alt="item.title + ' 동영상 플레이어'"
             />
-
-
           </v-card>
         </v-col>
 
@@ -44,30 +42,33 @@
         <v-col cols="12" md="3">
           <!-- 강의정보 Card -->
           <v-card class="mx-auto" min-height="780px" color="#eeeeee">
-            <v-card-title>
-              강의 제목
-              {{ item.title }}
-            </v-card-title>
+            <v-container>
+              <v-card>
+                <v-card-title class="boldtext">
+                  {{ item.title }}
+                </v-card-title>
 
-            <v-card-subtitle>
-              강의 요약
-              {{ item.summary }}
-            </v-card-subtitle>
+                <v-card-subtitle class="description">
+                  {{ item.summary }}
+                </v-card-subtitle>
 
-            <v-card-text>
-              강의 시간(초)
-              {{ item.length }}
-            </v-card-text>
-
-            <v-card-text>
-              조리방법 분류
-              {{ item.category }}
-            </v-card-text>
-
-            <v-card-text>
-              재료(공란)
-              {{ item.stuffs }}
-            </v-card-text>
+                <v-container style="margin-top:-20px">
+                  <table class="meta">
+                    <tr v-for="(item, i) in stuffList" :key="i">
+                      <th scope="row">재료 {{ i+1 }}</th>
+                      <td>
+                        <span>
+                          {{ item.name }}
+                        </span>
+                        <span>
+                          {{ item.quantity }}{{item.unit}}
+                        </span>
+                      </td>
+                    </tr>
+                  </table>
+                </v-container>
+              </v-card>
+            </v-container>
           </v-card>
         </v-col>
       </v-row>
@@ -82,7 +83,8 @@ export default {
     isSubscribed: false,
     dialog: false,
     item: {},
-    lectureList: [],
+    lectureUser: {},
+    stuffList: [],
   }),
   mounted() {
     this.getItem();
@@ -95,6 +97,9 @@ export default {
       }
       const id = this.$route.params.id;
       this.item = this.lectureList[id - 1];
+
+      this.stuffList = this.item.stuffs;
+      console.log(this.stuffList);
     },
     navigateTo(item) {
       console.log("돌아간다 " + item.id);
