@@ -94,7 +94,7 @@
               <v-list-item-action
                 ><v-img
                   :src="item.recipeProcedureImage"
-                  min-width="200px"
+                  min-width="300px"
                   min-height="100px"
                   style="float: right"
                   alt="Recipe Procedure Image"
@@ -110,19 +110,17 @@
           <v-list-item-title
             v-for="(item, i) in products"
             :key="i"
-            style="margin: 10px"
+            style="text-align: center; margin: 10px"
           >
             <v-img
               :src="item.productTitleImage"
-              style="margin: 20px"
               height="150px"
-              width="200px"
+              min-width="200px"
               alt="Market Stuff Image"
             />
-            <v-list-item-title
-              style="text-align: center; margin: 10px; font-weight: bold"
-              >{{ item.name }}</v-list-item-title
-            >
+            <v-list-item-title style="margin: 10px; font-weight: bold">{{
+              item.name
+            }}</v-list-item-title>
           </v-list-item-title>
         </v-list-item>
       </v-card>
@@ -130,19 +128,20 @@
         <v-card-title>추천 강의</v-card-title>
         <v-divider></v-divider>
         <v-list-item>
-          <v-list-item-title v-for="(item, i) in lectures" :key="i">
-            <v-img
-              :src="`https://img.youtube.com/vi/${item.imageSRC}/0.jpg`"
-              style="margin: 20px"
-              height="150px"
-              width="200px"
-              alt="Lecture Image"
-            />
-            <v-list-item-title
-              style="text-align: center; margin: 10px; font-weight: bold"
-              >{{ item.title }}</v-list-item-title
-            >
-          </v-list-item-title>
+          <v-col v-for="(item, i) in lectures" :key="i" cols="3">
+            <v-card style="text-align: center; margin: 10px" flat>
+              <v-img
+                :src="`https://img.youtube.com/vi/${item.imageSrc}/0.jpg`"
+                height="150px"
+                min-width="200px"
+                alt="Lecture Image"
+              />
+              <v-list-item-title
+                style="text-align: center; margin: 10px; font-weight: bold"
+                >{{ item.title }}</v-list-item-title
+              >
+            </v-card>
+          </v-col>
         </v-list-item>
       </v-card>
     </v-col>
@@ -161,7 +160,7 @@ export default {
   mounted() {
     this.getRecipeData();
     this.getLectureData();
-    // this.getProductData();
+    this.getProductData();
   },
   methods: {
     async getRecipeData() {
