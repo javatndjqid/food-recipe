@@ -1,22 +1,42 @@
+<style>
+.Aligner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
+.Aligner-item {
+  max-width: 50%;
+}
+
+.Aligner-item--top {
+  align-self: flex-start;
+}
+@font-face {
+  font-family: "yg-jalnan";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+</style>
 <template>
   <v-img src="./tablecloth.jpg" alt="배경" height="”bgHeight”">
     <v-container color="primary">
       <v-row>
         <v-col
           cols="12"
-          md="6"
-          lg="5
-        "
+          md="12"
+          lg="5"
           xs="12"
+          xl="5"
         >
           <template>
             <v-card
               style="height: 700px"
               class="overflow-y-auto"
               elevation="10"
-              img="https://pgnqdrjultom1827145.cdn.ntruss.com/img/bf/43/bf43dc0fd6c604082f713030601b9bc5d9d8d26047ab1eeb7efff8e31cf65e5c_v1.jpg"
-              alt="카드이미지"
+             
             >
               <v-card-subtitle>나의 레시피</v-card-subtitle>
               <v-img
@@ -44,16 +64,16 @@
                     <v-img
                       :src="item.recipefile[0].dataUrl"
                       :alt="item.recipeName"
-                      height="60px"
-                      width="60px"
+                      height="60"
+                      width="150"
                     />
                   </div>
                   <div v-else>
                     <v-img
                       :src="item.image"
                       :alt="item.recipeName"
-                      height="60px"
-                      width="60px"
+                      height="60"
+                      width="150"
                     />
                   </div>
                 </template>
@@ -89,7 +109,7 @@
           </template>
         </v-col>
 
-        <v-col cols="12" md="6" lg="4">
+        <v-col cols="12" md="12" lg="4" xl="4">
           <template>
             <v-card
               class="overflow-y-auto"
@@ -166,7 +186,7 @@
             </v-card>
           </template>
         </v-col>
-        <v-col cols="12" md="6" lg="3">
+        <v-col cols="12" md="12" lg="3" xl="3">
           <template>
             <v-card>
               <template>
