@@ -75,48 +75,6 @@
                 </template>
               </v-simple-table>
             </v-list-item-action>
-            <!-- <v-list-item-action
-              style="width: 50%"
-              class="Aligner-item Aligner-item--top"
-            >
-              <v-simple-table dense style="width: 100%">
-                <template v-slot:default>
-                  <thead style="background-color: blue">
-                    <tr>
-                      <th class="text-left white--text">Stuff</th>
-                      <th class="text-left white--text">Quentity</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr v-for="(item, i) in stuff2" :key="i">
-                      <td>{{ item.stuffName }}</td>
-                      <td>{{ item.quantity }}</td>
-                    </tr>
-                  </tbody>
-                </template>
-              </v-simple-table>
-            </v-list-item-action>
-            <v-list-item-action
-              style="width: 50%"
-              class="Aligner-item Aligner-item--top"
-            >
-              <v-simple-table dense style="width: 100%">
-                <template v-slot:default>
-                  <thead style="background-color: blue">
-                    <tr>
-                      <th class="text-left white--text">Stuff</th>
-                      <th class="text-left white--text">Quentity</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr v-for="(item, i) in stuff3" :key="i">
-                      <td>{{ item.stuffName }}</td>
-                      <td>{{ item.quantity }}</td>
-                    </tr>
-                  </tbody>
-                </template>
-              </v-simple-table>
-            </v-list-item-action> -->
           </v-list-item>
         </v-list>
       </v-card>
