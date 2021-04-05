@@ -79,42 +79,16 @@
 
           <v-card>
             <v-card-actions>
-              <v-simple-table>
-                <template v-slot:default>
-                  <thead>
-                    <tr>
-                      <th class="text-center">
-                        <v-img
-                          src="./assets/jjub.png"
-                          height="40px"
-                          width="40px"
-                        ></v-img>
-                      </th>
-                      <th class="text-center"></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <th class="text-center">유저ID</th>
-                      <th class="text-center">
-                        {{ user[0].userName }}
-                      </th>
-                    </tr>
-                    <tr>
-                      <th class="text-center">이름</th>
-                      <th class="text-center">
-                        {{ user[0].name }}
-                      </th>
-                    </tr>
-                    <tr>
-                      <th class="text-center">E-mail</th>
-                      <th class="text-center">
-                        {{ user[0].email }}
-                      </th>
-                    </tr>
-                  </tbody>
-                </template>
-              </v-simple-table>
+              <div class="text-center">
+                <router-link to="/profile" style="text-decoration:none;">
+                  <v-btn text>
+                    Profile
+                  </v-btn>
+                </router-link>
+                <v-btn color="primary" text @click="signOut()">
+                  Sign Out
+                </v-btn>
+              </div>
             </v-card-actions>
           </v-card>
         </v-menu>
@@ -132,7 +106,7 @@
 </template>
 
 <script>
-import api from "@/api/Mypage";
+//import api from "@/api/Mypage";
 
 export default {
   name: "App",
@@ -148,26 +122,39 @@ export default {
       { text: "SEARCH", path: "/Search", count: 1 },
       { text: "Market", path: "/Shopping", count: 2 },
       { text: "Lecture", path: "/Lecture", count: 3 },
-      { text: "MYPAGE", path: "/Mypage", count: 4 },
-    ],
+      { text: "MYPAGE", path: "/Mypage", count: 4 }
+    ]
   }),
   user: [],
   mounted() {
-    this.getUsers();
+     //this.$store.dispatch("profile/setProfile");
+ //   this.getUsers();
     this.selectItem();
   },
+  // computed: {
+  //   profile() {
+  //     console.log(this.$store.state.profile.data);
+  //    return this.$store.state.profile.data;
+     
+  //   }
+  // },
   methods: {
-    async getUsers() {
-      const result = await api.getUser();
-      if (result.status == 200) {
-        this.user = result.data;
-        console.log(result.data);
-      }
+    async signOut() {
+      console.log("--sign out--");
+      this.$store.dispatch("profile/signout");
     },
+
+    // async getUsers() {
+    //   const result = await api.getUser();
+    //   if (result.status == 200) {
+    //     this.user = result.data;
+    //     console.log(result.data);
+    //   }
+ //   },
     selectItem() {
       console.log("==== route.path ====");
       console.log(this.$route);
-      this.items.forEach((item) => {
+      this.items.forEach(item => {
         if (this.$route.path == item.path) this.selectedItem = item.count;
       });
     },
@@ -180,7 +167,7 @@ export default {
         console.log(this.$route.path);
         this.$router.push(item.path);
       }
-    },
-  },
+    }
+  }
 };
 </script>

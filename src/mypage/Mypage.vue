@@ -24,19 +24,13 @@
   <v-img src="./tablecloth.jpg" alt="배경" height="”bgHeight”">
     <v-container color="primary">
       <v-row>
-        <v-col
-          cols="12"
-          md="12"
-          lg="5"
-          xs="12"
-          xl="5"
-        >
+        <v-col cols="12" md="12" lg="5" xs="12" xl="5">
           <template>
             <v-card
+            color="#eeeeee"
               style="height: 700px"
               class="overflow-y-auto"
               elevation="10"
-             
             >
               <v-card-subtitle>나의 레시피</v-card-subtitle>
               <v-img
@@ -47,6 +41,7 @@
               />
 
               <v-data-table
+              
                 style="height: 430px"
                 :headers="recipyHeaders"
                 :items="itemsWithSno"
@@ -94,6 +89,7 @@
               </v-data-table>
               <div class="text-xs-center pt-2">
                 <v-pagination
+                  color="#FF6347"
                   :total-visible="5"
                   v-model="page"
                   :length="pageCount"
@@ -112,6 +108,7 @@
         <v-col cols="12" md="12" lg="4" xl="4">
           <template>
             <v-card
+            color="#eeeeee"
               class="overflow-y-auto"
               elevation="10"
               style="height: 700px"
@@ -176,6 +173,7 @@
               </v-data-table>
               <div class="text-xs-center pt-2">
                 <v-pagination
+                  color="#FF6347"
                   circle
                   :total-visible="5"
                   v-model="page2"
@@ -191,6 +189,7 @@
             <v-card>
               <template>
                 <v-card
+                color="#eeeeee"
                   class="overflow-y-auto"
                   elevation="10"
                   style="height: 700px"
@@ -204,6 +203,7 @@
                   >
                   </v-img>
                   <v-data-table
+                  
                     style="height: 480px"
                     :headers="ClassHeaders"
                     :items="userlectureList"
@@ -213,15 +213,17 @@
                     class="elevation-1"
                     @page-count="pageCount3 = $event"
                   >
-                    <template v-slot:item.lectureName="{ item }" >
+                    <template v-slot:item.lectureName="{ item }">
                       <div @click="navigateTolect(item)">
-                      {{ item.lectureTitle }}
+                        {{ item.lectureTitle }}
                       </div>
                     </template>
                     <template v-slot:item.image="{ item }">
                       <div>
                         <v-img
-                          :src="`http://i.ytimg.com/vi/${item.lectureImageSRC}/default.jpg`"
+                          :src="
+                            `http://i.ytimg.com/vi/${item.lectureImageSRC}/default.jpg`
+                          "
                           :alt="item.lectureTitle"
                           height="40px"
                           width="50px"
@@ -231,6 +233,7 @@
                   </v-data-table>
                   <div class="text-xs-center pt-2">
                     <v-pagination
+                      color="#FF6347"
                       circle
                       :total-visible="5"
                       v-model="page3"
@@ -257,42 +260,42 @@ export default {
         align: "start",
         value: "sno",
         class: "elevation-1",
-        width: 10,
+        width: 10
       },
       {
         text: "레시피 사진",
         value: "image",
         sortable: false,
-        align: "center",
+        align: "center"
       },
       {
         text: "레시피 이름",
         value: "recipeName",
         sortable: false,
-        align: "center",
+        align: "center"
       },
       {
         text: "상세정보",
         value: "details",
         sortable: false,
         width: 80,
-        align: "center",
+        align: "center"
       },
       {
         text: "삭제",
         value: "del",
         sortable: false,
         width: 10,
-        align: "center",
-      },
+        align: "center"
+      }
     ],
     ClassHeaders: [
       { text: "썸네일", value: "image", sortable: false, align: "center" },
       {
         text: "구독내역",
         value: "lectureName",
-        sortable: false,
-      },
+        sortable: false
+      }
     ],
     MarketHeaders: [
       { text: "구매시간", align: "start", value: "orderDate" },
@@ -300,14 +303,14 @@ export default {
       {
         text: "구매내역",
         value: "productName",
-        sortable: false,
+        sortable: false
       },
       {
         text: "상세내역",
         value: "productNames",
         sortable: false,
-        align: "center",
-      },
+        align: "center"
+      }
     ],
     userRecipeList: [],
     userlectureList: [],
@@ -317,14 +320,18 @@ export default {
     page2: 1,
     pageCount2: 0,
     page3: 1,
-    pageCount3: 0,
+    pageCount3: 0
   }),
   mounted() {
+    this.$store.dispatch("profile/setProfile");
     this.getlecturelist();
     this.getRecipeList();
     this.getpurchaselist();
   },
   computed: {
+    profile(){
+      return this.$store.state.profile.data
+    },
     items() {
       return Array.from({ length: this.length }, (k, v) => v + 1);
     },
@@ -334,10 +341,10 @@ export default {
     //데이터 리스트 넘버링
     itemsWithSno() {
       return this.userRecipeList.map((d, index) => ({ ...d, sno: index + 1 }));
-    },
+    }
   },
   methods: {
-      navigateTolect(item) {
+    navigateTolect(item) {
       this.$router.push(`../Lecture/Detail/${item.lectureId}`);
     },
     //구매리스트호출
@@ -351,7 +358,7 @@ export default {
     },
     //레시피리스트호출
     async getRecipeList() {
-      const result = await api.recipelist(2);
+      const result = await api.recipelist(1);
 
       if (result.status == 200) {
         this.userRecipeList = result.data;
@@ -374,7 +381,7 @@ export default {
     navigateTo(item) {
       this.$router.push({
         name: "MypageRecipyDetail",
-        params: { recipeId: item.recipeId },
+        params: { recipeId: item.recipeId }
       });
       //    console.log(item.recipeId);
     },
@@ -382,11 +389,11 @@ export default {
     async deleteitem(item) {
       const result = await api.delrecipe(item);
       if (result.status == 200) {
-        const result = await api.recipelist();
+        const result = await api.recipelist(1);
         this.userRecipeList = result.data;
         // this.userRecipeList.splice(this.userRecipeList.indexOf(item), 1);
       }
-    },
-  },
+    }
+  }
 };
 </script>
