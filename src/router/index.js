@@ -8,6 +8,11 @@ Vue.use(VueRouter)
 
 const routes = [
   {
+    path: '/Profile',
+    name: 'Profile',
+    component: () => import('../mypage/Profile.vue')
+  },
+  {
     path: '/',
     name: 'Home',
     component: Home
