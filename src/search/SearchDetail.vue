@@ -203,7 +203,7 @@ export default {
   mounted() {
     this.getRecipeData();
     this.getLectureData();
-    this.getProductData();
+    // this.getProductData();
   },
   methods: {
     async getRecipeData() {
