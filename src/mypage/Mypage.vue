@@ -222,7 +222,7 @@
                       <div>
                         <v-img
                           :src="
-                            `http://i.ytimg.com/vi/${item.lectureImageSRC}/default.jpg`
+                            `http://i.ytimg.com/vi/${item.lectureImageSrc}/default.jpg`
                           "
                           :alt="item.lectureTitle"
                           height="40px"
@@ -369,7 +369,8 @@ export default {
     },
     //구독리스트호출
     async getlecturelist() {
-      const result = await api.lecturelist();
+      const id = this.profile.id
+      const result = await api.lecturelist(id);
       if (result.status == 200) {
         this.userlectureList = result.data;
       }

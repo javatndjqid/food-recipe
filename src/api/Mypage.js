@@ -6,8 +6,8 @@ export default {
   request.get(`${process.env.VUE_APP_API_MYPAGE}/user`),
   purchaselist: () =>
   request.get(`${process.env.VUE_APP_API_MYPAGE}/purchase-order`),
-  lecturelist: () =>
-  request.get(`${process.env.VUE_APP_API_MYPAGE}/user-lecture`),
+  lecturelist: (userId) =>
+  request.get(`${process.env.VUE_APP_API_MYPAGE}/user-lecture/${userId}`),
   categorylist: () =>
   request.get(`${process.env.VUE_APP_API_MYPAGE}/category`),
   recipelist: (userId) =>
