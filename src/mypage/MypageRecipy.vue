@@ -195,16 +195,6 @@
                     </v-btn>
                   </v-col>
                 </v-row>
-                <v-alert
-                  :value="alert"
-                  color="pink"
-                  dark
-                  border="top"
-                  icon="mdi-home"
-                  transition="scale-transition"
-                  >정말 삭제하시겠습니까?
-                  <v-btn @click="addData()" dark large color="brown">예</v-btn>
-                </v-alert>
               </v-container>
             </v-form>
           </v-card>
@@ -225,22 +215,29 @@ export default {
       default: true
     }
   },
+   computed:{
+    profile(){
+      return this.$store.state.profile.data
+    }
+  },
   data: () => ({
     alert: false,
     hasSaved: false,
     isEditing: null,
     model: null,
     recipe: {
+      // userId: {userId:this.profile.id} ,
       image:
         "https://3.bp.blogspot.com/-ZKBbW7TmQD4/U6P_DTbE2MI/AAAAAAAADjg/wdhBRyLv5e8/s1600/noimg.gif",
       tip: "",
       explanation: "",
       recipeName: "",
       // imageSmall: [],
-      userId: 1,
+      
       stuffRecipe: [{ quantity: "", stuffName: "" }],
       recipeProcedure: [{ recipeProcedure: "", recipeProcedureImage: "" }],
-      category: ""
+      category: "",
+      
     },
     categorylist: [],
     // stuffs: [],
@@ -260,6 +257,7 @@ export default {
     ]
   }),
   mounted() {
+    this.$store.dispatch("profile/setProfile");
     this.getRecipeData();
     this.getCategoryData();
   },
@@ -291,9 +289,10 @@ export default {
     },
 
     async addData() {
-      const recipedata = this.recipe;
+      this.recipe.userId = this.profile.id
+     const recipedata = this.recipe
 
-      console.log(recipedata);
+     console.log(recipedata)
 
       const result = await api.postrecipelist(recipedata);
       if (result.status == 200) {

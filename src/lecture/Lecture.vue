@@ -34,10 +34,10 @@
                 <v-img
                   width="90%"
                   :src="
-                    `http://i.ytimg.com/vi/${item.imageSRC}/maxresdefault.jpg`
+                    `http://i.ytimg.com/vi/${item.imageSrc}/maxresdefault.jpg`
                   "
                   :lazy-src="
-                    `https://img.youtube.com/vi/${item.imageSRC}/default.jpg`
+                    `https://img.youtube.com/vi/${item.imageSrc}/default.jpg`
                   "
                   @click="navigateTo(item)"
                   style="cursor: pointer;"

@@ -79,7 +79,6 @@
                   height="200px"
                   :alt="item.name"
                 ></v-img>
-
                 <v-card-title>
                   {{ item.name }}
                 </v-card-title>
@@ -137,6 +136,7 @@ export default {
     // this.getCount();
     this.getState();
     this.getCategories();
+    this.getImage(13, 2);
   },
   methods: {
     querySelections(v) {
@@ -206,6 +206,7 @@ export default {
       if (results.status == 200) {
         this.recipe = results.data;
         this.recipe.reverse();
+        // this.getImage();
       }
     },
     async getState() {
@@ -218,6 +219,27 @@ export default {
       const categoriesResults = await api.categories();
       if (categoriesResults.status === 200) {
         this.category.push(...categoriesResults.data);
+      }
+    },
+    async getImage() {
+      console.log(this.recipe);
+      for (let i in this.recipe) {
+        if (
+          this.recipe[i].image == "" ||
+          this.recipe[i].image ==
+            "https://3.bp.blogspot.com/-ZKBbW7TmQD4/U6P_DTbE2MI/AAAAAAAADjg/wdhBRyLv5e8/s1600/noimg.gif"
+        ) {
+          const result = await api.detail(this.recipe[i].recipeId);
+          if (result.status == 200) {
+            console.log("===== recipefile ======");
+            console.log(result.data);
+            if (result.data[0].recipefile[0] == null) continue;
+            // console.log(result.data[0].recipefile[0].dataUrl);
+            // this.recipe[n].image = result.data[0].recipefile[0].dataUrl;
+            // return this.recipe[n].image;
+            this.recipe[i].image = result.data[0].recipefile[0].dataUrl;
+          }
+        }
       }
     },
     // async getCount() {

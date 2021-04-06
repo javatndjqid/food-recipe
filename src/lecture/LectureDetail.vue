@@ -75,9 +75,9 @@
 
             <v-card-actions>
               <v-img
-                v-if="item.imageSRC"
+                v-if="item.imageSrc"
                 :src="
-                  `http://i.ytimg.com/vi/${item.imageSRC}/maxresdefault.jpg`
+                  `http://i.ytimg.com/vi/${item.imageSrc}/maxresdefault.jpg`
                 "
                 :alt="item.title"
                 width="100%"
@@ -170,9 +170,9 @@
                           <v-card-actions>
                             <v-img
                               style="cursor: pointer"
-                              v-if="item.imageSRC"
+                              v-if="item.imageSrc"
                               :src="
-                                `http://i.ytimg.com/vi/${item.imageSRC}/maxresdefault.jpg`
+                                `http://i.ytimg.com/vi/${item.imageSrc}/maxresdefault.jpg`
                               "
                               :alt="item.title"
                               width="100%"
@@ -232,7 +232,6 @@ export default {
       this.isSubscribed = !this.isSubscribed;
     },
     navigateTo(item) {
-      // 동작 안함
       this.$router.push(`/Lecture/Detail/${item.id}`);
     },
     navigateToBack() {

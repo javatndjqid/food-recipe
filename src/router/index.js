@@ -8,6 +8,11 @@ Vue.use(VueRouter)
 
 const routes = [
   {
+    path: '/Profile',
+    name: 'Profile',
+    component: () => import('../mypage/Profile.vue')
+  },
+  {
     path: '/',
     name: 'Home',
     component: Home
@@ -34,7 +39,7 @@ const routes = [
     component: () => import('../mypage/MypageRecipy.vue')
   },
   {
-    path: '/SearchDetail:id',
+    path: '/SearchDetail',
     name: 'SearchDetail',
     component: () => import('../search/SearchDetail.vue'),
     props: true
