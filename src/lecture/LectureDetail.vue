@@ -220,15 +220,17 @@ export default {
   },
   methods: {
     subscribe() {
+      const userId = this.profile.id;
       const id = this.$route.params.id;
       console.log("Subscribing! : " + id);
-      api.subscribe(id);
+      api.subscribe(id, userId);
       this.isSubscribed = !this.isSubscribed;
     },
     unSubscribe() {
+      const userId = this.profile.id;
       const id = this.$route.params.id;
       console.log("unSubscribing! : " + id);
-      api.unSubscribe(id);
+      api.unSubscribe(id, userId);
       this.isSubscribed = !this.isSubscribed;
     },
     navigateTo(item) {
@@ -269,8 +271,9 @@ export default {
       }
     },
     async getSubscribed() {
+      const userId = this.profile.id;
       const id = this.$route.params.id;
-      const results = await api.information(id);
+      const results = await api.information(id, userId);
       if (results.status == 200) {
         this.isSubscribed = results.data;
         console.log("isSubscribed? : " + this.isSubscribed);
