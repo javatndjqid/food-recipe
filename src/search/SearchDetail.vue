@@ -160,7 +160,7 @@ export default {
   mounted() {
     this.getRecipeData();
     this.getLectureData();
-    this.getProductData();
+    // this.getProductData();
   },
   methods: {
     async getRecipeData() {
@@ -169,9 +169,13 @@ export default {
       const id = this.$route.query.id;
       const result = await api.detail(id);
       if (result.status == 200) {
-        this.recipe = result.data[0];
+        this.recipe = result.data;
+        console.log("===== this.recipe =====");
         console.log(this.recipe);
+
         this.sliceList();
+        this.getProductData();
+        this.getLectureData();
       }
     },
     sliceList() {
@@ -179,8 +183,6 @@ export default {
         0,
         this.recipe.stuffRecipe.length / 3 + 1
       );
-      console.log("===== stuff1 =====");
-      console.log(this.stuff1);
 
       this.stuffs[1] = this.recipe.stuffRecipe.slice(
         this.recipe.stuffRecipe.length / 3 + 1,
@@ -192,25 +194,19 @@ export default {
       );
     },
     async getLectureData() {
-      const results = await api.lectureList();
+      const results = await api.lectureList(this.recipe.category);
       if (results.status == 200) {
         this.lectures = results.data;
         console.log("===== this.lectures =====");
         console.log(this.lectures);
-        this.lectures = this.lectures.filter((lec) => {
-          return lec.category == this.recipe.category;
-        });
       }
     },
     async getProductData() {
-      const results = await api.productList();
+      const results = await api.productList(this.recipe.stuffRecipe);
       if (results.status == 200) {
         this.products = results.data;
         console.log("===== this.products =====");
         console.log(this.products);
-        this.products = this.products.filter((pro) => {
-          return pro.id <= 5;
-        });
       }
     },
   },
