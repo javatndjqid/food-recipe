@@ -79,20 +79,20 @@
 
           <v-card>
             <v-card-actions>
-              <div class="text-center">
+              <div class="text-center" v-if="profile.id">
                 <router-link to="/profile" style="text-decoration:none;">
                   <v-btn text>
                     Profile
                   </v-btn>
                 </router-link>
-              </div>
-              <span />
-              <div class="text-center">
-                <v-btn color="primary" text @click="signIn()">
-                  Sign In
-                </v-btn>
+
                 <v-btn color="primary" text @click="signOut()">
                   Sign Out
+                </v-btn>
+              </div>
+              <div class="text-center" v-else>
+                <v-btn color="primary" text @click="signIn()">
+                  Sign In
                 </v-btn>
               </div>
             </v-card-actions>
@@ -112,6 +112,7 @@
 </template>
 
 <script>
+import cookie from "@/plugins/cookie";
 export default {
   name: "App",
   // components: {
@@ -131,10 +132,12 @@ export default {
   }),
 
   mounted() {
-     //   this.$store.dispatch("profile/setProfile");
-    //   this.getUsers();
+    if (cookie.getSession()) {
+      this.$store.dispatch("profile/setProfile");
+    }
+
     this.selectItem();
- //   this.$store.dispatch("profile/setProfile");
+    //   this.$store.dispatch("profile/setProfile");
   },
   computed: {
     profile() {
