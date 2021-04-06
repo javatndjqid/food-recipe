@@ -226,17 +226,12 @@ export default {
 
   methods: {
     subscribe() {
-      
-      const lectureid = this.$route.params.id;
-      
-      console.log(this.lectureList[lectureid-1].userId);
-      const userId = this.lectureList[lectureid-1].userId
-      console.log("Subscribing! : " + lectureid);
-      api.subscribe(lectureid, userId);
+      const id = this.$route.params.id;
+      console.log("Subscribing! : " + id);
+      api.subscribe(id);
       this.isSubscribed = !this.isSubscribed;
     },
     unSubscribe() {
-     // const userId = this.profile.id;
       const id = this.$route.params.id;
       console.log("unSubscribing! : " + id);
       api.unSubscribe(id);
@@ -281,9 +276,8 @@ export default {
       }
     },
     async getSubscribed() {
-      const userId = this.profile.id;
       const id = this.$route.params.id;
-      const results = await api.information(id, userId);
+      const results = await api.information(id);
       if (results.status == 200) {
         this.isSubscribed = results.data;
         console.log("isSubscribed? : " + this.isSubscribed);
