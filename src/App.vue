@@ -85,6 +85,12 @@
                     Profile
                   </v-btn>
                 </router-link>
+              </div>
+              <span />
+              <div class="text-center">
+                <v-btn color="primary" text @click="signIn()">
+                  Sign In
+                </v-btn>
                 <v-btn color="primary" text @click="signOut()">
                   Sign Out
                 </v-btn>
@@ -106,8 +112,6 @@
 </template>
 
 <script>
-//import api from "@/api/Mypage";
-
 export default {
   name: "App",
   // components: {
@@ -125,35 +129,31 @@ export default {
       { text: "MYPAGE", path: "/Mypage", count: 4 }
     ]
   }),
-  user: [],
+
   mounted() {
-     //this.$store.dispatch("profile/setProfile");
- //   this.getUsers();
+     //   this.$store.dispatch("profile/setProfile");
+    //   this.getUsers();
     this.selectItem();
+ //   this.$store.dispatch("profile/setProfile");
   },
-  // computed: {
-  //   profile() {
-  //     console.log(this.$store.state.profile.data);
-  //    return this.$store.state.profile.data;
-     
-  //   }
-  // },
+  computed: {
+    profile() {
+      console.log(this.$store.state.profile.data);
+      return this.$store.state.profile.data;
+    }
+  },
   methods: {
-    async signOut() {
-      console.log("--sign out--");
+    signOut() {
       this.$store.dispatch("profile/signout");
+      console.log(this.profile);
     },
 
-    // async getUsers() {
-    //   const result = await api.getUser();
-    //   if (result.status == 200) {
-    //     this.user = result.data;
-    //     console.log(result.data);
-    //   }
- //   },
+    signIn() {
+      this.$store.dispatch("profile/setProfile");
+    },
     selectItem() {
-      console.log("==== route.path ====");
-      console.log(this.$route);
+      //console.log("==== route.path ====");
+      // console.log(this.$route);
       this.items.forEach(item => {
         if (this.$route.path == item.path) this.selectedItem = item.count;
       });
@@ -164,7 +164,7 @@ export default {
       // 현재 경로와 다르면
       if (this.$route.path != item.path) {
         // 라우터에 경로 추가
-        console.log(this.$route.path);
+        //.log(this.$route.path);
         this.$router.push(item.path);
       }
     }

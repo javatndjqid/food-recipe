@@ -323,7 +323,7 @@ export default {
     pageCount3: 0
   }),
   mounted() {
-    this.$store.dispatch("profile/setProfile");
+   // this.$store.dispatch("profile/setProfile");
     this.getlecturelist();
     this.getRecipeList();
     this.getpurchaselist();
@@ -358,7 +358,9 @@ export default {
     },
     //레시피리스트호출
     async getRecipeList() {
-      const result = await api.recipelist(1);
+      const id = this.profile.id
+      console.log(id)
+      const result = await api.recipelist(id);
 
       if (result.status == 200) {
         this.userRecipeList = result.data;

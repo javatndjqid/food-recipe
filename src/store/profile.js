@@ -44,11 +44,13 @@ export default {
         // mutation 메소드를 호출해서 state 변경
         context.commit('setProfile', res.data);
         console.log(res)
+        // window.location.href = process.env
       } 
       else {
         // 로그인 페이지로 이동
         window.location.href = process.env.VUE_APP_LOGIN_URL;
       }
+     // window.location.href = process.env
     },
     async signout (context) {
       // 서버 세션 삭제
@@ -62,7 +64,12 @@ export default {
       cookie.clearSession();
 
       // 로그인 페이지로 이동
-      window.location.href = process.env.BASE_URL
+      // this.$router.push({
+      //   path: "/SearchDetail",
+      //   name: "SearchDetail",
+      //    }
+      // );
+      window.location.href = process.env.SEARCH_URL
       //this.$router.push(item.path);
     }
   }
