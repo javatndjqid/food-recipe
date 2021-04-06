@@ -28,10 +28,22 @@
           icon
           color="red"
           dark
-          style="margin-left: 1100px"
+          style="margin-left: 900px"
+          @click="moveToManager()"
+        >
+          <v-icon size="65" :style="{ marginBottom: '0px', marginTop: '70px' }"
+            >mdi-shield-key</v-icon
+          >
+        </v-btn>
+        <v-btn
+          text
+          icon
+          color="red"
+          dark
+          style="margin-left: 1050px"
           @click="moveToCart()"
         >
-          <v-icon size="65" :style="{ marginBottom: '50px', marginTop: '70px' }"
+          <v-icon size="65" :style="{ marginBottom: '65px', marginTop: '70px' }"
             >mdi-cart</v-icon
           >
         </v-btn>
@@ -216,6 +228,9 @@ export default {
         name: "ProductDetail",
         params: { id: item.id },
       });
+    },
+    moveToManager() {
+      this.$router.push("/Manager");
     },
   },
 };

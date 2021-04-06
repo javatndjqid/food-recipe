@@ -3,7 +3,8 @@ import axios from 'axios'
 
 export default {
 
-
+  addProduct: (product) =>
+    axios.post(`${process.env.VUE_APP_API_MARKET}/product`, product),
   productList: () =>
     axios.get(`${process.env.VUE_APP_API_MARKET}/product`),
   productDetail: (id) =>

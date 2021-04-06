@@ -70,6 +70,12 @@ const routes = [
     props: true,
   },
   {
+    path: '/Manager',
+    name: 'Manager',
+    component: () => import('../shopping/Manager.vue'),
+    props: true,
+  },
+  {
     path: '/ProductDetail',
     name: 'ProductDetail',
     component: () => import('../shopping/ProductDetail.vue'),
@@ -79,7 +85,7 @@ const routes = [
 ]
 
 const router = new VueRouter({
- // mode: 'history',
+  // mode: 'history',
   base: process.env.BASE_URL,
   routes
 })
