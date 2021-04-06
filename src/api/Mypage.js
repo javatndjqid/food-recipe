@@ -6,12 +6,12 @@ export default {
   request.get(`${process.env.VUE_APP_API_MYPAGE}/user`),
   purchaselist: () =>
   request.get(`${process.env.VUE_APP_API_MYPAGE}/purchase-order`),
-  lecturelist: (userId) =>
-  request.get(`${process.env.VUE_APP_API_MYPAGE}/user-lecture/${userId}`),
+  lecturelist: () =>
+  request.get(`${process.env.VUE_APP_API_MYPAGE}/user-lecture`),
   categorylist: () =>
   request.get(`${process.env.VUE_APP_API_MYPAGE}/category`),
-  recipelist: (userId) =>
-  request.get(`${process.env.VUE_APP_API_MYPAGE}/recipe/${userId}`),
+  recipelist: () =>
+  request.get(`${process.env.VUE_APP_API_MYPAGE}/recipe`),
     
   stufflist: () =>
   axios.get(`${process.env.VUE_APP_API_MYPAGE}/stuff`),

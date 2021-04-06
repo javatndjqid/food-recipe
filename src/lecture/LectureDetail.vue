@@ -151,7 +151,7 @@
                 </v-card>
 
                 <!-- https://stackoverflow.com/questions/55574599/how-to-align-the-contents-to-the-center-of-the-v-card-component-in-vuetify -->
-                <v-card v-if="relatedLectureList.length>0">
+                <v-card v-if="relatedLectureList.length > 0">
                   <v-container>
                     <v-row>
                       <v-col
@@ -212,25 +212,34 @@ export default {
     lectureUser: {},
     stuffList: [],
     lectureList: [],
-    relatedLectureList: [],
+    relatedLectureList: []
   }),
   mounted() {
     this.getItem();
     this.getSubscribed();
   },
+  computed: {
+    profile() {
+      return this.$store.state.profile.data;
+    }
+  },
+
   methods: {
     subscribe() {
-      const userId = this.profile.id;
-      const id = this.$route.params.id;
-      console.log("Subscribing! : " + id);
-      api.subscribe(id, userId);
+      
+      const lectureid = this.$route.params.id;
+      
+      console.log(this.lectureList[lectureid-1].userId);
+      const userId = this.lectureList[lectureid-1].userId
+      console.log("Subscribing! : " + lectureid);
+      api.subscribe(lectureid, userId);
       this.isSubscribed = !this.isSubscribed;
     },
     unSubscribe() {
-      const userId = this.profile.id;
+     // const userId = this.profile.id;
       const id = this.$route.params.id;
       console.log("unSubscribing! : " + id);
-      api.unSubscribe(id, userId);
+      api.unSubscribe(id);
       this.isSubscribed = !this.isSubscribed;
     },
     navigateTo(item) {
@@ -252,7 +261,8 @@ export default {
         this.lectureList = results.data;
       }
       this.item = this.lectureList[id - 1];
-      console.log("display : " + this.item.title);
+      this.item.userId = this.profile.id
+      console.log("display : " + this.item.userId);
 
       // 재료정보
       this.stuffList = this.item.stuffs;
@@ -265,7 +275,7 @@ export default {
       // 동일 카테고리 리스트
       const relatedResults = await api.related(category);
       if (relatedResults.status == 200) {
-        const relatedList = relatedResults.data.filter((item) => item.id != id);
+        const relatedList = relatedResults.data.filter(item => item.id != id);
         console.log(relatedList.slice(0, 2));
         this.relatedLectureList = relatedList.slice(0, 2);
       }
@@ -278,7 +288,7 @@ export default {
         this.isSubscribed = results.data;
         console.log("isSubscribed? : " + this.isSubscribed);
       }
-    },
-  },
+    }
+  }
 };
 </script>

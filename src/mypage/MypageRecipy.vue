@@ -215,9 +215,9 @@ export default {
       default: true
     }
   },
-   computed:{
-    profile(){
-      return this.$store.state.profile.data
+  computed: {
+    profile() {
+      return this.$store.state.profile.data;
     }
   },
   data: () => ({
@@ -233,11 +233,10 @@ export default {
       explanation: "",
       recipeName: "",
       // imageSmall: [],
-      
+
       stuffRecipe: [{ quantity: "", stuffName: "" }],
       recipeProcedure: [{ recipeProcedure: "", recipeProcedureImage: "" }],
-      category: "",
-      
+      category: ""
     },
     categorylist: [],
     // stuffs: [],
@@ -289,10 +288,10 @@ export default {
     },
 
     async addData() {
-      this.recipe.userId = this.profile.id
-     const recipedata = this.recipe
+      this.recipe.userId = this.profile.userId;
+      const recipedata = this.recipe;
 
-     console.log(recipedata)
+      console.log(recipedata);
 
       const result = await api.postrecipelist(recipedata);
       if (result.status == 200) {
@@ -310,12 +309,9 @@ export default {
         }
         result.data.recipeProcedure.forEach((recipe, index) => {
           const form = new FormData();
-          form.append(
-            "data",
-            this.file.recipeProcedure[index].recipeProcedureImage
-          );
+          form.append("data",this.file.recipeProcedure[index].recipeProcedureImage);
           api.uploadFile2(recipe.id, form);
-        });
+        })
         //  console.log(this.file.recipeProcedure);
         // for(const procedure of result.data.recipeProcedure){
         //   const form = new FormData();
@@ -325,8 +321,8 @@ export default {
 
         //recipeProcedureImage
 
-        this.$router.push("/Mypage");
-      }
+       
+      } this.$router.push("/Mypage");
     },
 
     async getRecipeData() {

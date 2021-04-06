@@ -80,6 +80,16 @@
           <v-card>
             <v-card-actions>
               <div class="text-center" v-if="profile.id">
+                <div>
+                  <v-layout column align-center justify-center>
+                  <v-img
+                   align center
+                    :src="profile.image"
+                    height="100px"
+                    width="100px"
+                  ></v-img>
+                  </v-layout>
+                </div>
                 <router-link to="/profile" style="text-decoration:none;">
                   <v-btn text>
                     Profile

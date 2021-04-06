@@ -323,7 +323,7 @@ export default {
     pageCount3: 0
   }),
   mounted() {
-   // this.$store.dispatch("profile/setProfile");
+    this.$store.dispatch("profile/setProfile");
     this.getlecturelist();
     this.getRecipeList();
     this.getpurchaselist();
@@ -353,14 +353,13 @@ export default {
 
       if (result.status == 200) {
         this.userPurchaseList = result.data;
+        console.log(result.data);
       }
       console.log(this.userPurchaseList);
     },
     //레시피리스트호출
     async getRecipeList() {
-      const id = this.profile.id
-      console.log(id)
-      const result = await api.recipelist(id);
+      const result = await api.recipelist();
 
       if (result.status == 200) {
         this.userRecipeList = result.data;
@@ -369,10 +368,11 @@ export default {
     },
     //구독리스트호출
     async getlecturelist() {
-      const id = this.profile.id
-      const result = await api.lecturelist(id);
+     
+      const result = await api.lecturelist();
       if (result.status == 200) {
         this.userlectureList = result.data;
+        console.log(result.data);
       }
       console.log(this.userlectureList);
     },
