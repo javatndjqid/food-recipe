@@ -81,6 +81,12 @@ const routes = [
     props: true,
   },
   {
+    path: '/ProductManagement',
+    name: 'ProductManagement',
+    component: () => import('../shopping/ProductManagement.vue'),
+    props: true,
+  },
+  {
     path: '/ProductDetail',
     name: 'ProductDetail',
     component: () => import('../shopping/ProductDetail.vue'),
