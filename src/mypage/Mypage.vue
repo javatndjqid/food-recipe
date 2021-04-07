@@ -165,7 +165,7 @@
                         v-for="(input, i) in item.orderProduct"
                         :key="i"
                       >
-                        {{ input.productName }}
+                        {{ input.productName }} {{input.productQuantity}}개
                       </v-card-text>
                     </v-card>
                   </v-dialog>

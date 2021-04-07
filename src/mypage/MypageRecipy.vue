@@ -288,7 +288,7 @@ export default {
     },
 
     async addData() {
-      this.recipe.userId = this.profile.userId;
+     // this.recipe.userId = this.profile.userId;
       const recipedata = this.recipe;
 
       console.log(recipedata);
