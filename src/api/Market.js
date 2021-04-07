@@ -1,5 +1,7 @@
 
 import axios from 'axios'
+import request from './request'
+
 
 export default {
 
@@ -12,13 +14,13 @@ export default {
   productDetail: (id) =>
     axios.get(`${process.env.VUE_APP_API_MARKET}/product/${id}`),
   addCart: (product) =>
-    axios.post(`${process.env.VUE_APP_API_MARKET}/cart`, product),
+    request.post(`${process.env.VUE_APP_API_MARKET}/cart`, product),
   cartList: () =>
-    axios.get(`${process.env.VUE_APP_API_MARKET}/cart`),
+    request.get(`${process.env.VUE_APP_API_MARKET}/cart`),
   removeCart: (id) =>
     axios.delete(`${process.env.VUE_APP_API_MARKET}/cart/${id}`),
   purchase: () =>
-    axios.post(`${process.env.VUE_APP_API_MARKET}/purchase`),
+    request.post(`${process.env.VUE_APP_API_MARKET}/purchase`),
   purchaseOrder: () =>
     axios.get(`${process.env.VUE_APP_API_MARKET}/purchaseOrder`),
   findByStuff: (keyword) =>
