@@ -25,6 +25,7 @@
     <v-col cols="8" style="margin-left: auto; margin-right: auto">
       <v-card class="mx-auto" style="padding: 20px">
         <v-img :src="recipe.image" max-height="400px" alt="Main Image"></v-img>
+
         <div style="margin-top: 5px; display: flex; float: right">
           <v-avatar style="flex: 1"
             ><v-img
@@ -51,7 +52,7 @@
           >
         </v-list-item> -->
         <v-list>
-          <v-list-item>
+          <v-list-item class="Aligner">
             <v-list-item-action
               style="width: 50%"
               class="Aligner-item Aligner-item--top"
@@ -107,21 +108,23 @@
         <v-card-title>판매 재료</v-card-title>
         <v-divider></v-divider>
         <v-list-item>
-          <v-list-item-title
-            v-for="(item, i) in products"
-            :key="i"
-            style="text-align: center; margin: 10px"
-          >
-            <v-img
-              :src="item.productTitleImage"
-              height="150px"
-              min-width="200px"
-              alt="Market Stuff Image"
-            />
-            <v-list-item-title style="margin: 10px; font-weight: bold">{{
-              item.name
-            }}</v-list-item-title>
-          </v-list-item-title>
+          <v-col v-for="(item, i) in products" :key="i" cols="3">
+            <v-card
+              style="text-align: center; margin: 10px"
+              @click="navigateToMarket(item.id)"
+              flat
+            >
+              <v-img
+                :src="item.productTitleImage"
+                height="150px"
+                min-width="200px"
+                alt="Market Stuff Image"
+              />
+              <v-list-item-title style="margin: 10px; font-weight: bold">{{
+                item.name
+              }}</v-list-item-title>
+            </v-card>
+          </v-col>
         </v-list-item>
       </v-card>
       <v-card style="margin-top: 30px">
@@ -129,7 +132,11 @@
         <v-divider></v-divider>
         <v-list-item>
           <v-col v-for="(item, i) in lectures" :key="i" cols="3">
-            <v-card style="text-align: center; margin: 10px" flat>
+            <v-card
+              style="text-align: center; margin: 10px"
+              @click="navigateToLecture(item.id)"
+              flat
+            >
               <v-img
                 :src="`https://img.youtube.com/vi/${item.imageSrc}/0.jpg`"
                 height="150px"
@@ -159,7 +166,7 @@ export default {
   }),
   mounted() {
     this.getRecipeData();
-    this.getLectureData();
+    // this.getLectureData();
     // this.getProductData();
   },
   methods: {
@@ -167,33 +174,46 @@ export default {
       console.log("===== this.$rouute.query.id =====");
       console.log(this.$route.query.id);
       const id = this.$route.query.id;
+      console.log(id);
       const result = await api.detail(id);
       if (result.status == 200) {
         this.recipe = result.data;
         console.log("===== this.recipe =====");
         console.log(this.recipe);
+        // 'https://3.bp.blogspot.com/-ZKBbW7TmQD4/U6P_DTbE2MI/AAAAAAAADjg/wdhBRyLv5e8/s1600/noimg.gif'
+        if (
+          this.recipe.image == null ||
+          this.recipe.image ==
+            "https://3.bp.blogspot.com/-ZKBbW7TmQD4/U6P_DTbE2MI/AAAAAAAADjg/wdhBRyLv5e8/s1600/noimg.gif"
+        )
+          this.recipe.image = this.recipe.recipefile[0].dataUrl;
 
         this.sliceList();
         this.getProductData();
         this.getLectureData();
       }
     },
+    navigateToLecture(lectureId) {
+      this.$router.push(`/lecture/detail/${lectureId}`);
+    },
+    navigateToMarket(productId) {
+      this.$router.push({
+        name: "ProductDetail",
+        params: { id: productId },
+      });
+    },
     sliceList() {
-      this.stuffs[0] = this.recipe.stuffRecipe.slice(
-        0,
-        this.recipe.stuffRecipe.length / 3 + 1
-      );
+      let i = this.recipe.stuffRecipe.length / 3 + 1;
+      if (this.recipe.stuffRecipe.length % 3 == 0) i = i - 1;
+      this.stuffs[0] = this.recipe.stuffRecipe.slice(0, i);
 
-      this.stuffs[1] = this.recipe.stuffRecipe.slice(
-        this.recipe.stuffRecipe.length / 3 + 1,
-        (this.recipe.stuffRecipe.length / 3) * 2 + 1
-      );
+      this.stuffs[1] = this.recipe.stuffRecipe.slice(i, i * 2);
 
-      this.stuffs[2] = this.recipe.stuffRecipe.slice(
-        (this.recipe.stuffRecipe.length / 3) * 2 + 1
-      );
+      this.stuffs[2] = this.recipe.stuffRecipe.slice(i * 2);
     },
     async getLectureData() {
+      if (this.recipe.category == null) this.recipe.category = " ";
+
       const results = await api.lectureList(this.recipe.category);
       if (results.status == 200) {
         this.lectures = results.data;

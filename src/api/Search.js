@@ -9,7 +9,7 @@ export default {
   count: () => axios.get(`${process.env.VUE_APP_API_SEARCH}/recipe/search/count`),
   // filter: (categoryId, page, stuffs) => axios.post(`${process.env.VUE_APP_API_BASE}/recipe/search/stuffs/${categoryId}?page=${page}`, stuffs),
   detail: (id) => axios.get(`${process.env.VUE_APP_API_SEARCH}/recipe/search/detail/${id}`),
-  lectureList: (category) => axios.get(`${process.env.VUE_APP_API_SEARCH}/recipe/detail/lectures/${category}`),
-  productList: (stuff) => axios.get(`${process.env.VUE_APP_API_SEARCH}/recipe/detail/market`, stuff),
+  lectureList: (category) => axios.get(`${process.env.VUE_APP_API_SEARCH}/recipe/detail/lecture/${category}`),
+  productList: (stuff) => axios.post(`${process.env.VUE_APP_API_SEARCH}/recipe/detail/market`, stuff),
 
 }
