@@ -81,6 +81,12 @@ const routes = [
     props: true,
   },
   {
+    path: '/Lock',
+    name: 'Lock',
+    component: () => import('../shopping/Lock.vue'),
+    props: true,
+  },
+  {
     path: '/ProductManagement',
     name: 'ProductManagement',
     component: () => import('../shopping/ProductManagement.vue'),
