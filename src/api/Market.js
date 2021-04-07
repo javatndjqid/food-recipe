@@ -19,6 +19,8 @@ export default {
     axios.delete(`${process.env.VUE_APP_API_MARKET}/cart/${id}`),
   purchase: () =>
     axios.post(`${process.env.VUE_APP_API_MARKET}/purchase`),
+  purchaseOrder: () =>
+    axios.get(`${process.env.VUE_APP_API_MARKET}/purchaseOrder`),
   findByStuff: (keyword) =>
     axios.get(`${process.env.VUE_APP_API_MARKET}/product/search/stuff?keyword=${keyword}`),
   findByName: (keyword) =>

@@ -19,6 +19,19 @@
             >mdi-cart</v-icon
           >
         </v-btn>
+        <v-btn
+          v-scroll="onScroll"
+          v-show="fab"
+          fab
+          dark
+          fixed
+          bottom
+          right
+          color="red"
+          @click="toTop"
+        >
+          <v-icon>mdi-chevron-double-up</v-icon>
+        </v-btn>
       </div>
       <v-row justify="center">
         <v-col cols="6" md="6">
@@ -77,6 +90,17 @@
           </v-simple-table>
           <br />
           <br /><br />
+          <v-btn
+            depressed
+            elevation="2"
+            color="red"
+            class="rounded-0"
+            dark
+            x-large
+            @click="moveToMarket()"
+            :style="{ marginRight: '30px' }"
+            >상품보기</v-btn
+          >
           <v-bottom-sheet v-model="sheet" inset>
             <template v-slot:activator="{ on, attrs }">
               <v-btn
@@ -124,6 +148,7 @@ export default {
   data: () => ({
     productDetail: [],
     sheet: false,
+    fab: false,
   }),
   mounted() {
     this.getProductDetail();
@@ -148,6 +173,14 @@ export default {
     },
     moveToCart() {
       this.$router.push("/Cart");
+    },
+    onScroll(e) {
+      if (typeof window === "undefined") return;
+      const top = window.pageYOffset || e.target.scrollTop || 0;
+      this.fab = top > 20;
+    },
+    toTop() {
+      this.$vuetify.goTo(0);
     },
   },
 };

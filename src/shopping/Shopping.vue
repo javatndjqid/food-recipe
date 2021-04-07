@@ -1,3 +1,4 @@
+
 <template>
   <div>
     <v-container>
@@ -20,6 +21,19 @@
           >
         </v-btn>
       </v-toolbar>
+      <v-btn
+        v-scroll="onScroll"
+        v-show="fab"
+        fab
+        dark
+        fixed
+        bottom
+        right
+        color="red"
+        @click="toTop"
+      >
+        <v-icon>mdi-chevron-double-up</v-icon>
+      </v-btn>
     </v-container>
     <v-container>
       <v-row align="center" justify="space-around">
@@ -145,7 +159,9 @@
         </v-col>
       </v-row>
     </v-container>
-    <!-- <v-pagination v-model="page" :length="5" :total-visible="5"></v-pagination> -->
+    <!--   <div class="scrollTop bg-primary" v-show="showTop" @click="toTop">
+      ^
+    </div> -->
   </div>
 </template>
 
@@ -164,6 +180,7 @@ export default {
       d: "정육·계란",
       e: "면·양념·오일",
     },
+    fab: false,
   }),
   mounted() {
     this.getProductList();
@@ -231,6 +248,14 @@ export default {
     },
     moveToManager() {
       this.$router.push("/Manager");
+    },
+    onScroll(e) {
+      if (typeof window === "undefined") return;
+      const top = window.pageYOffset || e.target.scrollTop || 0;
+      this.fab = top > 20;
+    },
+    toTop() {
+      this.$vuetify.goTo(0);
     },
   },
 };

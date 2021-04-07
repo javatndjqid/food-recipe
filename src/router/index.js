@@ -87,6 +87,12 @@ const routes = [
     props: true,
   },
   {
+    path: '/OrderList',
+    name: 'OrderList',
+    component: () => import('../shopping/OrderList.vue'),
+    props: true,
+  },
+  {
     path: '/ProductDetail',
     name: 'ProductDetail',
     component: () => import('../shopping/ProductDetail.vue'),

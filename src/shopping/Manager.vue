@@ -3,7 +3,7 @@
     <v-container>
       <v-btn block @click="moveToProductManagement()"> 제품 관리 </v-btn>
       <br />
-      <v-btn block> 구매 목록 관리 </v-btn>
+      <v-btn block @click="moveToOrderList()"> 주문 현황 보기 </v-btn>
       <br />
     </v-container>
   </div>
@@ -16,6 +16,9 @@ export default {
   methods: {
     moveToProductManagement() {
       this.$router.push("/ProductManagement");
+    },
+    moveToOrderList() {
+      this.$router.push("/OrderList");
     },
   },
 };

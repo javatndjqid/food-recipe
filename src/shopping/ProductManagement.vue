@@ -1,75 +1,95 @@
 <template>
   <div>
     <v-container>
-      <v-card-text>
-        <p class="display-1 text--primary">제품 추가</p>
-      </v-card-text>
-      <v-text-field
-        label="제품명"
-        outlined
-        color="red"
-        v-model="newProduct.name"
-      ></v-text-field>
-      <v-text-field
-        outlined
-        color="red"
-        label="가격"
-        v-model="newProduct.price"
-      ></v-text-field>
-      <v-text-field
-        outlined
-        color="red"
-        label="용량"
-        v-model="newProduct.weight"
-      ></v-text-field>
-      <v-text-field
-        outlined
-        color="red"
-        label="원산지"
-        v-model="newProduct.origin"
-      ></v-text-field>
-      <v-select
-        outlined
-        color="red"
-        :items="shelfLife"
-        label="유통기한"
-        v-model="newProduct.shelfLife"
-      ></v-select>
-      <v-text-field
-        color="red"
-        outlined
-        label="사진"
-        v-model="newProduct.productTitleImage"
-      ></v-text-field>
-      <v-text-field
-        color="red"
-        outlined
-        label="상세 사진"
-        v-model="newProduct.productDetailImage"
-      ></v-text-field>
-      <v-text-field
-        color="red"
-        outlined
-        label="재료"
-        v-model="newProduct.stuff"
-      ></v-text-field>
-      <v-select
-        outlined
-        color="red"
-        :items="categorys"
-        label="카테고리"
-        v-model="newProduct.category"
-      ></v-select>
-      <br />
-      <br />
-      <v-btn text icon color="red" dark style="margin-left: 900px">
-        <v-icon
-          size="65"
-          :style="{ marginLeft: '370px', marginBottom: '50px' }"
-          @click="addProduct()"
-          >mdi-plus-circle-outline</v-icon
-        >
-      </v-btn>
+      <v-card flat align="center">
+        <v-card-text>
+          <p class="display-1 text--primary">제품 추가</p>
+        </v-card-text>
+        <v-text-field
+          label="제품명"
+          :style="{ width: '800px' }"
+          outlined
+          rounded
+          clear-icon="red"
+          color="red"
+          v-model="newProduct.name"
+        ></v-text-field>
+        <v-text-field
+          outlined
+          rounded
+          :style="{ width: '800px' }"
+          color="red"
+          label="가격"
+          v-model="newProduct.price"
+        ></v-text-field>
+        <v-text-field
+          outlined
+          rounded
+          :style="{ width: '800px' }"
+          color="red"
+          label="용량"
+          v-model="newProduct.weight"
+        ></v-text-field>
+        <v-text-field
+          outlined
+          rounded
+          :style="{ width: '800px' }"
+          color="red"
+          label="원산지"
+          v-model="newProduct.origin"
+        ></v-text-field>
+        <v-select
+          outlined
+          rounded
+          :style="{ width: '800px' }"
+          color="red"
+          :items="shelfLife"
+          label="유통기한"
+          v-model="newProduct.shelfLife"
+        ></v-select>
+        <v-text-field
+          color="red"
+          :style="{ width: '800px' }"
+          outlined
+          rounded
+          label="사진"
+          v-model="newProduct.productTitleImage"
+        ></v-text-field>
+        <v-text-field
+          :style="{ width: '800px' }"
+          color="red"
+          outlined
+          rounded
+          label="상세 사진"
+          v-model="newProduct.productDetailImage"
+        ></v-text-field>
+        <v-text-field
+          :style="{ width: '800px' }"
+          color="red"
+          outlined
+          rounded
+          label="재료"
+          v-model="newProduct.stuff"
+        ></v-text-field>
+        <v-select
+          outlined
+          rounded
+          :style="{ width: '800px' }"
+          color="red"
+          :items="categorys"
+          label="카테고리"
+          v-model="newProduct.category"
+        ></v-select>
+        <br />
+        <v-btn text icon color="red" dark style="margin-left: 700px">
+          <v-icon
+            size="65"
+            :style="{ marginLeft: '0px', marginBottom: '50px' }"
+            @click="addProduct()"
+            >mdi-plus-circle-outline</v-icon
+          >
+        </v-btn>
+      </v-card>
       <v-container
         ><v-toolbar color="red" dark>
           <!-- <v-toolbar-title>State selection</v-toolbar-title> -->
@@ -238,6 +258,7 @@ export default {
       if (result.status == 200) {
         console.log("추가완료");
       }
+      this.getProductList();
       this.newProduct = "";
     },
     async getProductList() {
@@ -293,7 +314,7 @@ export default {
     async removeProduct(item) {
       const result = await api.removeProduct(item.id);
       if (result.status == 200) {
-        this.cartList.splice(this.productList.indexOf(item), 1);
+        this.productList.splice(this.productList.indexOf(item), 1);
         this.getProductList();
       }
     },
