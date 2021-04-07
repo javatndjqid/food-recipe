@@ -11,7 +11,9 @@
 <script>
 //import api from "@/api/Market";
 export default {
-  data: () => ({}),
+  data: () => ({
+    password: "",
+  }),
 
   methods: {
     moveToProductManagement() {

@@ -37,17 +37,8 @@
     </v-container>
     <v-container>
       <v-row align="center" justify="space-around">
-        <v-btn
-          text
-          icon
-          color="red"
-          dark
-          style="margin-left: 900px"
-          @click="moveToManager()"
-        >
-          <v-icon size="65" :style="{ marginBottom: '0px', marginTop: '70px' }"
-            >mdi-shield-key</v-icon
-          >
+        <v-btn class="mt-6" text color="white" @click="moveToLock()">
+          관리자
         </v-btn>
         <v-btn
           text
@@ -248,6 +239,9 @@ export default {
     },
     moveToManager() {
       this.$router.push("/Manager");
+    },
+    moveToLock() {
+      this.$router.push("/Lock");
     },
     onScroll(e) {
       if (typeof window === "undefined") return;

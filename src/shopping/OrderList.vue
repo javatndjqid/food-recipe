@@ -1,14 +1,19 @@
 <template>
   <div>
-    <v-card class="mx-auto" max-width="1000px" max-height="100%">
+    <v-card class="mx-auto" max-height="100%">
       <v-simple-table dark>
         <template v-slot:default>
           <thead>
-            <tr></tr>
+            <tr>
+              <th>주문 시간</th>
+              <th>아이디</th>
+              <th>상품</th>
+            </tr>
           </thead>
           <tbody>
             <tr v-for="(item, i) in purchaseOrderList" :key="i" :item="item">
               <td>{{ item.orderDate }}</td>
+              <td>{{ item.userId }}</td>
               <td v-for="(product, j) in item.orderProduct" :key="j">
                 제품명 : {{ product.productName }}
                 <br />
