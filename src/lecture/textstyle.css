@@ -80,66 +80,70 @@ table.meta td {
 /* SCSS 설명(이번 프로젝트에서 사용은 안할 것) https://heropy.blog/2018/01/31/sass/ */
 
 
-/* 모바일 사이즈 기준 */
+@media (min-width:500px){
+  .player {
+    height: 33vh;
+  }
+}
+@media (min-width:600px){
+  .player {
+    height: 40vh;
+  }
+}
+@media (min-width:700px){
+  .player {
+    height: 50vh;
+  }
+}
 @media (min-width:768px){
   .player {
-    height: 62vh;
+    height: 52vh;
   }
 }
 @media (min-width:800px){
   .player{
-    height: 65vh;
+    height: 55vh;
   }
 }
-
 @media (min-width:900px){
   .player {
-    height: 74vh
+    height: 62vh
   } 
 }
 
 @media (min-width:1024px){
   .player {
-    height: 26.5vh
+    height: 66vh
   } 
+}
+@media (min-width:1250px){
+  .player{
+    height: 58vh
+  }
 }
 
 @media (min-width:1500px){
   .player{
-    height: 40vh;
+    height: 58vh;
   }
 }
 
 @media (min-width:1600px){
   .player{
-    height: 38vh;
+    height: 58vh;
   }
 }
 
 @media (min-width:1700px){
   .player{
-    height: 36vh;
-  }
-}
-
-@media (min-width:1800px){
-  .player{
-    height: 34vh;
-  }
-}
-
-@media (min-width:1900px){
-  .player{
-    height: 32vh;
+    height: 58vh;
   }
 }
 
 /* 아래에 놓일수록 우선순위가 높은듯? */
-
-
-
+/* 모바일 사이즈 기준 */
 /* iPhone 6/7/8 portrait */
-@media (min-width:375px){
+@media (width:375px) and (width:667px){
   .player{
     height: 27.5vh
   }
@@ -151,7 +155,7 @@ table.meta td {
   }
 } */
 /* iPhone 6/7/8 plus portrait */
-@media (min-width:414px){
+@media (width:414px) and (height:736px){
   .player{
     height: 27.6vh
   }

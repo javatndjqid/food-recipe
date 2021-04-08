@@ -162,7 +162,7 @@ export default {
       this.$store.dispatch("profile/setProfile");
     },
     selectItem() {
-      //console.log("==== route.path ====");
+      // console.log("==== route.path ====");
       // console.log(this.$route);
       this.items.forEach((item) => {
         if (this.$route.path == item.path) this.selectedItem = item.count;

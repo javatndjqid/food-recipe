@@ -101,10 +101,12 @@ export default {
         this.lectureList = results.data;
       }
       const id = this.$route.params.id;
+      // console.log("lectureplay: ");
+      // console.log(this.$route.fullPath);
       this.item = this.lectureList[id - 1];
 
       this.stuffList = this.item.stuffs;
-      console.log(this.stuffList);
+      // console.log(this.stuffList);
     },
     navigateTo(item) {
       console.log("돌아간다 " + item.id);
