@@ -36,24 +36,11 @@
       </v-btn>
     </v-container>
     <v-container>
-      <v-row align="center" justify="space-around">
+      <v-row justify="center">
         <v-btn class="mt-6" text color="white" @click="moveToLock()">
           관리자
         </v-btn>
-        <v-btn
-          text
-          icon
-          color="red"
-          dark
-          style="margin-left: 1050px"
-          @click="moveToCart()"
-        >
-          <v-icon size="65" :style="{ marginBottom: '65px', marginTop: '70px' }"
-            >mdi-cart</v-icon
-          >
-        </v-btn>
-      </v-row>
-      <v-row justify="center">
+
         <v-btn
           depressed
           color="red"
@@ -113,6 +100,16 @@
           @click="findByCategory(5)"
         >
           면·양념·오일
+        </v-btn>
+        <v-btn
+          text
+          icon
+          color="red"
+          dark
+          style="margin-left: 0px"
+          @click="moveToCart()"
+        >
+          <v-icon size="65">mdi-cart</v-icon>
         </v-btn>
       </v-row>
       <v-row justify="center" :style="{ marginTop: '10px' }">
