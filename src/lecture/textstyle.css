@@ -51,22 +51,85 @@
 table.meta {
   border-collapse: separate;
   border-spacing: 1px;
+  width:95%;
   text-align: left;
-  line-height: 1.5;
+  line-height: 1.5rem;
   border-top: 1px solid #ccc;
-  margin: 20px 10px;
+  margin: 20px 1rem;
 }
 table.meta th {
-  width: 150px;
+  width: 30%;
   padding: 10px;
-  font-weight: bold;
-  vertical-align: top;
   border-bottom: 1px solid #ccc;
   background: #efefef;
 }
 table.meta td {
-  width: 350px;
+  width: 70%;
   padding: 10px;
-  vertical-align: top;
   border-bottom: 1px solid #ccc;
+}
+
+
+
+
+.player {
+  height: 26vh;
+}
+/* https://nykim.work/84 */
+
+/* iPhone 6/7/8 */
+@media (width:375px){
+  .player{
+    height: 27.5vh
+  }
+}
+@media (width:667px){
+  .player{
+    height: 92vh
+  }
+}
+/* iPhone 6/7/8 plus portrait */
+@media (width:414px){
+  .player{
+    height: 27.6vh
+  }
+}
+/* iPhone 6/7/8 plus landscape */
+@media (width:736px){
+  .player{
+    height: 20vh
+  }
+}
+@media (min-width:768px) and (max-width:811px) {
+  .player {
+    height: 39vh;
+  }
+}
+/* iPhone X */
+@media (width:812px) and (height:375px){
+  .player{
+    height: 80vh
+  }
+}
+
+@media (min-width:1024px){
+  .player {
+    height: 26.5vh
+  } 
+}
+@media (width:1366px){
+  .player{
+    height: 47vh
+    /* 아이패드 프로 가로모드 */
+  }
+}
+@media (min-width:1500px){
+  .player{
+    height: 47.5vh;
+  }
+}
+@media (min-width:1900px){
+  .player{
+    height: 68vh;
+  }
 }

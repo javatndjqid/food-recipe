@@ -36,9 +36,6 @@
                   :src="
                     `http://i.ytimg.com/vi/${item.imageSrc}/maxresdefault.jpg`
                   "
-                  :lazy-src="
-                    `https://img.youtube.com/vi/${item.imageSrc}/default.jpg`
-                  "
                   @click="navigateTo(item)"
                   style="cursor: pointer;"
                   :alt="item.title"

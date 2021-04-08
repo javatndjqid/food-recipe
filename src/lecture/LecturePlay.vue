@@ -17,34 +17,39 @@
       </v-row>
 
       <v-row justify="center">
-        <v-col cols="12" md="9">
+        <v-col cols="12" ex="9" lg="8" md="12" sm="12">
           <!-- 동영상 플레이어 공간 -->
           <v-card
+            fluid
             color="#eeeeee"
-            height="780px"
             class="d-flex align-center justify-center"
           >
+            <div>
+              <div>
+              </div>
+            </div>
+
             <!-- justify center https://vuetifyjs.com/en/styles/flex/#flex-justify -->
-            <iframe
-              height="98%"
-              width="99%"
-              :src="item.videoSrc"
-              title="YouTube video player"
-              frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen
-              :alt="item.title + ' 동영상 플레이어'"
-            />
+              <iframe
+                class="player"
+                width=100%
+                :src="item.videoSrc"
+                title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+                :alt="item.title + ' 동영상 플레이어'"
+              />
           </v-card>
         </v-col>
 
         <!-- 강의정보 공간 -->
-        <v-col cols="12" md="3">
+        <v-col cols="12" ex="3" lg="4" md="12" sm="12">
           <!-- 강의정보 Card -->
-          <v-card class="mx-auto" min-height="780px" color="#eeeeee">
+          <v-card class="mx-auto" color="#eeeeee">
             <v-container>
               <v-card>
-                <v-card-title class="boldtext">
+                <v-card-title class="boldtext" >
                   {{ item.title }}
                 </v-card-title>
 
@@ -52,8 +57,8 @@
                   {{ item.summary }}
                 </v-card-subtitle>
 
-                <v-container style="margin-top:-20px">
-                  <table class="meta">
+                <v-container style="margin-top:-20px;">
+                  <table class="meta" style=" display: table; margin-left: auto; margin-right: auto;">
                     <tr v-for="(item, i) in stuffList" :key="i">
                       <th scope="row">재료 {{ i+1 }}</th>
                       <td>

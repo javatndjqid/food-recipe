@@ -29,7 +29,7 @@
                 depressed
                 color="red"
                 class="white--text"
-                v-if="isSubscribed"
+                v-if="needSubscribe"
                 @click="dialog = true"
                 >구독 취소</v-btn
               >
@@ -67,6 +67,34 @@
                 </v-card>
               </v-dialog>
 
+              
+              <v-dialog v-model="requireAuth" width="400px">
+                <v-card>
+                  <v-card-title
+                    class="justify-center align-content-center headline grey lighten-2"
+                  >
+                    로그인 확인
+                  </v-card-title>
+                  <v-card-text> </v-card-text>
+                  <v-card-text class="text-center" style="font-size:1.1rem">
+                    "{{ item.title }}" 강의를<br />구독하기 위해서는 로그인이 필요합니다.<br />
+                    로그인 하시겠습니까?
+                  </v-card-text>
+
+                  <v-divider></v-divider>
+
+                  <v-card-actions>
+                    <v-btn color="primary" text @click="requireAuth = false;">
+                      로그인하지 않는다
+                    </v-btn>
+                    <v-spacer></v-spacer>
+                    <v-btn color="primary" text @click="navigateToLogin()">
+                      로그인 창으로
+                    </v-btn>
+                  </v-card-actions>
+                </v-card>
+              </v-dialog>
+
               <!-- 조건부 렌더링 설명 https://kr.vuejs.org/v2/guide/conditional.html -->
 
               <!-- 구독 취소 버튼 클릭시 팝업 추가 -->
@@ -87,9 +115,18 @@
               <v-btn
                 depressed
                 block
+                color="#666666"
+                v-if="needLogin"
+                @click="loginCheck()"
+              >
+                로그인이 필요합니다
+              </v-btn>
+              <v-btn
+                depressed
+                block
                 color="green lighten-1"
-                v-if="!isSubscribed"
-                @click="subscribe()"
+                v-if="!needLogin && !needSubscribe"
+                @click="loginCheck()"
               >
                 강의 구독
               </v-btn>
@@ -98,7 +135,7 @@
                 block
                 class="white--text"
                 color="pink"
-                v-if="isSubscribed"
+                v-if="!needLogin && needSubscribe"
                 @click="navigateToViewer(item)"
               >
                 강의 시청
@@ -163,7 +200,7 @@
                         <v-card
                           class="mx-auto"
                           width="100%"
-                          min-height="300px"
+                          min-height="200px"
                           color="#eeeeee"
                           v-if="item"
                         >
@@ -206,7 +243,9 @@
 import api from "@/api/Lecture";
 export default {
   data: () => ({
-    isSubscribed: false,
+    needLogin: true,
+    needSubscribe: true,
+    requireAuth: false,
     dialog: false,
     item: {},
     lectureUser: {},
@@ -216,26 +255,28 @@ export default {
   }),
   mounted() {
     this.getItem();
-    this.getSubscribed();
   },
   computed: {
     profile() {
       return this.$store.state.profile.data;
-    }
+    },
   },
 
   methods: {
+    navigateToLogin(){
+      window.location.href = process.env.VUE_APP_LOGIN_URL;
+    },
     subscribe() {
       const id = this.$route.params.id;
       console.log("Subscribing! : " + id);
       api.subscribe(id);
-      this.isSubscribed = !this.isSubscribed;
+      this.needSubscribe = !this.needSubscribe;
     },
     unSubscribe() {
       const id = this.$route.params.id;
       console.log("unSubscribing! : " + id);
       api.unSubscribe(id);
-      this.isSubscribed = !this.isSubscribed;
+      this.needSubscribe = !this.needSubscribe;
     },
     navigateTo(item) {
       this.$router.push(`/Lecture/Detail/${item.id}`);
@@ -247,6 +288,10 @@ export default {
       console.log("진행한다 " + item.id);
       this.$router.push(`/Lecture/Play/${item.id}`);
     },
+    loginCheck(){
+      console.log("check");
+      this.requireAuth=true;
+    },
     async getItem() {
       const id = this.$route.params.id;
       const results = await api.list();
@@ -256,12 +301,18 @@ export default {
         this.lectureList = results.data;
       }
       this.item = this.lectureList[id - 1];
-      this.item.userId = this.profile.id
-      console.log("display : " + this.item.userId);
+      const userId = this.profile.id
+      console.log("display : " + this.item.id);
+
+      if(userId != null){
+        console.log("userId is not null");
+        this.isLoggedIn=true;
+        this.getSubscribed();
+      }
 
       // 재료정보
       this.stuffList = this.item.stuffs;
-      console.log(this.stuffList);
+      // console.log(this.stuffList);
 
       // 카테고리 정보
       const category = this.item.category;
@@ -271,7 +322,7 @@ export default {
       const relatedResults = await api.related(category);
       if (relatedResults.status == 200) {
         const relatedList = relatedResults.data.filter(item => item.id != id);
-        console.log(relatedList.slice(0, 2));
+        // console.log(relatedList.slice(0, 2));
         this.relatedLectureList = relatedList.slice(0, 2);
       }
     },
@@ -279,8 +330,8 @@ export default {
       const id = this.$route.params.id;
       const results = await api.information(id);
       if (results.status == 200) {
-        this.isSubscribed = results.data;
-        console.log("isSubscribed? : " + this.isSubscribed);
+        this.needSubscribe = results.data;
+        console.log("needSubscribe? : " + this.needSubscribe);
       }
     }
   }
