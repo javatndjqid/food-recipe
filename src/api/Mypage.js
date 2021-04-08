@@ -1,5 +1,5 @@
 
-import axios from 'axios'
+//import axios from 'axios'
 import request from './request'
 export default {
   getUser: () =>
@@ -14,7 +14,7 @@ export default {
   request.get(`${process.env.VUE_APP_API_MYPAGE}/recipe`),
     
   stufflist: () =>
-  axios.get(`${process.env.VUE_APP_API_MYPAGE}/stuff`),
+  request.get(`${process.env.VUE_APP_API_MYPAGE}/stuff`),
   recipe: (id) => request.get(`${process.env.VUE_APP_API_MYPAGE}/recipes/${id}`),
   recipeProcedureFile: (id) => request.get(`${process.env.VUE_APP_API_MYPAGE}/RecipeProcedureFile/${id}`),
 
