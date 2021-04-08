@@ -36,11 +36,12 @@
       </v-btn>
     </v-container>
     <v-container>
-      <v-row justify="center">
+      <v-row justify="start">
         <v-btn class="mt-6" text color="white" @click="moveToLock()">
           관리자
         </v-btn>
-
+      </v-row>
+      <v-row justify="center">
         <v-btn
           depressed
           color="red"
@@ -101,12 +102,14 @@
         >
           면·양념·오일
         </v-btn>
+      </v-row>
+      <v-row justify="end">
         <v-btn
           text
           icon
           color="red"
           dark
-          style="margin-left: 0px"
+          style="margin-top: -50px"
           @click="moveToCart()"
         >
           <v-icon size="65">mdi-cart</v-icon>
