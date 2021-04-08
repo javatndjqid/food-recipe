@@ -320,15 +320,15 @@ export default {
     pageCount3: 0
   }),
   mounted() {
-    this.$store.dispatch("profile/setProfile");
+//    this.$store.dispatch("profile/setProfile");
     this.getlecturelist();
     this.getRecipeList();
     this.getpurchaselist();
   },
   computed: {
-    profile() {
-      return this.$store.state.profile.data;
-    },
+    // profile() {
+    //   return this.$store.state.profile.data;
+    // },
     items() {
       return Array.from({ length: this.length }, (k, v) => v + 1);
     },
