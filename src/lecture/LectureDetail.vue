@@ -29,7 +29,7 @@
                 depressed
                 color="red"
                 class="white--text"
-                v-if="needSubscribe"
+                v-if="!needSubscribe"
                 @click="dialog = true"
                 >구독 취소</v-btn
               >
@@ -77,7 +77,7 @@
                   </v-card-title>
                   <v-card-text> </v-card-text>
                   <v-card-text class="text-center" style="font-size:1.1rem">
-                    "{{ item.title }}" 강의를<br />구독하기 위해서는 로그인이 필요합니다.<br />
+                    "{{ item.title }}" 강의를 구독하기 위해서는 로그인이 필요합니다.<br />
                     로그인 하시겠습니까?
                   </v-card-text>
 
