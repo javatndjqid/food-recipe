@@ -61,7 +61,7 @@
           </v-card>
         </template> -->
 
-      <div style="width: 100%; text-align: right">
+      <div style="text-align: right">
         <v-menu offset-y>
           <template v-slot:activator="{ on, attrs }">
             <v-avatar size="80" class="mr-3" v-bind="attrs" v-on="on">
@@ -82,18 +82,17 @@
               <div class="text-center" v-if="profile.id">
                 <div>
                   <v-layout column align-center justify-center>
-                  <v-img
-                   align center
-                    :src="profile.image"
-                    height="100px"
-                    width="100px"
-                  ></v-img>
+                    <v-img
+                      align
+                      center
+                      :src="profile.image"
+                      height="100px"
+                      width="100px"
+                    ></v-img>
                   </v-layout>
                 </div>
-                <router-link to="/profile" style="text-decoration:none;">
-                  <v-btn text>
-                    Profile
-                  </v-btn>
+                <router-link to="/profile" style="text-decoration: none">
+                  <v-btn text> Profile </v-btn>
                 </router-link>
 
                 <v-btn color="primary" text @click="signOut()">
@@ -101,9 +100,7 @@
                 </v-btn>
               </div>
               <div class="text-center" v-else>
-                <v-btn color="primary" text @click="signIn()">
-                  Sign In
-                </v-btn>
+                <v-btn color="primary" text @click="signIn()"> Sign In </v-btn>
               </div>
             </v-card-actions>
           </v-card>
@@ -133,12 +130,12 @@ export default {
     selectedItem: 0,
     items: [
       /* https://cdn.materialdesignicons.com/5.4.55/ */
+      // { text: "Home", path: "/", count: 0 },
       { text: "Home", path: "/", count: 0 },
-      { text: "SEARCH", path: "/Search", count: 1 },
-      { text: "Market", path: "/Shopping", count: 2 },
-      { text: "Lecture", path: "/Lecture", count: 3 },
-      { text: "MYPAGE", path: "/Mypage", count: 4 }
-    ]
+      { text: "Market", path: "/Shopping", count: 1 },
+      { text: "Lecture", path: "/Lecture", count: 2 },
+      { text: "MYPAGE", path: "/Mypage", count: 3 },
+    ],
   }),
 
   mounted() {
@@ -153,7 +150,7 @@ export default {
     profile() {
       console.log(this.$store.state.profile.data);
       return this.$store.state.profile.data;
-    }
+    },
   },
   methods: {
     signOut() {
@@ -167,7 +164,7 @@ export default {
     selectItem() {
       //console.log("==== route.path ====");
       // console.log(this.$route);
-      this.items.forEach(item => {
+      this.items.forEach((item) => {
         if (this.$route.path == item.path) this.selectedItem = item.count;
       });
     },
@@ -180,7 +177,7 @@ export default {
         //.log(this.$route.path);
         this.$router.push(item.path);
       }
-    }
-  }
+    },
+  },
 };
 </script>

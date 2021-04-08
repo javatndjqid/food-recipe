@@ -34,22 +34,21 @@
         </v-btn>
       </div>
       <v-row justify="center">
-        <v-col cols="6" md="6">
+        <v-col cols="12" md="6">
           <v-card
             class="rounded-0"
-            max-width="450px"
+            max-width="100%"
             :style="{ marginRight: '0px' }"
           >
             <v-img
               :src="productDetail.productTitleImage"
-              width="450px"
               height="600px"
               :alt="productDetail.name"
               :style="{ marginBottom: '50px', marginTop: '60px' }"
             ></v-img>
           </v-card>
         </v-col>
-        <v-col cols="6" md="6" align-content="left">
+        <v-col cols="12" md="6" align-content="left">
           <v-simple-table
             :style="{
               marginBottom: '50px',
@@ -131,7 +130,7 @@
             </v-sheet>
           </v-bottom-sheet>
         </v-col>
-        <v-card class="mx-auto" max-width="1000px" max-height="100%">
+        <v-card class="mx-auto" max-width="100%" max-height="100%">
           <v-img
             :alt="productDetail.name"
             :src="productDetail.productDetailImage"

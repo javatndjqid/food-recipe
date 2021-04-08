@@ -69,7 +69,7 @@ export default {
       //   name: "SearchDetail",
       //    }
       // );
-      window.location.href = process.env.SEARCH_URL
+      window.location.href = process.env.URL
       //this.$router.push(item.path);
     }
   }

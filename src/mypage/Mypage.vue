@@ -24,14 +24,9 @@
   <v-img src="./tablecloth.jpg" alt="배경" height="”bgHeight”">
     <v-container color="primary">
       <v-row>
-        <v-col cols="12" md="12" lg="5" xs="12" xl="5">
+        <v-col cols="12" md="12" lg="5" xs="12" xl="12">
           <template>
-            <v-card
-            color="#eeeeee"
-              style="height: 700px"
-              class="overflow-y-auto"
-              elevation="10"
-            >
+            <v-card color="#eeeeee" class="overflow-y-auto" elevation="10" height="80vh">
               <v-card-subtitle>나의 레시피</v-card-subtitle>
               <v-img
                 class="white--text align-end"
@@ -39,55 +34,57 @@
                 src="https://image.freepik.com/free-vector/healthy-recipe-illustration-concept_23-2148576281.jpg"
                 alt="카드상단이미지"
               />
-
-              <v-data-table
-              
-                style="height: 430px"
-                :headers="recipyHeaders"
-                :items="itemsWithSno"
-                :page.sync="page"
-                :items-per-page="6"
-                hide-default-footer
-                class="elevation-1"
-                @page-count="pageCount = $event"
+              <v-layout column style="height: 43vh">
+                <v-flex style="overflow: auto">
+                  <v-data-table
+                    fill-height
+                    :headers="recipyHeaders"
+                    :items="itemsWithSno"
+                    :page.sync="page"
+                    :items-per-page="4"
+                    hide-default-footer
+                    class="elevation-1"
+                    @page-count="pageCount = $event"
+                  >
+                    <template v-slot:item.recipeId:="props">
+                      {{ props.item.recipe.length }}
+                    </template>
+                    <template v-slot:item.image="{ item }">
+                      <div v-if="item.recipefile[0]">
+                        <v-img
+                          :src="item.recipefile[0].dataUrl"
+                          :alt="item.recipeName"
+                          height="60"
+                          width="150"
+                        />
+                      </div>
+                      <div v-else>
+                        <v-img
+                          :src="item.image"
+                          :alt="item.recipeName"
+                          height="60"
+                          width="150"
+                        />
+                      </div>
+                    </template>
+                    <template v-slot:item.details="{ item }">
+                      <v-icon @click="navigateTo(item)" fab dark color="black"
+                        >mdi-view-list</v-icon
+                      >
+                    </template>
+                    <template v-slot:item.del="{ item }">
+                      <v-icon
+                        @click="deleteitem(item.recipeId)"
+                        fab
+                        dark
+                        color="black"
+                        >mdi-window-close</v-icon
+                      >
+                    </template>
+                  </v-data-table>
+                </v-flex></v-layout
               >
-                <template v-slot:item.recipeId:="props">
-                  {{ props.item.recipe.length }}
-                </template>
-                <template v-slot:item.image="{ item }">
-                  <div v-if="item.recipefile[0]">
-                    <v-img
-                      :src="item.recipefile[0].dataUrl"
-                      :alt="item.recipeName"
-                      height="60"
-                      width="150"
-                    />
-                  </div>
-                  <div v-else>
-                    <v-img
-                      :src="item.image"
-                      :alt="item.recipeName"
-                      height="60"
-                      width="150"
-                    />
-                  </div>
-                </template>
-                <template v-slot:item.details="{ item }">
-                  <v-icon @click="navigateTo(item)" fab dark color="black"
-                    >mdi-view-list</v-icon
-                  >
-                </template>
-                <template v-slot:item.del="{ item }">
-                  <v-icon
-                    @click="deleteitem(item.recipeId)"
-                    fab
-                    dark
-                    color="black"
-                    >mdi-window-close</v-icon
-                  >
-                </template>
-              </v-data-table>
-              <div class="text-xs-center pt-2">
+              <div class="pa-2">
                 <v-pagination
                   color="#FF6347"
                   :total-visible="5"
@@ -108,25 +105,26 @@
         <v-col cols="12" md="12" lg="4" xl="4">
           <template>
             <v-card
-            color="#eeeeee"
+              height="80vh"
+              color="#eeeeee"
               class="overflow-y-auto"
               elevation="10"
-              style="height: 700px"
             >
               <v-card-subtitle>쇼핑 리스트</v-card-subtitle>
               <v-img
                 class="white--text align-end"
-                height="100px"
+                height="150px"
                 src="https://en.pimg.jp/001/710/411/1/1710411.jpg"
                 alt="카드상단이미지"
               >
               </v-img>
+              <v-layout column style="height: 43vh">
+                <v-flex style="overflow: auto">
               <v-data-table
-                style="height: 480px"
                 :headers="MarketHeaders"
                 :items="userPurchaseList"
                 :page.sync="page2"
-                :items-per-page="9"
+                :items-per-page="5"
                 hide-default-footer
                 class="elevation-1"
                 @page-count="pageCount2 = $event"
@@ -165,12 +163,13 @@
                         v-for="(input, i) in item.orderProduct"
                         :key="i"
                       >
-                        {{ input.productName }} {{input.productQuantity}}개
+                        {{ input.productName }} {{ input.productQuantity }}개
                       </v-card-text>
                     </v-card>
                   </v-dialog>
                 </template>
               </v-data-table>
+                </v-flex></v-layout>
               <div class="text-xs-center pt-2">
                 <v-pagination
                   color="#FF6347"
@@ -184,65 +183,64 @@
             </v-card>
           </template>
         </v-col>
-        <v-col cols="12" md="12" lg="3" xl="3">
+        <v-col cols="12" md="12" lg="3" xl="4">
           <template>
-            <v-card>
-              <template>
-                <v-card
+            <template>
+              <v-card
                 color="#eeeeee"
-                  class="overflow-y-auto"
-                  elevation="10"
-                  style="height: 700px"
+                class="overflow-y-auto"
+                elevation="10"
+                height="80vh"
+              >
+                <v-card-subtitle>나의 강의</v-card-subtitle>
+                <v-img
+                  class="white--text align-end"
+                  height="150px"
+                  src="https://cdn.crowdpic.net/list-thumb/thumb_l_756C27E1062B73D39C8E3E51165172E2.jpg"
+                  alt="카드상단이미지"
                 >
-                  <v-card-subtitle>나의 강의</v-card-subtitle>
-                  <v-img
-                    class="white--text align-end"
-                    height="100px"
-                    src="https://cdn.crowdpic.net/list-thumb/thumb_l_756C27E1062B73D39C8E3E51165172E2.jpg"
-                    alt="카드상단이미지"
-                  >
-                  </v-img>
-                  <v-data-table
-                  
-                    style="height: 480px"
-                    :headers="ClassHeaders"
-                    :items="userlectureList"
-                    :page.sync="page3"
-                    :items-per-page="9"
-                    hide-default-footer
-                    class="elevation-1"
-                    @page-count="pageCount3 = $event"
-                  >
-                    <template v-slot:item.lectureName="{ item }">
-                      <div @click="navigateTolect(item)">
-                        {{ item.lectureTitle }}
-                      </div>
-                    </template>
-                    <template v-slot:item.image="{ item }">
-                      <div>
-                        <v-img
-                          :src="
-                            `http://i.ytimg.com/vi/${item.lectureImageSrc}/default.jpg`
-                          "
-                          :alt="item.lectureTitle"
-                          height="40px"
-                          width="50px"
-                        />
-                      </div>
-                    </template>
-                  </v-data-table>
-                  <div class="text-xs-center pt-2">
-                    <v-pagination
-                      color="#FF6347"
-                      circle
-                      :total-visible="5"
-                      v-model="page3"
-                      :length="pageCount3"
-                    ></v-pagination>
-                  </div>
-                </v-card>
-              </template>
-            </v-card>
+                </v-img>
+                 <v-layout column style="height: 43vh">
+                <v-flex style="overflow: auto">
+                <v-data-table
+                  :headers="ClassHeaders"
+                  :items="userlectureList"
+                  :page.sync="page3"
+                  :items-per-page="6"
+                  hide-default-footer
+                  class="elevation-1"
+                  @page-count="pageCount3 = $event"
+                >
+                  <template v-slot:item.lectureName="{ item }">
+                    <div @click="navigateTolect(item)">
+                      {{ item.lectureTitle }}
+                    </div>
+                  </template>
+                  <template v-slot:item.image="{ item }">
+                    <div>
+                      <v-img
+                        :src="
+                          `http://i.ytimg.com/vi/${item.lectureImageSrc}/default.jpg`
+                        "
+                        :alt="item.lectureTitle"
+                        height="40px"
+                        width="50px"
+                      />
+                    </div>
+                  </template>
+                </v-data-table>
+                </v-flex></v-layout>
+                <div class="text-xs-center pt-2">
+                  <v-pagination
+                    color="#FF6347"
+                    circle
+                    :total-visible="5"
+                    v-model="page3"
+                    :length="pageCount3"
+                  ></v-pagination>
+                </div>
+              </v-card>
+            </template>
           </template>
         </v-col>
       </v-row>
@@ -259,8 +257,7 @@ export default {
         text: "No.",
         align: "start",
         value: "sno",
-        class: "elevation-1",
-        width: 10
+        class: "elevation-1"
       },
       {
         text: "레시피 사진",
@@ -278,14 +275,14 @@ export default {
         text: "상세정보",
         value: "details",
         sortable: false,
-        width: 80,
+
         align: "center"
       },
       {
         text: "삭제",
         value: "del",
         sortable: false,
-        width: 10,
+
         align: "center"
       }
     ],
@@ -323,15 +320,15 @@ export default {
     pageCount3: 0
   }),
   mounted() {
-    this.$store.dispatch("profile/setProfile");
+//    this.$store.dispatch("profile/setProfile");
     this.getlecturelist();
     this.getRecipeList();
     this.getpurchaselist();
   },
   computed: {
-    profile(){
-      return this.$store.state.profile.data
-    },
+    // profile() {
+    //   return this.$store.state.profile.data;
+    // },
     items() {
       return Array.from({ length: this.length }, (k, v) => v + 1);
     },
@@ -368,7 +365,6 @@ export default {
     },
     //구독리스트호출
     async getlecturelist() {
-     
       const result = await api.lecturelist();
       if (result.status == 200) {
         this.userlectureList = result.data;

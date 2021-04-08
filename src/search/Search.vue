@@ -2,6 +2,11 @@
   <div>
     <v-app>
       <v-container>
+        <v-row justify="center" align="start">
+          <v-col cols="12">
+            <v-img src="../assets/yum.png" class="my-3" contain height="250" />
+          </v-col>
+        </v-row>
         <v-toolbar color="red" dark>
           <!-- <v-toolbar-title>State selection</v-toolbar-title> -->
           <v-autocomplete
@@ -41,28 +46,33 @@
             <v-expansion-panel>
               <v-expansion-panel-header v-slot="{ open }">
                 <v-row no-gutters>
-                  <v-col cols="4"> 조리방법(카테고리) </v-col>
-                  <v-col cols="8" class="text--secondary">
+                  <v-col cols="5"> 조리방법(카테고리) </v-col>
+                  <v-col cols="7" class="text--secondary">
                     <v-fade-transition leave-absolute>
                       <span v-if="open" key="0" />
                     </v-fade-transition>
                   </v-col>
                 </v-row>
               </v-expansion-panel-header>
-              <v-expansion-panel-content style="display: flex">
-                <v-card-actions>
-                  <v-btn
-                    text
-                    :color="item.id == radio.id ? 'blue accent-4' : 'secondary'"
-                    v-for="(item, i) in category"
-                    :key="i"
-                    style="flex: 1"
-                    v-model="radio"
-                    @click="selectRadio(item)"
-                  >
-                    {{ item.name }}
-                  </v-btn>
-                </v-card-actions>
+              <v-expansion-panel-content>
+                <v-row>
+                  <v-col cols="2">
+                    <v-card-actions>
+                      <v-btn
+                        text
+                        :color="
+                          item.id == radio.id ? 'blue accent-4' : 'secondary'
+                        "
+                        v-for="(item, i) in category"
+                        :key="i"
+                        v-model="radio"
+                        @click="selectRadio(item)"
+                      >
+                        {{ item.name }}
+                      </v-btn>
+                    </v-card-actions>
+                  </v-col>
+                </v-row>
               </v-expansion-panel-content>
             </v-expansion-panel>
           </v-expansion-panels>
@@ -72,7 +82,7 @@
       <v-main>
         <v-container>
           <v-row>
-            <v-col v-for="(item, n) in calData" :key="n" cols="3">
+            <v-col v-for="(item, n) in calData" :key="n" cols="6" md="3">
               <v-card class="mx-auto" max-width="344" @click="navigateTo(item)">
                 <v-img
                   :src="item.image"
@@ -133,7 +143,6 @@ export default {
   },
   mounted() {
     this.getItem();
-    // this.getCount();
     this.getState();
     this.getCategories();
     this.getImage(13, 2);
@@ -242,13 +251,6 @@ export default {
         }
       }
     },
-    // async getCount() {
-    //   const result = await api.count();
-    //   if (result.status == 200) {
-    //     this.pageLength = Math.ceil(result.data / 12);
-    //     console.log(this.pageLength);
-    //   }
-    // },
   },
 };
 </script>
