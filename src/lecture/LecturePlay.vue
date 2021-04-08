@@ -102,11 +102,33 @@ export default {
       }
       const id = this.$route.params.id;
       // console.log("lectureplay: ");
-      // console.log(this.$route.fullPath);
+      this.getRoute();
+
       this.item = this.lectureList[id - 1];
 
       this.stuffList = this.item.stuffs;
       // console.log(this.stuffList);
+    },
+    getRoute(){
+      this.$store.state.fullPath=this.$route.fullPath;
+      const fullPath = this.$store.state.fullPath;
+
+      // console.log(fullPath);
+      // console.log(fullPath.indexOf("/",1));
+
+      const length = fullPath.indexOf("/",1);
+
+      // console.log(fullPath.substring(1,length));
+
+      const msName = fullPath.substring(1,length);
+
+      // https://lktprogrammer.tistory.com/124
+
+      this.$store.state.msName = msName;
+      // microServiceName
+
+      console.log(this.$store.state);
+
     },
     navigateTo(item) {
       console.log("돌아간다 " + item.id);

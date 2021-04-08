@@ -145,19 +145,27 @@ export default {
 
     this.selectItem();
     //   this.$store.dispatch("profile/setProfile");
+
+      console.log("App.vue "+ this.getRoute);
   },
   computed: {
     profile() {
       console.log(this.$store.state.profile.data);
       return this.$store.state.profile.data;
     },
+    getRoute() {
+      console.log("App.vue.getRouteComputed "+ this.$store.state.msName)
+      return this.$store.state.msName;
+    }, 
   },
   methods: {
+    changedName(){
+      this.$store.dispatch("callMutation",{newPath: this.getRoute})
+    },
     signOut() {
       this.$store.dispatch("profile/signout");
       console.log(this.profile);
     },
-
     signIn() {
       this.$store.dispatch("profile/setProfile");
     },
@@ -165,10 +173,11 @@ export default {
       // console.log("==== route.path ====");
       // console.log(this.$route);
       this.items.forEach((item) => {
-        if (this.$route.path == item.path) this.selectedItem = item.count;
+        if (this.$route.path == item.path){
+        this.selectedItem = item.count;
+        }
       });
     },
-
     navigateTo(item) {
       /* https://router.vuejs.org/kr/guide/essentials/navigation.html */
       // 현재 경로와 다르면
