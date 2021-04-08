@@ -94,32 +94,31 @@
           <!-- </v-list-item>
           </v-list> -->
         </v-card>
-        <v-col
-          cols="12"
+
+        <v-card
           style="margin-top: 30px; font-weight: bold; font-family: yg-jalnan"
           v-for="(item, i) in recipe.recipeProcedure"
           :key="i"
         >
-          <v-card>
-            <!-- <v-list>
+          <!-- <v-list>
               <v-list-item> -->
-            <!-- <v-list-item-action>{{ i + 1 }}</v-list-item-action> -->
-            <v-row align="center" justify="center">
-              <v-col cols="12" md="8">
-                <v-card-text style="font-size: 15pt">
-                  {{ item.recipeProcedure }}
-                </v-card-text>
-              </v-col>
-              <v-col cols="12" md="4">
-                <v-img
-                  :src="item.recipeProcedureImage"
-                  width="350"
-                  alt="Recipe Procedure Image"
-                />
-              </v-col>
-            </v-row>
-          </v-card>
-        </v-col>
+          <!-- <v-list-item-action>{{ i + 1 }}</v-list-item-action> -->
+          <v-row align="center" justify="center">
+            <v-col cols="12" md="8">
+              <v-card-text style="font-size: 15pt">
+                {{ item.recipeProcedure }}
+              </v-card-text>
+            </v-col>
+            <v-col cols="12" md="4">
+              <v-img
+                :src="item.recipeProcedureImage"
+                width="350"
+                alt="Recipe Procedure Image"
+              />
+            </v-col>
+          </v-row>
+        </v-card>
+
         <v-card style="margin-top: 30px">
           <v-card-title>판매 재료</v-card-title>
           <v-divider></v-divider>
