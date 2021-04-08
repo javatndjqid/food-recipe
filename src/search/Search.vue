@@ -41,8 +41,8 @@
             <v-expansion-panel>
               <v-expansion-panel-header v-slot="{ open }">
                 <v-row no-gutters>
-                  <v-col cols="4"> 조리방법(카테고리) </v-col>
-                  <v-col cols="8" class="text--secondary">
+                  <v-col cols="5"> 조리방법(카테고리) </v-col>
+                  <v-col cols="7" class="text--secondary">
                     <v-fade-transition leave-absolute>
                       <span v-if="open" key="0" />
                     </v-fade-transition>
@@ -72,7 +72,7 @@
       <v-main>
         <v-container>
           <v-row>
-            <v-col v-for="(item, n) in calData" :key="n" cols="3">
+            <v-col v-for="(item, n) in calData" :key="n" cols="6" md="3">
               <v-card class="mx-auto" max-width="344" @click="navigateTo(item)">
                 <v-img
                   :src="item.image"
@@ -133,7 +133,6 @@ export default {
   },
   mounted() {
     this.getItem();
-    // this.getCount();
     this.getState();
     this.getCategories();
     this.getImage(13, 2);
@@ -242,13 +241,6 @@ export default {
         }
       }
     },
-    // async getCount() {
-    //   const result = await api.count();
-    //   if (result.status == 200) {
-    //     this.pageLength = Math.ceil(result.data / 12);
-    //     console.log(this.pageLength);
-    //   }
-    // },
   },
 };
 </script>
