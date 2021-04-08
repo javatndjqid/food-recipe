@@ -73,43 +73,29 @@ table.meta td {
 
 
 .player {
-  height: 26vh;
+  height: 27.5vh;
 }
-/* https://nykim.work/84 */
+/* 뷰포트 설명 https://nykim.work/84 */
+/* 뷰포트 설명2 https://aboooks.tistory.com/353 */
+/* SCSS 설명(이번 프로젝트에서 사용은 안할 것) https://heropy.blog/2018/01/31/sass/ */
 
-/* iPhone 6/7/8 */
-@media (width:375px){
-  .player{
-    height: 27.5vh
-  }
-}
-@media (width:667px){
-  .player{
-    height: 92vh
-  }
-}
-/* iPhone 6/7/8 plus portrait */
-@media (width:414px){
-  .player{
-    height: 27.6vh
-  }
-}
-/* iPhone 6/7/8 plus landscape */
-@media (width:736px){
-  .player{
-    height: 20vh
-  }
-}
-@media (min-width:768px) and (max-width:811px) {
+
+/* 모바일 사이즈 기준 */
+@media (min-width:768px){
   .player {
-    height: 39vh;
+    height: 62vh;
   }
 }
-/* iPhone X */
-@media (width:812px) and (height:375px){
+@media (min-width:800px){
   .player{
-    height: 80vh
+    height: 65vh;
   }
+}
+
+@media (min-width:900px){
+  .player {
+    height: 74vh
+  } 
 }
 
 @media (min-width:1024px){
@@ -117,19 +103,106 @@ table.meta td {
     height: 26.5vh
   } 
 }
-@media (width:1366px){
-  .player{
-    height: 47vh
-    /* 아이패드 프로 가로모드 */
-  }
-}
+
 @media (min-width:1500px){
   .player{
-    height: 47.5vh;
+    height: 40vh;
   }
 }
+
+@media (min-width:1600px){
+  .player{
+    height: 38vh;
+  }
+}
+
+@media (min-width:1700px){
+  .player{
+    height: 36vh;
+  }
+}
+
+@media (min-width:1800px){
+  .player{
+    height: 34vh;
+  }
+}
+
 @media (min-width:1900px){
   .player{
-    height: 68vh;
+    height: 32vh;
+  }
+}
+
+/* 아래에 놓일수록 우선순위가 높은듯? */
+
+
+
+/* iPhone 6/7/8 portrait */
+@media (min-width:375px){
+  .player{
+    height: 27.5vh
+  }
+}
+/* iPhone 6/7/8 landscape */
+/* @media (width:667px) and (height:375px){
+  .player{
+    height: 92vh
+  }
+} */
+/* iPhone 6/7/8 plus portrait */
+@media (min-width:414px){
+  .player{
+    height: 27.6vh
+  }
+}
+/* iPhone 6/7/8 plus landscape */
+/* @media (width:736px){
+  .player{
+    height: 20vh
+  }
+} */
+
+/* iPhone X portrait */
+@media (width:375px) and (height:812px){
+  .player{
+    height: 22.7vh
+  }
+}
+/* iPhone X landscape */
+@media (width:812px) and (height:375px){
+  .player{
+    height: 80vh
+  }
+}
+
+@media (max-width:767px){
+  @viewport{
+    orientation: landscape;
+  }
+}
+
+/* iPad portrait */
+@media (width:768px) and (height:1024px){
+  .player {
+    height: 39vh;
+  }
+}
+/* iPad landscape */
+@media (width:1024px) and (height:768px){
+  .player {
+    height: 64vh;
+  }
+}
+/* iPad Pro portrait */
+@media (width:1024px) and (height:1366px){
+  .player {
+    height: 36vh
+  } 
+}
+/* iPad Pro landscape */
+@media (width:1366px) and (height:1024px){
+  .player{
+    height: 42vh
   }
 }
