@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+// import Home from '../views/Home.vue'
 Vue.use(VueRouter)
 
 // https://router.vuejs.org/kr/guide/essentials/passing-props.html
@@ -15,14 +15,14 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home
+    component: () => import('../search/Search.vue')
     //  component: () => import('../views/Home.vue')
   },
-  {
-    path: '/Search',
-    name: 'Search',
-    component: () => import('../search/Search.vue')
-  },
+  // {
+  //   path: '/Search',
+  //   name: 'Search',
+  //   component: () => import('../search/Search.vue')
+  // },
   {
     path: '/Shopping',
     name: 'Shopping',

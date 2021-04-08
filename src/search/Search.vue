@@ -2,6 +2,11 @@
   <div>
     <v-app>
       <v-container>
+        <v-row justify="center" align="start">
+          <v-col cols="12">
+            <v-img src="../assets/yum.png" class="my-3" contain height="250" />
+          </v-col>
+        </v-row>
         <v-toolbar color="red" dark>
           <!-- <v-toolbar-title>State selection</v-toolbar-title> -->
           <v-autocomplete
@@ -49,20 +54,25 @@
                   </v-col>
                 </v-row>
               </v-expansion-panel-header>
-              <v-expansion-panel-content style="display: flex">
-                <v-card-actions>
-                  <v-btn
-                    text
-                    :color="item.id == radio.id ? 'blue accent-4' : 'secondary'"
-                    v-for="(item, i) in category"
-                    :key="i"
-                    style="flex: 1"
-                    v-model="radio"
-                    @click="selectRadio(item)"
-                  >
-                    {{ item.name }}
-                  </v-btn>
-                </v-card-actions>
+              <v-expansion-panel-content>
+                <v-row>
+                  <v-col cols="2">
+                    <v-card-actions>
+                      <v-btn
+                        text
+                        :color="
+                          item.id == radio.id ? 'blue accent-4' : 'secondary'
+                        "
+                        v-for="(item, i) in category"
+                        :key="i"
+                        v-model="radio"
+                        @click="selectRadio(item)"
+                      >
+                        {{ item.name }}
+                      </v-btn>
+                    </v-card-actions>
+                  </v-col>
+                </v-row>
               </v-expansion-panel-content>
             </v-expansion-panel>
           </v-expansion-panels>
