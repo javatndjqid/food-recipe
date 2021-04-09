@@ -3,7 +3,7 @@
 </style>
 
 <template>
-  <div>
+  <div class="lecture">
     <v-container v-bind="item">
       <!-- 버튼 공간 -->
       <v-row>
@@ -109,7 +109,7 @@ export default {
       // console.log(this.stuffList);
     },
     navigateTo(item) {
-      console.log("돌아간다 " + item.id);
+      // console.log("돌아간다 " + item.id);
       this.$router.push(`/Lecture/Detail/${item.id}`);
     },
   },

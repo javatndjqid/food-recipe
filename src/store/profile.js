@@ -25,8 +25,8 @@ export default {
     // this.$store.commit("setProfile", {name:'kdk'....})
     setProfile(state, payload){
       // payload의 값으로 state를 업데이트 코드
-      console.log(state);
-      console.log(payload);
+      // console.log(state);
+      // console.log(payload);
 
       state.data = {...payload};
     }
@@ -43,7 +43,7 @@ export default {
         const res = await api.getprofile();
         // mutation 메소드를 호출해서 state 변경
         context.commit('setProfile', res.data);
-        console.log(res)
+        // console.log(res)
         // window.location.href = process.env
       } 
       else {

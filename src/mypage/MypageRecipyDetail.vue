@@ -185,12 +185,12 @@ export default {
     },
     //레시피 id의 해당 정보호출
     async getRecipeData() {
-      console.log(this.$route.params.recipeId);
+      // console.log(this.$route.params.recipeId);
       const id = this.$route.params.recipeId;
       const result = await api.recipe(id);
       if (result.status == 200) {
         this.recipe = result.data[0];
-        console.log(this.recipe);
+        // console.log(this.recipe);
         this.sliceList();
       }
     },
@@ -199,8 +199,8 @@ export default {
         0,
         this.recipe.stuffRecipe.length / 3 + 1
       );
-      console.log("===== stuff1 =====");
-      console.log(this.stuff1);
+      // console.log("===== stuff1 =====");
+      // console.log(this.stuff1);
 
       this.stuffs[1] = this.recipe.stuffRecipe.slice(
         this.recipe.stuffRecipe.length / 3 + 1,

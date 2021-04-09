@@ -1,3 +1,6 @@
+<style>
+@import "./textstyle.css";
+</style>
 <template>
   <div>
     <v-app>
@@ -8,7 +11,6 @@
           </v-col>
         </v-row>
         <v-toolbar color="red" dark>
-          <!-- <v-toolbar-title>State selection</v-toolbar-title> -->
           <v-autocomplete
             v-model="select"
             :loading="loading"
@@ -56,9 +58,10 @@
               </v-expansion-panel-header>
               <v-expansion-panel-content>
                 <v-row>
-                  <v-col cols="2">
+                  <v-col cols="12">
                     <v-card-actions>
                       <v-btn
+                        width="16%"
                         text
                         :color="
                           item.id == radio.id ? 'blue accent-4' : 'secondary'
@@ -83,7 +86,12 @@
         <v-container>
           <v-row>
             <v-col v-for="(item, n) in calData" :key="n" cols="6" md="3">
-              <v-card class="mx-auto" max-width="344" @click="navigateTo(item)">
+              <v-card
+                class="mx-auto"
+                max-width="344"
+                @click="navigateTo(item)"
+                style="font-family: ELAND_Nice_M"
+              >
                 <v-img
                   :src="item.image"
                   height="200px"
@@ -150,7 +158,6 @@ export default {
   methods: {
     querySelections(v) {
       this.loading = true;
-      // Simulated ajax query
       setTimeout(() => {
         this.items = this.states.filter((e) => {
           return (e || "").toLowerCase().indexOf((v || "").toLowerCase()) > -1;
@@ -161,13 +168,10 @@ export default {
     addChip() {
       if (this.select == null || this.chips.indexOf(this.select) > -1) return;
       this.chips.push(this.select);
-      console.log(this.chips);
-      console.log(this.radio);
       this.recipeFilter(this.chips);
       this.page = 1;
     },
     movePage() {
-      console.log(this.page);
       this.recipeFilter(this.chips);
     },
     async recipeFilter(chips) {
@@ -182,16 +186,8 @@ export default {
         this.recipe = this.searchRecipe.reverse();
       }
     },
-    // async searchfilter(id, page, stuffs) {
-    //   const results = await api.filter(id, page - 1, stuffs);
-    //   if (results.status == 200) {
-    //     this.recipe = results.data;
-    //   }
-    // },
     delChip(i) {
       this.chips.splice(i, 1);
-      console.log(this.chips.length);
-      console.log(this.radio.id);
       this.chips.length == 0
         ? this.selectRadio(this.radio)
         : this.recipeFilter(this.chips);
@@ -202,8 +198,6 @@ export default {
         name: "SearchDetail",
         query: { id: item.recipeId },
       });
-      console.log(item);
-      // this.$router.push({ name: "SearchDetail", params: { id: 3 } });
     },
     selectRadio(category) {
       this.radio = category;
@@ -215,7 +209,6 @@ export default {
       if (results.status == 200) {
         this.recipe = results.data;
         this.recipe.reverse();
-        // this.getImage();
       }
     },
     async getState() {
@@ -231,7 +224,6 @@ export default {
       }
     },
     async getImage() {
-      console.log(this.recipe);
       for (let i in this.recipe) {
         if (
           this.recipe[i].image == "" ||
@@ -240,12 +232,7 @@ export default {
         ) {
           const result = await api.detail(this.recipe[i].recipeId);
           if (result.status == 200) {
-            console.log("===== recipefile ======");
-            console.log(result.data);
             if (result.data[0].recipefile[0] == null) continue;
-            // console.log(result.data[0].recipefile[0].dataUrl);
-            // this.recipe[n].image = result.data[0].recipefile[0].dataUrl;
-            // return this.recipe[n].image;
             this.recipe[i].image = result.data[0].recipefile[0].dataUrl;
           }
         }

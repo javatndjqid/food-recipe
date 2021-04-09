@@ -173,35 +173,35 @@
               </v-img>
               <v-layout column style="height: 40vh">
                 <v-flex style="overflow: auto">
-                  <v-data-table
-                    :headers="MarketHeaders"
-                    :items="userPurchaseList"
-                    :page.sync="page2"
-                    :items-per-page="5"
-                    hide-default-footer
-                    class="elevation-1 table100"
-                    @page-count="pageCount2 = $event"
-                  >
-                    <template v-slot:item.orderDate="{ item }">
-                      {{ $moment(item.orderDate).format("YYYY-MM-DD-HH-MM") }}
-                    </template>
-                    <template v-slot:item.image="{ item }">
-                      <v-img
-                        :src="item.orderProduct[0].productTitleImage"
-                        :alt="item.orderProduct[0].productName"
-                        height="40px"
-                        width="50px"
-                      />
-                    </template>
-                    <!-- <template v-slot:item.productName="{ item }">
-                      {{ item.orderProduct[0].productName }}
-                      {{ item.orderProduct.length != 1 ? "외" : null }}
-                      {{
-                        item.orderProduct.length != 1
-                          ? item.orderProduct.length - 1
-                          : null
-                      }}
-                    </template> -->
+              <v-data-table
+                :headers="MarketHeaders"
+                :items="userPurchaseList"
+                :page.sync="page2"
+                :items-per-page="5"
+                hide-default-footer
+                class="elevation-1 table100"
+                @page-count="pageCount2 = $event"
+              >
+                <template v-slot:item.orderDate="{ item }">
+                  {{ $moment(item.orderDate).format("YYYY-MM-DD / HH:mm") }}
+                </template>
+                <template v-slot:item.image="{ item }">
+                  <v-img
+                    :src="item.orderProduct[0].productTitleImage"
+                    :alt="item.orderProduct[0].productName"
+                    height="40px"
+                    width="50px"
+                  />
+                </template>
+                <template v-slot:item.productName="{ item }">
+                  {{ item.orderProduct[0].productName }}
+                  {{ item.orderProduct.length != 1 ? "외" : null }}
+                  {{
+                    item.orderProduct.length != 1
+                      ? item.orderProduct.length - 1
+                      : null
+                  }}
+                </template>
 
                     <template v-slot:item.productName="{ item }">
                       <v-dialog max-width="500px">
@@ -258,39 +258,36 @@
                   alt="카드상단이미지"
                 >
                 </v-img>
-                <v-layout column style="height: 40vh">
-                  <v-flex style="overflow: auto">
-                    <v-data-table
-                      :headers="ClassHeaders"
-                      :items="userlectureList"
-                      :page.sync="page3"
-                      :items-per-page="6"
-                      hide-default-footer
-                      class="elevation-1 table100"
-                      @page-count="pageCount3 = $event"
-                    >
-                    <template v-slot:item.orderDate="{ item }">
-                      {{ $moment(item.subscribedTime).format("YYYY-MM-DD-HH-MM") }}
-                    </template>
-                      <template v-slot:item.lectureName="{ item }">
-                        <div class="mouse" @click="navigateTolect(item)">
-                          {{ item.lectureTitle }}
-                        </div>
-                      </template>
-                      <template v-slot:item.image="{ item }">
-                        <div>
-                          <v-img
-                            :src="
-                              `http://i.ytimg.com/vi/${item.lectureImageSrc}/default.jpg`
-                            "
-                            :alt="item.lectureTitle"
-                            height="40px"
-                            width="50px"
-                          />
-                        </div>
-                      </template>
-                    </v-data-table> </v-flex
-                ></v-layout>
+                 <v-layout column style="height: 40vh">
+                <v-flex style="overflow: auto">
+                <v-data-table
+                  :headers="ClassHeaders"
+                  :items="userlectureList"
+                  :page.sync="page3"
+                  :items-per-page="6"
+                  hide-default-footer
+                  class="elevation-1 table100"
+                  @page-count="pageCount3 = $event"
+                >
+                  <template v-slot:item.lectureName="{ item }">
+                    <div @click="navigateTolect(item)" style="cursor: pointer">
+                      {{ item.lectureTitle }}
+                    </div>
+                  </template>
+                  <template v-slot:item.image="{ item }">
+                    <div>
+                      <v-img
+                        :src="
+                          `http://i.ytimg.com/vi/${item.lectureImageSrc}/default.jpg`
+                        "
+                        :alt="item.lectureTitle"
+                        height="40px"
+                        width="50px"
+                      />
+                    </div>
+                  </template>
+                </v-data-table>
+                </v-flex></v-layout>
                 <div class="text-xs-center pt-2">
                   <v-pagination
                     color="#e4f19b"
@@ -411,9 +408,9 @@ export default {
 
       if (result.status == 200) {
         this.userPurchaseList = result.data;
-        console.log(result.data);
+        // console.log(result.data);
       }
-      console.log(this.userPurchaseList);
+      // console.log(this.userPurchaseList);
     },
     //레시피리스트호출
     async getRecipeList() {
@@ -421,7 +418,7 @@ export default {
 
       if (result.status == 200) {
         this.userRecipeList = result.data;
-        console.log(result.data);
+        // console.log(result.data);
       }
     },
     //구독리스트호출
@@ -429,9 +426,9 @@ export default {
       const result = await api.lecturelist();
       if (result.status == 200) {
         this.userlectureList = result.data;
-        console.log(result.data);
+        // console.log(result.data);
       }
-      console.log(this.userlectureList);
+      // console.log(this.userlectureList);
     },
     //레시피등록페이지로 이동
     navigate() {
@@ -443,7 +440,7 @@ export default {
         name: "MypageRecipyDetail",
         params: { recipeId: item.recipeId }
       });
-      //    console.log(item.recipeId);
+      //    // console.log(item.recipeId);
     },
     //레시피 삭제
     async deleteitem(item) {

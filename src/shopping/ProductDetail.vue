@@ -159,12 +159,12 @@ export default {
       if (result.status == 200) {
         this.productDetail = result.data;
       }
-      console.log(result.data);
+      // console.log(result.data);
     },
     async addCart() {
       const result = await api.addCart({ product: { ...this.productDetail } });
       if (result.status == 200) {
-        console.log(result.data);
+        // console.log(result.data);
       }
     },
     moveToMarket() {

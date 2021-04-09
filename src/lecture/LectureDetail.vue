@@ -3,7 +3,7 @@
 </style>
 
 <template>
-  <div>
+  <div class="lecture">
     <v-container>
       <v-row justify="center" v-bind="item">
         <!-- UI -->
@@ -112,6 +112,7 @@
               />
             </v-card-actions>
             <v-card-actions>
+              
               <v-btn
                 depressed
                 block
@@ -121,25 +122,28 @@
               >
                 로그인이 필요합니다
               </v-btn>
+
               <v-btn
                 depressed
                 block
                 color="green lighten-1"
-                v-if="!needLogin && !needSubscribe"
-                @click="loginCheck()"
+                v-else-if="!needLogin && needSubscribe"
+                @click="subscribe()"
               >
                 강의 구독
               </v-btn>
+              
               <v-btn
                 depressed
                 block
                 class="white--text"
                 color="pink"
-                v-if="!needLogin && needSubscribe"
+                v-else-if="!needLogin && !needSubscribe"
                 @click="navigateToViewer(item)"
               >
                 강의 시청
               </v-btn>
+            
             </v-card-actions>
           </v-card>
         </v-col>
@@ -268,13 +272,13 @@ export default {
     },
     subscribe() {
       const id = this.$route.params.id;
-      console.log("Subscribing! : " + id);
+      // console.log("Subscribing! : " + id);
       api.subscribe(id);
       this.needSubscribe = !this.needSubscribe;
     },
     unSubscribe() {
       const id = this.$route.params.id;
-      console.log("unSubscribing! : " + id);
+      // console.log("unSubscribing! : " + id);
       api.unSubscribe(id);
       this.needSubscribe = !this.needSubscribe;
     },
@@ -285,11 +289,11 @@ export default {
       this.$router.push("/Lecture");
     },
     navigateToViewer(item) {
-      console.log("진행한다 " + item.id);
+      // console.log("진행한다 " + item.id);
       this.$router.push(`/Lecture/Play/${item.id}`);
     },
     loginCheck(){
-      console.log("check");
+      // console.log("check");
       this.requireAuth=true;
     },
     async getItem() {
@@ -302,10 +306,10 @@ export default {
       }
       this.item = this.lectureList[id - 1];
       const userId = this.profile.id
-      console.log("display : " + this.item.id);
+      // console.log("display : " + this.item.id);
 
       if(userId != null){
-        console.log("userId is not null");
+        // console.log("userId is not null");
         this.needLogin = !this.needLogin;
         this.getSubscribed();
       }
@@ -330,7 +334,8 @@ export default {
       const id = this.$route.params.id;
       const results = await api.information(id);
       if (results.status == 200) {
-        this.needSubscribe = results.data;
+        this.needSubscribe = !results.data;
+        console.log(!results.data)
         console.log("needSubscribe? : " + this.needSubscribe);
       }
     }

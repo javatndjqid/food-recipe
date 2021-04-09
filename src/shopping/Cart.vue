@@ -103,8 +103,8 @@ export default {
           this.nullCart = "상품이 없습니다.";
         }
       }
-      console.log(sumPrice);
-      console.log(this.cartList);
+      // console.log(sumPrice);
+      // console.log(this.cartList);
     },
     async removeCart(item) {
       const result = await api.removeCart(item.id);
@@ -114,10 +114,10 @@ export default {
       }
     },
     async purchase() {
-      console.log(this.cartList);
+      // console.log(this.cartList);
       if (this.cartList.length != 0) {
         const result = await api.purchase();
-        console.log(result.data);
+        // console.log(result.data);
         if (result.status == 200) {
           this.cartList.splice(this.cartList);
           this.getCartList();

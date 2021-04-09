@@ -45,7 +45,7 @@ export default {
         this.moveToManager();
       } else {
         this.hint = "❌비밀번호가 일치하지 않습니다.❌";
-        console.log("비밀번호 불일치");
+        // console.log("비밀번호 불일치");
       }
     },
   },

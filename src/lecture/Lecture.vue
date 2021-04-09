@@ -3,7 +3,7 @@
 </style>
 
 <template>
-  <div>
+  <div class="lecture">
     <!-- <v-toolbar dark color="red" height="40px">
       <v-autocomplete
         v-model="select"
@@ -111,7 +111,7 @@ export default {
     },
     async getItem() {
       const results = await api.list();
-      console.log("Welcome!");
+      // console.log("Welcome!");
       if (results.status == 200) {
         this.lectureList = results.data.reverse();
         // console.log(this.lectureList);

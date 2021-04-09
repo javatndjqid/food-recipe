@@ -304,7 +304,7 @@ export default {
      // this.recipe.userId = this.profile.userId;
       const recipedata = this.recipe;
 
-      console.log(recipedata);
+      // console.log(recipedata);
 
       const result = await api.postrecipelist(recipedata);
       if (result.status == 200) {
@@ -325,7 +325,7 @@ export default {
           form.append("data",this.file.recipeProcedure[index].recipeProcedureImage);
           api.uploadFile2(recipe.id, form);
         })
-        //  console.log(this.file.recipeProcedure);
+        //  // console.log(this.file.recipeProcedure);
         // for(const procedure of result.data.recipeProcedure){
         //   const form = new FormData();
         //   form.append("data2", this.file.recipeProcedure.recipeProcedureImage);
@@ -340,12 +340,12 @@ export default {
 
     async getRecipeData() {
       const result = await api.stufflist();
-      //  console.log(result.data[0].stuffName);
+      //  // console.log(result.data[0].stuffName);
 
       for (let i = 0; i < result.data.length; i++) {
         this.stuffs.push(result.data[i].stuffName);
       }
-      //   console.log(this.stuffs);
+      //   // console.log(this.stuffs);
     },
     async getCategoryData() {
       const result = await api.categorylist();
