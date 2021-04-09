@@ -27,7 +27,7 @@
       <!-- 반응형 grid Layout 컨테이너 -->
       <v-container>
         <v-row justify="center">
-          <v-col cols="12" md="3" v-for="(item, i) in calData" :key="i">
+          <v-col cols="12" lg="3" md="4" v-for="(item, i) in calData" :key="i">
             <v-card min-height="360px" color="#eeeeee">
               <!-- https://vuetifyjs.com/en/components/cards/#card-reveal -->
               <v-card-actions>

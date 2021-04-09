@@ -36,18 +36,21 @@
       </v-btn>
     </v-container>
     <v-container>
+      <div>
       <v-row justify="start">
         <v-btn class="mt-6" text color="white" @click="moveToLock()">
           관리자
         </v-btn>
       </v-row>
+      </div>
+      <div>
       <v-row justify="center">
         <v-btn
           depressed
           color="red"
           dark
           small
-          :style="{ marginLeft: '0px' }"
+          :style="{ marginLeft: '0px',marginTop: '10px'  }"
           @click="getProductList()"
         >
           전체보기
@@ -57,7 +60,7 @@
           color="red"
           dark
           small
-          :style="{ marginLeft: '10px' }"
+          :style="{ marginLeft: '10px',marginTop: '10px'  }"
           @click="findByCategory(1)"
         >
           채소
@@ -67,7 +70,7 @@
           color="red"
           dark
           small
-          :style="{ marginLeft: '10px' }"
+          :style="{ marginLeft: '10px',marginTop: '10px'  }"
           @click="findByCategory(2)"
         >
           과일·견과·쌀
@@ -77,7 +80,7 @@
           color="red"
           dark
           small
-          :style="{ marginLeft: '10px' }"
+          :style="{ marginLeft: '10px' ,marginTop: '10px' }"
           @click="findByCategory(3)"
         >
           수산·해산·건어물
@@ -87,7 +90,7 @@
           color="red"
           dark
           small
-          :style="{ marginLeft: '10px' }"
+          :style="{ marginLeft: '10px',marginTop: '10px'  }"
           @click="findByCategory(4)"
         >
           정육·계란
@@ -97,26 +100,29 @@
           color="red"
           dark
           small
-          :style="{ marginLeft: '10px' }"
+          :style="{ marginLeft: '10px',marginTop: '10px', marginRight: '10px'}"
           @click="findByCategory(5)"
         >
           면·양념·오일
         </v-btn>
       </v-row>
+      </div>
+      <div>
       <v-row justify="end">
         <v-btn
           text
           icon
           color="red"
           dark
-          style="margin-top: -50px"
+         :style="{ marginRight: '0px',marginBottom: '10px' }"
           @click="moveToCart()"
         >
           <v-icon size="65">mdi-cart</v-icon>
         </v-btn>
       </v-row>
+      </div>
       <v-row justify="center" :style="{ marginTop: '10px' }">
-        <v-col cols="6" md="3" v-for="(item, i) in productList" :key="i">
+        <v-col cols="6" lg="3" md="4" v-for="(item, i) in productList" :key="i">
           <v-card
             flat
             style="cursor: pointer"

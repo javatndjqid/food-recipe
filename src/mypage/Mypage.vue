@@ -73,7 +73,7 @@
   <v-img src="./tablecloth.jpg" alt="배경" height="”bgHeight”">
     <v-container>
       <v-row>
-        <v-col cols="12" md="12" lg="5" xs="12" xl="4">
+        <v-col cols="12" md="12" lg="12" xs="12" xl="4">
           <template>
             <v-card class="overflow-y-auto" elevation="10" height="80vh">
               <v-card-subtitle class="elevation-1  table1" dark
@@ -158,7 +158,7 @@
           </template>
         </v-col>
 
-        <v-col cols="12" md="12" lg="4" xl="4">
+        <v-col cols="12" md="12" lg="6" xl="4">
           <template>
             <v-card height="80vh" class="overflow-y-auto" elevation="10">
               <v-card-subtitle class="elevation-1 table2"
@@ -177,7 +177,7 @@
                 :headers="MarketHeaders"
                 :items="userPurchaseList"
                 :page.sync="page2"
-                :items-per-page="5"
+                :items-per-page="4"
                 hide-default-footer
                 class="elevation-1 table100"
                 @page-count="pageCount2 = $event"
@@ -189,11 +189,11 @@
                   <v-img
                     :src="item.orderProduct[0].productTitleImage"
                     :alt="item.orderProduct[0].productName"
-                    height="40px"
-                    width="50px"
+                    height="60"
+                          width="150"
                   />
                 </template>
-                <template v-slot:item.productName="{ item }">
+                <!-- <template v-slot:item.productName="{ item }">
                   {{ item.orderProduct[0].productName }}
                   {{ item.orderProduct.length != 1 ? "외" : null }}
                   {{
@@ -201,7 +201,7 @@
                       ? item.orderProduct.length - 1
                       : null
                   }}
-                </template>
+                </template> -->
 
                     <template v-slot:item.productName="{ item }">
                       <v-dialog max-width="500px">
@@ -244,7 +244,7 @@
             </v-card>
           </template>
         </v-col>
-        <v-col cols="12" md="12" lg="3" xl="4">
+        <v-col cols="12" md="12" lg="6" xl="4">
           <template>
             <template>
               <v-card class="overflow-y-auto" elevation="10" height="80vh">
@@ -264,7 +264,7 @@
                   :headers="ClassHeaders"
                   :items="userlectureList"
                   :page.sync="page3"
-                  :items-per-page="6"
+                  :items-per-page="4"
                   hide-default-footer
                   class="elevation-1 table100"
                   @page-count="pageCount3 = $event"
@@ -281,11 +281,14 @@
                           `http://i.ytimg.com/vi/${item.lectureImageSrc}/default.jpg`
                         "
                         :alt="item.lectureTitle"
-                        height="40px"
-                        width="50px"
+                        height="60"
+                          width="150"
                       />
                     </div>
                   </template>
+                       <template v-slot:item.orderDate="{ item }">
+                  {{ $moment(item.subscribedTime).format("YYYY-MM-DD / HH:mm") }}
+                </template>
                 </v-data-table>
                 </v-flex></v-layout>
                 <div class="text-xs-center pt-2">
@@ -451,6 +454,6 @@ export default {
         // this.userRecipeList.splice(this.userRecipeList.indexOf(item), 1);
       }
     }
-  }
+   }
 };
 </script>
