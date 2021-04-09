@@ -17,10 +17,10 @@ export default {
 
   methods: {
     moveToProductManagement() {
-      this.$router.push("/ProductManagement");
+      this.$router.push("/Shopping/ProductManagement");
     },
     moveToOrderList() {
-      this.$router.push("/OrderList");
+      this.$router.push("/Shopping/OrderList");
     },
   },
 };
