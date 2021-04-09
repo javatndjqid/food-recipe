@@ -1,31 +1,5 @@
 <style>
-.Aligner {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.Aligner-item {
-  max-width: 50%;
-}
-
-.Aligner-item--top {
-  align-self: flex-start;
-}
-@font-face {
-  font-family: "yg-jalnan";
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff")
-    format("woff");
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
-  font-family: "ELAND_Nice_M";
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts-20-12@1.0/ELAND_Nice_M.woff")
-    format("woff");
-  font-weight: normal;
-  font-style: normal;
-}
+@import "./textstyle.css";
 </style>
 <template>
   <div style="color: gray">
@@ -64,17 +38,9 @@
         <v-card style="margin-top: 30px">
           <v-card-title>재료</v-card-title>
           <v-divider></v-divider>
-          <!-- <v-list-item>
-          <v-list-item-title v-for="(item, i) in stuffs" :key="i"
-            >{{ item.stuff }} {{ item.quentity }}</v-list-item-title
-          >
-        </v-list-item> -->
-          <!-- <v-list>
-            <v-list-item class="Aligner"> -->
           <v-row align="start" justify="center">
             <v-col cols="12" md="4" v-for="(items, i) in stuffs" :key="i">
               <v-simple-table dense>
-                <!-- <template v-slot:default> -->
                 <thead style="background-color: blue">
                   <tr>
                     <th class="white--text">Stuff</th>
@@ -87,12 +53,9 @@
                     <td>{{ item.quantity }}</td>
                   </tr>
                 </tbody>
-                <!-- </template> -->
               </v-simple-table>
             </v-col>
           </v-row>
-          <!-- </v-list-item>
-          </v-list> -->
         </v-card>
 
         <v-card
@@ -100,9 +63,6 @@
           v-for="(item, i) in recipe.recipeProcedure"
           :key="i"
         >
-          <!-- <v-list>
-              <v-list-item> -->
-          <!-- <v-list-item-action>{{ i + 1 }}</v-list-item-action> -->
           <v-row align="center" justify="center">
             <v-col cols="12" md="8">
               <v-card-text style="font-size: 15pt">
@@ -187,15 +147,10 @@ export default {
   },
   methods: {
     async getRecipeData() {
-      // console.log("===== this.$rouute.query.id =====");
-      // console.log(this.$route.query.id);
       const id = this.$route.query.id;
-      // console.log(id);
       const result = await api.detail(id);
       if (result.status == 200) {
         this.recipe = result.data;
-        // console.log("===== this.recipe =====");
-        // console.log(this.recipe);
         // 'https://3.bp.blogspot.com/-ZKBbW7TmQD4/U6P_DTbE2MI/AAAAAAAADjg/wdhBRyLv5e8/s1600/noimg.gif'
         if (
           this.recipe.image == null ||
@@ -233,16 +188,12 @@ export default {
       const results = await api.lectureList(this.recipe.category);
       if (results.status == 200) {
         this.lectures = results.data;
-        // console.log("===== this.lectures =====");
-        // console.log(this.lectures);
       }
     },
     async getProductData() {
       const results = await api.productList(this.recipe.stuffRecipe);
       if (results.status == 200) {
         this.products = results.data;
-        // console.log("===== this.products =====");
-        // console.log(this.products);
       }
     },
   },
