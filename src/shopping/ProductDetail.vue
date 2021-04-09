@@ -171,7 +171,7 @@ export default {
       this.$router.push("/Shopping");
     },
     moveToCart() {
-      this.$router.push("/Cart");
+      this.$router.push("/Shopping/Cart");
     },
     onScroll(e) {
       if (typeof window === "undefined") return;

@@ -324,7 +324,7 @@ export default {
       }
     },
     moveToManager() {
-      this.$router.push("/Manager");
+      this.$router.push("/Shopping/Manager");
     },
   },
 };

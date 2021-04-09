@@ -77,7 +77,7 @@ export default {
   }),
   methods: {
     moveToCart() {
-      this.$router.push("/Cart");
+      this.$router.push("/Shopping/Cart");
     },
   },
 };

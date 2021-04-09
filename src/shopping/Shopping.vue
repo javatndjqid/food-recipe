@@ -229,7 +229,7 @@ export default {
     },
 
     moveToCart() {
-      this.$router.push("/Cart");
+      this.$router.push("/Shopping/Cart");
     },
     moveToDetail(item) {
       this.$router.push({
@@ -238,10 +238,10 @@ export default {
       });
     },
     moveToManager() {
-      this.$router.push("/Manager");
+      this.$router.push("/Shopping/Manager");
     },
     moveToLock() {
-      this.$router.push("/Lock");
+      this.$router.push("/Shopping/Lock");
     },
     onScroll(e) {
       if (typeof window === "undefined") return;
