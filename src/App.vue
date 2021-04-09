@@ -120,6 +120,7 @@
 
 <script>
 import cookie from "@/plugins/cookie";
+import {mapState, mapActions, mapGetters} from 'vuex';
 export default {
   name: "App",
   // components: {
@@ -146,22 +147,29 @@ export default {
     this.selectItem();
     //   this.$store.dispatch("profile/setProfile");
 
-      console.log("App.vue "+ this.getRoute);
+      console.log("App.vue "+ this.routePath);
   },
   computed: {
     profile() {
       console.log(this.$store.state.profile.data);
       return this.$store.state.profile.data;
     },
-    getRoute() {
+    routePath() {
       console.log("App.vue.getRouteComputed "+ this.$store.state.msName)
       return this.$store.state.msName;
     }, 
+    ...mapState({msName: state=>state.route.msName}),
+    ...mapGetters('route',{routePath: 'get_route'})
   },
   methods: {
+    ...mapActions('route',['setRoute']),
     changedName(){
-      this.$store.dispatch("callMutation",{newPath: this.getRoute})
+      this.$store.dispatch("callMutation",{newPath: this.routePath})
+
+      console.log("callMutation" + this.routePath)
     },
+
+
     signOut() {
       this.$store.dispatch("profile/signout");
       console.log(this.profile);
