@@ -1,4 +1,50 @@
 <style>
+.table3  {
+    font-family: "yg-jalnan";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-size: 23px;
+  line-height: 1.4;
+  text-transform: uppercase;
+  background-color: #e4f19b;
+}
+.table2  {
+    font-family: "yg-jalnan";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-size: 23px;
+  line-height: 1.4;
+  text-transform: uppercase;
+  background-color: #81cafb;
+}
+.table1  {
+    font-family: "yg-jalnan";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-size: 23px;
+  line-height: 1.4;
+  text-transform: uppercase;
+  background-color: #a2f19b;
+}
+.table100  {
+    font-family: "yg-jalnan";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-size: 15px;
+  color: rgb(218, 70, 70);
+  line-height: 1.4;
+  text-transform: uppercase;
+
+  background-color: #9478f1;
+}
 .Aligner {
   display: flex;
   align-items: center;
@@ -22,19 +68,20 @@
 </style>
 <template>
   <v-img src="./tablecloth.jpg" alt="배경" height="”bgHeight”">
-    <v-container color="primary">
+    <v-container>
+      <v-card>
       <v-row>
-        <v-col cols="12" md="12" lg="5" xs="12" xl="12">
+        <v-col cols="12" md="12" lg="5" xs="12" xl="4">
           <template>
-            <v-card color="#eeeeee" class="overflow-y-auto" elevation="10" height="80vh">
-              <v-card-subtitle>나의 레시피</v-card-subtitle>
+            <v-card  class="overflow-y-auto" elevation="10" height="80vh">
+              <v-card-subtitle class="elevation-1  table1" dark>나의 레시피</v-card-subtitle>
               <v-img
                 class="white--text align-end"
                 height="150px"
                 src="https://image.freepik.com/free-vector/healthy-recipe-illustration-concept_23-2148576281.jpg"
                 alt="카드상단이미지"
               />
-              <v-layout column style="height: 43vh">
+              <v-layout column style="height: 40vh">
                 <v-flex style="overflow: auto">
                   <v-data-table
                     fill-height
@@ -43,7 +90,7 @@
                     :page.sync="page"
                     :items-per-page="4"
                     hide-default-footer
-                    class="elevation-1"
+                    class="elevation-1 table100"
                     @page-count="pageCount = $event"
                   >
                     <template v-slot:item.recipeId:="props">
@@ -86,7 +133,7 @@
               >
               <div class="pa-2">
                 <v-pagination
-                  color="#FF6347"
+                  color="#a2f19b"
                   :total-visible="5"
                   v-model="page"
                   :length="pageCount"
@@ -95,7 +142,7 @@
               </div>
             </v-card>
             <v-row cols="12" justify="end">
-              <v-btn @click="navigate()" class="mx-2" fab dark color="cyan">
+              <v-btn @click="navigate()" class="mx-2" fab dark color="#67c0fc">
                 <v-icon> mdi-playlist-plus </v-icon>
               </v-btn>
             </v-row>
@@ -106,11 +153,11 @@
           <template>
             <v-card
               height="80vh"
-              color="#eeeeee"
+              
               class="overflow-y-auto"
               elevation="10"
             >
-              <v-card-subtitle>쇼핑 리스트</v-card-subtitle>
+              <v-card-subtitle  class="elevation-1 table2">쇼핑 리스트</v-card-subtitle>
               <v-img
                 class="white--text align-end"
                 height="150px"
@@ -118,7 +165,7 @@
                 alt="카드상단이미지"
               >
               </v-img>
-              <v-layout column style="height: 43vh">
+              <v-layout column style="height: 40vh">
                 <v-flex style="overflow: auto">
               <v-data-table
                 :headers="MarketHeaders"
@@ -126,7 +173,7 @@
                 :page.sync="page2"
                 :items-per-page="5"
                 hide-default-footer
-                class="elevation-1"
+                class="elevation-1 table100"
                 @page-count="pageCount2 = $event"
               >
                 <template v-slot:item.orderDate="{ item }">
@@ -172,7 +219,7 @@
                 </v-flex></v-layout>
               <div class="text-xs-center pt-2">
                 <v-pagination
-                  color="#FF6347"
+                  color="#9bcff1"
                   circle
                   :total-visible="5"
                   v-model="page2"
@@ -187,12 +234,12 @@
           <template>
             <template>
               <v-card
-                color="#eeeeee"
+                
                 class="overflow-y-auto"
                 elevation="10"
                 height="80vh"
               >
-                <v-card-subtitle>나의 강의</v-card-subtitle>
+                <v-card-subtitle class="elevation-1 table3">나의 강의</v-card-subtitle>
                 <v-img
                   class="white--text align-end"
                   height="150px"
@@ -200,7 +247,7 @@
                   alt="카드상단이미지"
                 >
                 </v-img>
-                 <v-layout column style="height: 43vh">
+                 <v-layout column style="height: 40vh">
                 <v-flex style="overflow: auto">
                 <v-data-table
                   :headers="ClassHeaders"
@@ -208,7 +255,7 @@
                   :page.sync="page3"
                   :items-per-page="6"
                   hide-default-footer
-                  class="elevation-1"
+                  class="elevation-1 table100"
                   @page-count="pageCount3 = $event"
                 >
                   <template v-slot:item.lectureName="{ item }">
@@ -232,7 +279,7 @@
                 </v-flex></v-layout>
                 <div class="text-xs-center pt-2">
                   <v-pagination
-                    color="#FF6347"
+                    color="#e4f19b"
                     circle
                     :total-visible="5"
                     v-model="page3"
@@ -244,6 +291,7 @@
           </template>
         </v-col>
       </v-row>
+      </v-card>
     </v-container>
   </v-img>
 </template>
@@ -257,7 +305,7 @@ export default {
         text: "No.",
         align: "start",
         value: "sno",
-        class: "elevation-1"
+        
       },
       {
         text: "레시피 사진",
@@ -320,15 +368,15 @@ export default {
     pageCount3: 0
   }),
   mounted() {
-//    this.$store.dispatch("profile/setProfile");
+   this.$store.dispatch("profile/setProfile");
     this.getlecturelist();
     this.getRecipeList();
     this.getpurchaselist();
   },
   computed: {
-    // profile() {
-    //   return this.$store.state.profile.data;
-    // },
+    profile() {
+      return this.$store.state.profile.data;
+    },
     items() {
       return Array.from({ length: this.length }, (k, v) => v + 1);
     },
@@ -350,9 +398,9 @@ export default {
 
       if (result.status == 200) {
         this.userPurchaseList = result.data;
-        console.log(result.data);
+        // console.log(result.data);
       }
-      console.log(this.userPurchaseList);
+      // console.log(this.userPurchaseList);
     },
     //레시피리스트호출
     async getRecipeList() {
@@ -360,7 +408,7 @@ export default {
 
       if (result.status == 200) {
         this.userRecipeList = result.data;
-        console.log(result.data);
+        // console.log(result.data);
       }
     },
     //구독리스트호출
@@ -368,21 +416,21 @@ export default {
       const result = await api.lecturelist();
       if (result.status == 200) {
         this.userlectureList = result.data;
-        console.log(result.data);
+        // console.log(result.data);
       }
-      console.log(this.userlectureList);
+      // console.log(this.userlectureList);
     },
     //레시피등록페이지로 이동
     navigate() {
       this.$router.push("/MypageRecipy");
     },
-    //레시피 상세 화면으로 이동
+  //   //레시피 상세 화면으로 이동
     navigateTo(item) {
       this.$router.push({
         name: "MypageRecipyDetail",
         params: { recipeId: item.recipeId }
       });
-      //    console.log(item.recipeId);
+      //    // console.log(item.recipeId);
     },
     //레시피 삭제
     async deleteitem(item) {
@@ -393,6 +441,6 @@ export default {
         // this.userRecipeList.splice(this.userRecipeList.indexOf(item), 1);
       }
     }
-  }
+   }
 };
 </script>

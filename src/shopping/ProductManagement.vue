@@ -261,7 +261,7 @@ export default {
       const product = this.newProduct;
       const result = await api.addProduct(product);
       if (result.status == 200) {
-        console.log("추가완료");
+        // console.log("추가완료");
       }
       this.getProductList();
       this.newProduct = "";
@@ -273,7 +273,7 @@ export default {
       }
     },
     async findByStuff() {
-      console.log(this.stuff);
+      // console.log(this.stuff);
       const result = await api.findByStuff(this.stuff);
       if (result.status == 200) {
         this.productList = result.data;
@@ -281,7 +281,7 @@ export default {
       }
     },
     async findByName() {
-      console.log(this.stuff);
+      // console.log(this.stuff);
       const result = await api.findByName(this.stuff);
       if (result.status == 200) {
         this.productList = result.data;

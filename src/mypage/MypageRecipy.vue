@@ -1,3 +1,17 @@
+<style>
+.back  {
+  font-family: "yg-jalnan";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff")
+  format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-size: 26px;
+  line-height: 1;
+  text-transform: uppercase;
+  background-color: #f5f5f5;
+}
+
+</style>
 <template>
   <v-img src="./kitchen.png" alt="배경이미지" height="”bgHeight”">
     <v-container id="user-profile-view" fluid tag="section">
@@ -5,11 +19,10 @@
         <v-col cols="12" md="8">
           <v-card color="glay" elevation="10" filled rounded dense>
             <v-form>
-              <v-container class="py-0">
+              <v-container class="py-0 back">
                 <v-row>
                   <v-col cols="12" md="8">
                     <v-text-field
-                      dark
                       disabled
                       label="당신의 레시피를 등록하세요"
                     />
@@ -291,7 +304,7 @@ export default {
      // this.recipe.userId = this.profile.userId;
       const recipedata = this.recipe;
 
-      console.log(recipedata);
+      // console.log(recipedata);
 
       const result = await api.postrecipelist(recipedata);
       if (result.status == 200) {
@@ -312,7 +325,7 @@ export default {
           form.append("data",this.file.recipeProcedure[index].recipeProcedureImage);
           api.uploadFile2(recipe.id, form);
         })
-        //  console.log(this.file.recipeProcedure);
+        //  // console.log(this.file.recipeProcedure);
         // for(const procedure of result.data.recipeProcedure){
         //   const form = new FormData();
         //   form.append("data2", this.file.recipeProcedure.recipeProcedureImage);
@@ -327,12 +340,12 @@ export default {
 
     async getRecipeData() {
       const result = await api.stufflist();
-      //  console.log(result.data[0].stuffName);
+      //  // console.log(result.data[0].stuffName);
 
       for (let i = 0; i < result.data.length; i++) {
         this.stuffs.push(result.data[i].stuffName);
       }
-      //   console.log(this.stuffs);
+      //   // console.log(this.stuffs);
     },
     async getCategoryData() {
       const result = await api.categorylist();
