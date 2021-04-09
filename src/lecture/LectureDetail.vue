@@ -33,7 +33,7 @@
                 @click="dialog = true"
                 >구독 취소</v-btn
               >
-              <v-dialog v-model="dialog" width="400px">
+              <v-dialog persistent v-model="dialog" width="400px">
                 <v-card>
                   <v-card-title
                     class="justify-center align-content-center headline grey lighten-2"
@@ -68,7 +68,7 @@
               </v-dialog>
 
               
-              <v-dialog v-model="requireAuth" width="400px">
+              <v-dialog persistent v-model="requireAuth" width="400px">
                 <v-card>
                   <v-card-title
                     class="justify-center align-content-center headline grey lighten-2"
@@ -335,8 +335,8 @@ export default {
       const results = await api.information(id);
       if (results.status == 200) {
         this.needSubscribe = !results.data;
-        console.log(!results.data)
-        console.log("needSubscribe? : " + this.needSubscribe);
+        // console.log(!results.data)
+        // console.log("needSubscribe? : " + this.needSubscribe);
       }
     }
   }
