@@ -1,3 +1,17 @@
+<style>
+.back  {
+  font-family: "yg-jalnan";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff")
+  format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-size: 26px;
+  line-height: 1;
+  text-transform: uppercase;
+  background-color: #f5f5f5;
+}
+
+</style>
 <template>
   <v-img src="./kitchen.png" alt="배경이미지" height="”bgHeight”">
     <v-container id="user-profile-view" fluid tag="section">
@@ -5,11 +19,10 @@
         <v-col cols="12" md="8">
           <v-card color="glay" elevation="10" filled rounded dense>
             <v-form>
-              <v-container class="py-0">
+              <v-container class="py-0 back">
                 <v-row>
                   <v-col cols="12" md="8">
                     <v-text-field
-                      dark
                       disabled
                       label="당신의 레시피를 등록하세요"
                     />
