@@ -161,13 +161,13 @@ export default {
     addChip() {
       if (this.select == null || this.chips.indexOf(this.select) > -1) return;
       this.chips.push(this.select);
-      console.log(this.chips);
-      console.log(this.radio);
+      // console.log(this.chips);
+      // console.log(this.radio);
       this.recipeFilter(this.chips);
       this.page = 1;
     },
     movePage() {
-      console.log(this.page);
+      // console.log(this.page);
       this.recipeFilter(this.chips);
     },
     async recipeFilter(chips) {
@@ -190,8 +190,8 @@ export default {
     // },
     delChip(i) {
       this.chips.splice(i, 1);
-      console.log(this.chips.length);
-      console.log(this.radio.id);
+      // console.log(this.chips.length);
+      // console.log(this.radio.id);
       this.chips.length == 0
         ? this.selectRadio(this.radio)
         : this.recipeFilter(this.chips);
@@ -202,7 +202,7 @@ export default {
         name: "SearchDetail",
         query: { id: item.recipeId },
       });
-      console.log(item);
+      // console.log(item);
       // this.$router.push({ name: "SearchDetail", params: { id: 3 } });
     },
     selectRadio(category) {
@@ -231,7 +231,7 @@ export default {
       }
     },
     async getImage() {
-      console.log(this.recipe);
+      // console.log(this.recipe);
       for (let i in this.recipe) {
         if (
           this.recipe[i].image == "" ||
@@ -240,10 +240,10 @@ export default {
         ) {
           const result = await api.detail(this.recipe[i].recipeId);
           if (result.status == 200) {
-            console.log("===== recipefile ======");
-            console.log(result.data);
+            // console.log("===== recipefile ======");
+            // console.log(result.data);
             if (result.data[0].recipefile[0] == null) continue;
-            // console.log(result.data[0].recipefile[0].dataUrl);
+            // // console.log(result.data[0].recipefile[0].dataUrl);
             // this.recipe[n].image = result.data[0].recipefile[0].dataUrl;
             // return this.recipe[n].image;
             this.recipe[i].image = result.data[0].recipefile[0].dataUrl;

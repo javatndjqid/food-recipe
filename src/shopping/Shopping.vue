@@ -184,7 +184,7 @@ export default {
       }
     },
     async findByStuff() {
-      console.log(this.stuff);
+      // console.log(this.stuff);
       const result = await api.findByStuff(this.stuff);
       if (result.status == 200) {
         this.productList = result.data;
@@ -192,7 +192,7 @@ export default {
       }
     },
     async findByName() {
-      console.log(this.stuff);
+      // console.log(this.stuff);
       const result = await api.findByName(this.stuff);
       if (result.status == 200) {
         this.productList = result.data;

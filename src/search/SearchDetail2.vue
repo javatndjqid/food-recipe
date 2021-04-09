@@ -276,17 +276,17 @@ export default {
   methods: {
     sliceList() {
       this.stuff1 = this.stuffs.slice(0, this.stuffs.length / 3 + 1);
-      console.log("===== this.stuff1 =====");
-      console.log(this.stuff1);
+      // console.log("===== this.stuff1 =====");
+      // console.log(this.stuff1);
       this.stuff2 = this.stuffs.slice(
         this.stuffs.length / 3 + 1,
         (this.stuffs.length / 3) * 2 + 1
       );
-      console.log("===== this.stuff2 =====");
-      console.log(this.stuff2);
+      // console.log("===== this.stuff2 =====");
+      // console.log(this.stuff2);
       this.stuff3 = this.stuffs.slice((this.stuffs.length / 3) * 2 + 1);
-      console.log("===== this.stuff3 =====");
-      console.log(this.stuff3);
+      // console.log("===== this.stuff3 =====");
+      // console.log(this.stuff3);
     },
   },
 };

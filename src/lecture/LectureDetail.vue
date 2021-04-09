@@ -112,6 +112,7 @@
               />
             </v-card-actions>
             <v-card-actions>
+              
               <v-btn
                 depressed
                 block
@@ -121,15 +122,17 @@
               >
                 로그인이 필요합니다
               </v-btn>
+
               <v-btn
                 depressed
                 block
                 color="green lighten-1"
                 v-if="!needLogin && !needSubscribe"
-                @click="loginCheck()"
+                @click="subscribe()"
               >
                 강의 구독
               </v-btn>
+              
               <v-btn
                 depressed
                 block
@@ -140,6 +143,7 @@
               >
                 강의 시청
               </v-btn>
+            
             </v-card-actions>
           </v-card>
         </v-col>

@@ -148,14 +148,14 @@ export default {
   },
   computed: {
     profile() {
-      console.log(this.$store.state.profile.data);
+      // console.log(this.$store.state.profile.data);
       return this.$store.state.profile.data;
     },
   },
   methods: {
     signOut() {
       this.$store.dispatch("profile/signout");
-      console.log(this.profile);
+      // console.log(this.profile);
     },
 
     signIn() {

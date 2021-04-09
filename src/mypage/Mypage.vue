@@ -398,9 +398,9 @@ export default {
 
       if (result.status == 200) {
         this.userPurchaseList = result.data;
-        console.log(result.data);
+        // console.log(result.data);
       }
-      console.log(this.userPurchaseList);
+      // console.log(this.userPurchaseList);
     },
     //레시피리스트호출
     async getRecipeList() {
@@ -408,7 +408,7 @@ export default {
 
       if (result.status == 200) {
         this.userRecipeList = result.data;
-        console.log(result.data);
+        // console.log(result.data);
       }
     },
     //구독리스트호출
@@ -416,9 +416,9 @@ export default {
       const result = await api.lecturelist();
       if (result.status == 200) {
         this.userlectureList = result.data;
-        console.log(result.data);
+        // console.log(result.data);
       }
-      console.log(this.userlectureList);
+      // console.log(this.userlectureList);
     },
     //레시피등록페이지로 이동
     navigate() {
@@ -430,7 +430,7 @@ export default {
         name: "MypageRecipyDetail",
         params: { recipeId: item.recipeId }
       });
-      //    console.log(item.recipeId);
+      //    // console.log(item.recipeId);
     },
     //레시피 삭제
     async deleteitem(item) {

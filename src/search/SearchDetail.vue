@@ -187,15 +187,15 @@ export default {
   },
   methods: {
     async getRecipeData() {
-      console.log("===== this.$rouute.query.id =====");
-      console.log(this.$route.query.id);
+      // console.log("===== this.$rouute.query.id =====");
+      // console.log(this.$route.query.id);
       const id = this.$route.query.id;
-      console.log(id);
+      // console.log(id);
       const result = await api.detail(id);
       if (result.status == 200) {
         this.recipe = result.data;
-        console.log("===== this.recipe =====");
-        console.log(this.recipe);
+        // console.log("===== this.recipe =====");
+        // console.log(this.recipe);
         // 'https://3.bp.blogspot.com/-ZKBbW7TmQD4/U6P_DTbE2MI/AAAAAAAADjg/wdhBRyLv5e8/s1600/noimg.gif'
         if (
           this.recipe.image == null ||
@@ -233,16 +233,16 @@ export default {
       const results = await api.lectureList(this.recipe.category);
       if (results.status == 200) {
         this.lectures = results.data;
-        console.log("===== this.lectures =====");
-        console.log(this.lectures);
+        // console.log("===== this.lectures =====");
+        // console.log(this.lectures);
       }
     },
     async getProductData() {
       const results = await api.productList(this.recipe.stuffRecipe);
       if (results.status == 200) {
         this.products = results.data;
-        console.log("===== this.products =====");
-        console.log(this.products);
+        // console.log("===== this.products =====");
+        // console.log(this.products);
       }
     },
   },
