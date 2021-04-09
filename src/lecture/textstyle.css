@@ -118,25 +118,25 @@ table.meta td {
 }
 @media (min-width:1250px){
   .player{
-    height: 58vh
+    height: 60vh
   }
 }
 
 @media (min-width:1500px){
   .player{
-    height: 58vh;
+    height: 64vh;
   }
 }
 
 @media (min-width:1600px){
   .player{
-    height: 58vh;
+    height: 66vh;
   }
 }
 
 @media (min-width:1700px){
   .player{
-    height: 58vh;
+    height: 68vh;
   }
 }
 
