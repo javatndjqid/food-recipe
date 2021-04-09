@@ -64,21 +64,23 @@
     format("woff");
   font-weight: normal;
   font-style: normal;
+
 }
+.opacity{opacity: 0;}
 </style>
 <template>
   <v-img src="./tablecloth.jpg" alt="배경" height="”bgHeight”">
     <v-container>
-      <v-card>
+   
       <v-row>
         <v-col cols="12" md="12" lg="5" xs="12" xl="4">
           <template>
-            <v-card  class="overflow-y-auto" elevation="10" height="80vh">
+            <v-card  class="overflow-y-auto" elevation="10" height="80vh" >
               <v-card-subtitle class="elevation-1  table1" dark>나의 레시피</v-card-subtitle>
               <v-img
                 class="white--text align-end"
                 height="150px"
-                src="https://image.freepik.com/free-vector/healthy-recipe-illustration-concept_23-2148576281.jpg"
+                src="./recipe1.jpg"
                 alt="카드상단이미지"
               />
               <v-layout column style="height: 40vh">
@@ -161,7 +163,7 @@
               <v-img
                 class="white--text align-end"
                 height="150px"
-                src="https://en.pimg.jp/001/710/411/1/1710411.jpg"
+                src="./market.png"
                 alt="카드상단이미지"
               >
               </v-img>
@@ -243,7 +245,7 @@
                 <v-img
                   class="white--text align-end"
                   height="150px"
-                  src="https://cdn.crowdpic.net/list-thumb/thumb_l_756C27E1062B73D39C8E3E51165172E2.jpg"
+                  src="./lecture.jpg"
                   alt="카드상단이미지"
                 >
                 </v-img>
@@ -291,7 +293,7 @@
           </template>
         </v-col>
       </v-row>
-      </v-card>
+     
     </v-container>
   </v-img>
 </template>
