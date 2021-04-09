@@ -1,6 +1,6 @@
 <style>
-.table3  {
-    font-family: "yg-jalnan";
+.table3 {
+  font-family: "yg-jalnan";
   src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff")
     format("woff");
   font-weight: normal;
@@ -10,8 +10,8 @@
   text-transform: uppercase;
   background-color: #e4f19b;
 }
-.table2  {
-    font-family: "yg-jalnan";
+.table2 {
+  font-family: "yg-jalnan";
   src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff")
     format("woff");
   font-weight: normal;
@@ -21,8 +21,8 @@
   text-transform: uppercase;
   background-color: #81cafb;
 }
-.table1  {
-    font-family: "yg-jalnan";
+.table1 {
+  font-family: "yg-jalnan";
   src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff")
     format("woff");
   font-weight: normal;
@@ -32,8 +32,8 @@
   text-transform: uppercase;
   background-color: #a2f19b;
 }
-.table100  {
-    font-family: "yg-jalnan";
+.table100 {
+  font-family: "yg-jalnan";
   src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff")
     format("woff");
   font-weight: normal;
@@ -64,19 +64,21 @@
     format("woff");
   font-weight: normal;
   font-style: normal;
-
 }
-.opacity{opacity: 0;}
+.mouse {
+ cursor:pointer
+}
 </style>
 <template>
   <v-img src="./tablecloth.jpg" alt="배경" height="”bgHeight”">
     <v-container>
-   
       <v-row>
         <v-col cols="12" md="12" lg="5" xs="12" xl="4">
           <template>
-            <v-card  class="overflow-y-auto" elevation="10" height="80vh" >
-              <v-card-subtitle class="elevation-1  table1" dark>나의 레시피</v-card-subtitle>
+            <v-card class="overflow-y-auto" elevation="10" height="80vh">
+              <v-card-subtitle class="elevation-1  table1" dark
+                >나의 레시피</v-card-subtitle
+              >
               <v-img
                 class="white--text align-end"
                 height="150px"
@@ -116,10 +118,15 @@
                         />
                       </div>
                     </template>
-                    <template v-slot:item.details="{ item }">
+                    <!-- <template v-slot:item.details="{ item }">
                       <v-icon @click="navigateTo(item)" fab dark color="black"
                         >mdi-view-list</v-icon
                       >
+                    </template> -->
+                    <template v-slot:item.recipeName="{ item }">
+                      <div class="mouse" @click="navigateTo(item)">
+                     {{item.recipeName}}
+                     </div>
                     </template>
                     <template v-slot:item.del="{ item }">
                       <v-icon
@@ -144,7 +151,7 @@
               </div>
             </v-card>
             <v-row cols="12" justify="end">
-              <v-btn @click="navigate()" class="mx-2" fab dark color="#67c0fc">
+              <v-btn @click="navigate()" class="mx-2" fab dark color="#a2f19b">
                 <v-icon> mdi-playlist-plus </v-icon>
               </v-btn>
             </v-row>
@@ -153,13 +160,10 @@
 
         <v-col cols="12" md="12" lg="4" xl="4">
           <template>
-            <v-card
-              height="80vh"
-              
-              class="overflow-y-auto"
-              elevation="10"
-            >
-              <v-card-subtitle  class="elevation-1 table2">쇼핑 리스트</v-card-subtitle>
+            <v-card height="80vh" class="overflow-y-auto" elevation="10">
+              <v-card-subtitle class="elevation-1 table2"
+                >쇼핑 리스트</v-card-subtitle
+              >
               <v-img
                 class="white--text align-end"
                 height="150px"
@@ -169,56 +173,64 @@
               </v-img>
               <v-layout column style="height: 40vh">
                 <v-flex style="overflow: auto">
-              <v-data-table
-                :headers="MarketHeaders"
-                :items="userPurchaseList"
-                :page.sync="page2"
-                :items-per-page="5"
-                hide-default-footer
-                class="elevation-1 table100"
-                @page-count="pageCount2 = $event"
-              >
-                <template v-slot:item.orderDate="{ item }">
-                  {{ $moment(item.orderDate).format("YYYY-MM-DD-HH-MM") }}
-                </template>
-                <template v-slot:item.image="{ item }">
-                  <v-img
-                    :src="item.orderProduct[0].productTitleImage"
-                    :alt="item.orderProduct[0].productName"
-                    height="40px"
-                    width="50px"
-                  />
-                </template>
-                <template v-slot:item.productName="{ item }">
-                  {{ item.orderProduct[0].productName }}
-                  {{ item.orderProduct.length != 1 ? "외" : null }}
-                  {{
-                    item.orderProduct.length != 1
-                      ? item.orderProduct.length - 1
-                      : null
-                  }}
-                </template>
-
-                <template v-slot:item.productNames="{ item }">
-                  <v-dialog max-width="500px">
-                    <template v-slot:activator="{ on, attrs }">
-                      <v-icon v-bind="attrs" v-on="on">
-                        mdi-format-list-bulleted
-                      </v-icon>
+                  <v-data-table
+                    :headers="MarketHeaders"
+                    :items="userPurchaseList"
+                    :page.sync="page2"
+                    :items-per-page="5"
+                    hide-default-footer
+                    class="elevation-1 table100"
+                    @page-count="pageCount2 = $event"
+                  >
+                    <template v-slot:item.orderDate="{ item }">
+                      {{ $moment(item.orderDate).format("YYYY-MM-DD-HH-MM") }}
                     </template>
-                    <v-card
-                      ><v-card-text />
-                      <v-card-text
-                        v-for="(input, i) in item.orderProduct"
-                        :key="i"
-                      >
-                        {{ input.productName }} {{ input.productQuantity }}개
-                      </v-card-text>
-                    </v-card>
-                  </v-dialog>
-                </template>
-              </v-data-table>
-                </v-flex></v-layout>
+                    <template v-slot:item.image="{ item }">
+                      <v-img
+                        :src="item.orderProduct[0].productTitleImage"
+                        :alt="item.orderProduct[0].productName"
+                        height="40px"
+                        width="50px"
+                      />
+                    </template>
+                    <!-- <template v-slot:item.productName="{ item }">
+                      {{ item.orderProduct[0].productName }}
+                      {{ item.orderProduct.length != 1 ? "외" : null }}
+                      {{
+                        item.orderProduct.length != 1
+                          ? item.orderProduct.length - 1
+                          : null
+                      }}
+                    </template> -->
+
+                    <template v-slot:item.productName="{ item }">
+                      <v-dialog max-width="500px">
+                        <template v-slot:activator="{ on, attrs }">
+                          <div v-bind="attrs" v-on="on" class="mouse">
+                             {{ item.orderProduct[0].productName }}
+                      {{ item.orderProduct.length != 1 ? "외" : null }}
+                      {{
+                        item.orderProduct.length != 1
+                          ? item.orderProduct.length - 1
+                          : null
+                      }}
+                          </div>
+                        </template>
+                        <v-card
+                          ><v-card-text />
+                          <v-card-text
+                            v-for="(input, i) in item.orderProduct"
+                            :key="i"
+                          >
+                            {{ input.productName }}
+                            {{ input.productQuantity }}개
+                          </v-card-text>
+                        </v-card>
+                      </v-dialog>
+                    </template>
+                  </v-data-table>
+                </v-flex></v-layout
+              >
               <div class="text-xs-center pt-2">
                 <v-pagination
                   color="#9bcff1"
@@ -235,13 +247,10 @@
         <v-col cols="12" md="12" lg="3" xl="4">
           <template>
             <template>
-              <v-card
-                
-                class="overflow-y-auto"
-                elevation="10"
-                height="80vh"
-              >
-                <v-card-subtitle class="elevation-1 table3">나의 강의</v-card-subtitle>
+              <v-card class="overflow-y-auto" elevation="10" height="80vh">
+                <v-card-subtitle class="elevation-1 table3"
+                  >나의 강의</v-card-subtitle
+                >
                 <v-img
                   class="white--text align-end"
                   height="150px"
@@ -249,36 +258,39 @@
                   alt="카드상단이미지"
                 >
                 </v-img>
-                 <v-layout column style="height: 40vh">
-                <v-flex style="overflow: auto">
-                <v-data-table
-                  :headers="ClassHeaders"
-                  :items="userlectureList"
-                  :page.sync="page3"
-                  :items-per-page="6"
-                  hide-default-footer
-                  class="elevation-1 table100"
-                  @page-count="pageCount3 = $event"
-                >
-                  <template v-slot:item.lectureName="{ item }">
-                    <div @click="navigateTolect(item)">
-                      {{ item.lectureTitle }}
-                    </div>
-                  </template>
-                  <template v-slot:item.image="{ item }">
-                    <div>
-                      <v-img
-                        :src="
-                          `http://i.ytimg.com/vi/${item.lectureImageSrc}/default.jpg`
-                        "
-                        :alt="item.lectureTitle"
-                        height="40px"
-                        width="50px"
-                      />
-                    </div>
-                  </template>
-                </v-data-table>
-                </v-flex></v-layout>
+                <v-layout column style="height: 40vh">
+                  <v-flex style="overflow: auto">
+                    <v-data-table
+                      :headers="ClassHeaders"
+                      :items="userlectureList"
+                      :page.sync="page3"
+                      :items-per-page="6"
+                      hide-default-footer
+                      class="elevation-1 table100"
+                      @page-count="pageCount3 = $event"
+                    >
+                    <template v-slot:item.orderDate="{ item }">
+                      {{ $moment(item.subscribedTime).format("YYYY-MM-DD-HH-MM") }}
+                    </template>
+                      <template v-slot:item.lectureName="{ item }">
+                        <div class="mouse" @click="navigateTolect(item)">
+                          {{ item.lectureTitle }}
+                        </div>
+                      </template>
+                      <template v-slot:item.image="{ item }">
+                        <div>
+                          <v-img
+                            :src="
+                              `http://i.ytimg.com/vi/${item.lectureImageSrc}/default.jpg`
+                            "
+                            :alt="item.lectureTitle"
+                            height="40px"
+                            width="50px"
+                          />
+                        </div>
+                      </template>
+                    </v-data-table> </v-flex
+                ></v-layout>
                 <div class="text-xs-center pt-2">
                   <v-pagination
                     color="#e4f19b"
@@ -293,7 +305,6 @@
           </template>
         </v-col>
       </v-row>
-     
     </v-container>
   </v-img>
 </template>
@@ -306,8 +317,7 @@ export default {
       {
         text: "No.",
         align: "start",
-        value: "sno",
-        
+        value: "sno"
       },
       {
         text: "레시피 사진",
@@ -321,13 +331,13 @@ export default {
         sortable: false,
         align: "center"
       },
-      {
-        text: "상세정보",
-        value: "details",
-        sortable: false,
+      // {
+      //   text: "상세정보",
+      //   value: "details",
+      //   sortable: false,
 
-        align: "center"
-      },
+      //   align: "center"
+      // },
       {
         text: "삭제",
         value: "del",
@@ -337,6 +347,7 @@ export default {
       }
     ],
     ClassHeaders: [
+            { text: "구독날짜", align: "start", value: "orderDate" },
       { text: "썸네일", value: "image", sortable: false, align: "center" },
       {
         text: "구독내역",
@@ -352,12 +363,12 @@ export default {
         value: "productName",
         sortable: false
       },
-      {
-        text: "상세내역",
-        value: "productNames",
-        sortable: false,
-        align: "center"
-      }
+      // {
+      //   text: "상세내역",
+      //   value: "productNames",
+      //   sortable: false,
+      //   align: "center"
+      // }
     ],
     userRecipeList: [],
     userlectureList: [],
@@ -370,7 +381,7 @@ export default {
     pageCount3: 0
   }),
   mounted() {
-   this.$store.dispatch("profile/setProfile");
+    this.$store.dispatch("profile/setProfile");
     this.getlecturelist();
     this.getRecipeList();
     this.getpurchaselist();
@@ -426,7 +437,7 @@ export default {
     navigate() {
       this.$router.push("/MypageRecipy");
     },
-  //   //레시피 상세 화면으로 이동
+    //   //레시피 상세 화면으로 이동
     navigateTo(item) {
       this.$router.push({
         name: "MypageRecipyDetail",
@@ -443,6 +454,6 @@ export default {
         // this.userRecipeList.splice(this.userRecipeList.indexOf(item), 1);
       }
     }
-   }
+  }
 };
 </script>
