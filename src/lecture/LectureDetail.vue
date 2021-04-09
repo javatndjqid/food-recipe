@@ -306,7 +306,7 @@ export default {
 
       if(userId != null){
         console.log("userId is not null");
-        this.isLoggedIn=true;
+        this.needLogin=true;
         this.getSubscribed();
       }
 
