@@ -115,7 +115,7 @@
                           {{ item.name }}
                         </span>
                         <span>
-                          {{ item.quantity }}{{item.unit}}
+                          {{ item.quantity }}{{ item.unit }}
                         </span>
                       </td>
                     </tr>

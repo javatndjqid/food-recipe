@@ -4,8 +4,8 @@
 
 <template>
   <div class="lecture">
-    <v-container>
-      <v-row justify="center" v-bind="item">
+    <v-container v-bind="item">
+      <v-row justify="center">
         <!-- UI -->
         <!-- 뒤로가기/구독취소/이미지/강의시청/연관카테고리(재료) 강의 위젯 -->
         <v-col cols="12" md="8">
