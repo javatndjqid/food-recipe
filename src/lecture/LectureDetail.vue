@@ -3,7 +3,7 @@
 </style>
 
 <template>
-  <div>
+  <div class="lecture">
     <v-container>
       <v-row justify="center" v-bind="item">
         <!-- UI -->

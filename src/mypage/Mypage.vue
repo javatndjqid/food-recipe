@@ -177,7 +177,7 @@
                 @page-count="pageCount2 = $event"
               >
                 <template v-slot:item.orderDate="{ item }">
-                  {{ $moment(item.orderDate).format("YYYY-MM-DD-HH-MM") }}
+                  {{ $moment(item.orderDate).format("YYYY-MM-DD / HH:mm") }}
                 </template>
                 <template v-slot:item.image="{ item }">
                   <v-img
@@ -259,7 +259,7 @@
                   @page-count="pageCount3 = $event"
                 >
                   <template v-slot:item.lectureName="{ item }">
-                    <div @click="navigateTolect(item)">
+                    <div @click="navigateTolect(item)" style="cursor: pointer">
                       {{ item.lectureTitle }}
                     </div>
                   </template>

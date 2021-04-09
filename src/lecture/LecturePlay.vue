@@ -3,7 +3,7 @@
 </style>
 
 <template>
-  <div>
+  <div class="lecture">
     <v-container v-bind="item">
       <!-- 버튼 공간 -->
       <v-row>

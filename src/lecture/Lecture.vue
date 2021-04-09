@@ -3,7 +3,7 @@
 </style>
 
 <template>
-  <div>
+  <div class="lecture">
     <!-- <v-toolbar dark color="red" height="40px">
       <v-autocomplete
         v-model="select"
