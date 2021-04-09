@@ -134,7 +134,7 @@ export default {
       { text: "Home", path: "/", count: 0 },
       { text: "Market", path: "/Shopping", count: 1 },
       { text: "Lecture", path: "/Lecture", count: 2 },
-      { text: "MYPAGE", path: "/Mypage", count: 3 },
+      { text: "Mypage", path: "/Mypage", count: 3 },
     ],
   }),
 
@@ -144,6 +144,7 @@ export default {
     }
 
     this.selectItem();
+    this.getRoute();
     //   this.$store.dispatch("profile/setProfile");
   },
   computed: {
@@ -168,7 +169,19 @@ export default {
         if (this.$route.path == item.path) this.selectedItem = item.count;
       });
     },
-
+    getRoute() {
+      const fullPath = window.location.hash;
+      console.log("===== fullPath =====");
+      for (let i in this.items) {
+        if (i == 0) continue;
+        const length = fullPath.indexOf(this.items[i].path);
+        if (length != -1) {
+          this.selectedItem = this.items[i].count;
+          break;
+        }
+        if (this.items[i].path == "/Mypage") this.selectedItem = 0;
+      }
+    },
     navigateTo(item) {
       /* https://router.vuejs.org/kr/guide/essentials/navigation.html */
       // 현재 경로와 다르면
