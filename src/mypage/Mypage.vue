@@ -142,7 +142,7 @@
               </div>
             </v-card>
             <v-row cols="12" justify="end">
-              <v-btn @click="navigate()" class="mx-2" fab dark color="#67c0fc">
+              <v-btn @click="navigate()" class="mx-2" fab dark color="#a2f19b">
                 <v-icon> mdi-playlist-plus </v-icon>
               </v-btn>
             </v-row>
