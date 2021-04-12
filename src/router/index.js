@@ -60,13 +60,13 @@ const routes = [
     path: '/Lecture/Detail/:id',
     name: 'LectureDetail',
     component: () => import('../lecture/LectureDetail.vue'),
-    props: true,
+    props: castRouteParams,
   },
   {
     path: '/Lecture/Play/:id',
     name: 'LecturePlay',
     component: () => import('../lecture/LecturePlay.vue'),
-    props: true,
+    props: castRouteParams,
   },
   {
     path: '/Shopping/Cart',
@@ -112,5 +112,11 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes
 })
+
+function castRouteParams(route){
+  return {
+    id: Number(route.params.id),
+  };
+}
 
 export default router

@@ -283,14 +283,14 @@ export default {
       this.needSubscribe = !this.needSubscribe;
     },
     navigateTo(item) {
-      this.$router.push(`/Lecture/Detail/${item.id}`);
+      this.$router.push(`/Lecture/Detail/${(item.id)}`);
     },
     navigateToBack() {
       this.$router.push("/Lecture");
     },
     navigateToViewer(item) {
       // console.log("진행한다 " + item.id);
-      this.$router.push(`/Lecture/Play/${item.id}`);
+      this.$router.push(`/Lecture/Play/${(item.id)}`);
     },
     loginCheck(){
       // console.log("check");
@@ -319,16 +319,26 @@ export default {
       // console.log(this.stuffList);
 
       // 카테고리 정보
-      const category = this.item.category;
+      // const category = this.item.category;
       // console.log(category);
 
       // 동일 카테고리 리스트
-      const relatedResults = await api.related(category);
-      if (relatedResults.status == 200) {
-        const relatedList = relatedResults.data.filter(item => item.id != id);
-        // console.log(relatedList.slice(0, 2));
-        this.relatedLectureList = relatedList.slice(0, 2);
-      }
+      // const relatedResults = await api.related(category);
+      // if (relatedResults.status == 200) {
+      //   const relatedList = relatedResults.data.filter(item => item.id != id);
+      //   // console.log(relatedList.slice(0, 2));
+      //   this.relatedLectureList = relatedList.slice(0, 2);
+      // }
+
+
+      // 내이티브 쿼리
+      // 카테고리로 연관된 항목 중 2개 랜덤으로 추리고 id값으로 오름차순 정렬한 결과
+      const relatedResults = await api.recommand(id);
+      // console.log(relatedResults);
+      if(relatedResults.status == 200){
+        this.relatedLectureList = relatedResults.data;
+        // console.log(this.relatedLectureList);
+      }    
     },
     async getSubscribed() {
       const id = this.$route.params.id;

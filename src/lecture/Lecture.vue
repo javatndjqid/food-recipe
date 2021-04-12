@@ -107,7 +107,7 @@ export default {
     //   return Math.floor(Math.random() * 1000) + 1;
     // },
     navigateTo(item) {
-      this.$router.push(`/Lecture/Detail/${item.id}`);
+      this.$router.push(`/Lecture/Detail/${(item.id)}`);
     },
     async getItem() {
       const results = await api.list();
@@ -119,4 +119,8 @@ export default {
     },
   },
 };
+
+
+// vue.runtime.esm.js?2b0e:619 [Vue warn]: Invalid prop: type check failed for prop "id". Expected String with value "11", got Number with value 11. ?????
+
 </script>

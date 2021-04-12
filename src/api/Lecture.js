@@ -8,6 +8,5 @@ export default {
   unSubscribe: (lectureId) => request.delete(`${process.env.VUE_APP_API_LECTURE}/lecture-users/${lectureId}`),
   information: (lectureId) => request.get(`${process.env.VUE_APP_API_LECTURE}/lecture-users/${lectureId}`),
   related: (category) => axios.get(`${process.env.VUE_APP_API_LECTURE}/lectures/search/category`, {params:{keyword: category}}),
-
-
+  recommand: (lectureId) => axios.get(`${process.env.VUE_APP_API_LECTURE}/lectures/${lectureId}/recommand`)
 }

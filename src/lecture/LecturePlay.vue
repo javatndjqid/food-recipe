@@ -177,7 +177,7 @@ export default {
     },
     navigateTo(item) {
       // console.log("돌아간다 " + item.id);
-      this.$router.push(`/Lecture/Detail/${item.id}`);
+      this.$router.push(`/Lecture/Detail/${Number(item.id)}`);
     },
     async getSubscribed() {
       const id = this.$route.params.id;
