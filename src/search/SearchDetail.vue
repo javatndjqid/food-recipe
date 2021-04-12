@@ -36,7 +36,7 @@
           </v-expand-transition>
         </v-card>
         <v-card style="margin-top: 30px">
-          <v-card-title>재료</v-card-title>
+          <v-card-title style="font-weight: bold">재료</v-card-title>
           <v-divider></v-divider>
           <v-row align="start" justify="center">
             <v-col cols="12" md="4" v-for="(items, i) in stuffs" :key="i">
@@ -80,7 +80,7 @@
         </v-card>
 
         <v-card style="margin-top: 30px">
-          <v-card-title>판매 재료</v-card-title>
+          <v-card-title style="font-weight: bold">판매 재료</v-card-title>
           <v-divider></v-divider>
           <v-row>
             <v-col v-for="(item, i) in products" :key="i" cols="12" md="3">
@@ -103,7 +103,7 @@
           </v-row>
         </v-card>
         <v-card style="margin-top: 30px">
-          <v-card-title>추천 강의</v-card-title>
+          <v-card-title style="font-weight: bold">추천 강의</v-card-title>
           <v-divider></v-divider>
           <v-row>
             <v-col v-for="(item, i) in lectures" :key="i" cols="12" md="3">
