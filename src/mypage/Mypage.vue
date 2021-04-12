@@ -85,7 +85,7 @@
                 src="./recipe1.jpg"
                 alt="카드상단이미지"
               />
-              <v-layout column style="height: 40vh">
+              <v-layout  style="height: 40vh">
                 <v-flex style="overflow: auto">
                   <v-data-table
                     fill-height
@@ -171,7 +171,7 @@
                 alt="카드상단이미지"
               >
               </v-img>
-              <v-layout column style="height: 40vh">
+              <v-layout  style="height: 40vh">
                 <v-flex style="overflow: auto">
               <v-data-table
                 :headers="MarketHeaders"
@@ -258,7 +258,7 @@
                   alt="카드상단이미지"
                 >
                 </v-img>
-                 <v-layout column style="height: 40vh">
+                 <v-layout style="height: 40vh">
                 <v-flex style="overflow: auto">
                 <v-data-table
                   :headers="ClassHeaders"
